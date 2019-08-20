@@ -9,17 +9,17 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="374dp"
-        android:layout_height="107dp"
+        android:layout_width="376dp"
+        android:layout_height="128dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.432"
+        app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/gposto" />
+        app:srcCompat="@drawable/letreiro_gposto" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -40,7 +40,7 @@
         app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
-        app:layout_constraintVertical_bias="0.534" />
+        app:layout_constraintVertical_bias="0.575" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -57,7 +57,7 @@
         app:layout_constraintHorizontal_bias="0.542"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.205"
+        app:layout_constraintVertical_bias="0.22"
         app:srcCompat="@drawable/sem_fundo_icone" />
 
 

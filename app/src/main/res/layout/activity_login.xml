@@ -9,18 +9,18 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="391dp"
-        android:layout_height="184dp"
+        android:layout_width="312dp"
+        android:layout_height="115dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.166"
+        app:layout_constraintHorizontal_bias="0.45"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.014"
-        app:srcCompat="@drawable/gposto_azul" />
+        app:layout_constraintVertical_bias="0.083"
+        app:srcCompat="@drawable/letreiro_gposto" />
 
     <TextView
         android:id="@+id/textView4"
@@ -107,12 +107,13 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/shape_button"
         android:text="Login"
+        android:textColor="#EEE1E1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.557"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout5"
-        app:layout_constraintVertical_bias="0.031" />
+        app:layout_constraintVertical_bias="0.029" />
 
     <TextView
         android:id="@+id/textView5"
@@ -129,14 +130,14 @@
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.525"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button4"
-        app:layout_constraintVertical_bias="0.079" />
+        app:layout_constraintVertical_bias="0.08" />
 
     <com.facebook.login.widget.LoginButton
-        android:layout_width="221dp"
-        android:layout_height="32dp"
+        android:layout_width="214dp"
+        android:layout_height="26dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"

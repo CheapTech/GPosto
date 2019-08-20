@@ -4,25 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@drawable/background"
     tools:context=".MainActivity">
 
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="391dp"
-        android:layout_height="184dp"
+        android:layout_width="312dp"
+        android:layout_height="115dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.833"
+        app:layout_constraintHorizontal_bias="0.439"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.015"
-        app:srcCompat="@drawable/gposto_azul"/>
+        app:layout_constraintVertical_bias="0.101"
+        app:srcCompat="@drawable/letreiro_gposto" />
 
     <Button
         android:id="@+id/button"
@@ -36,6 +37,7 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/shape_button"
         android:text="Login"
+        android:textColor="#EEE1E1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.536"
@@ -55,6 +57,7 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/shape_button"
         android:text="Modo Visitante"
+        android:textColor="#EEE1E1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.538"
@@ -76,8 +79,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.532"
+        app:layout_constraintHorizontal_bias="0.542"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button2"
-        app:layout_constraintVertical_bias="0.702"/>
+        app:layout_constraintVertical_bias="0.704" />
 </androidx.constraintlayout.widget.ConstraintLayout>
