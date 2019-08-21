@@ -308,8 +308,8 @@
 
     <Button
         android:id="@+id/button10"
-        android:layout_width="134dp"
-        android:layout_height="23dp"
+        android:layout_width="138dp"
+        android:layout_height="27dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -321,15 +321,15 @@
         android:textColor="#EEE1E1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.175"
+        app:layout_constraintHorizontal_bias="0.178"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView16"
-        app:layout_constraintVertical_bias="0.308" />
+        app:layout_constraintVertical_bias="0.316" />
 
     <Button
         android:id="@+id/button11"
-        android:layout_width="139dp"
-        android:layout_height="23dp"
+        android:layout_width="138dp"
+        android:layout_height="27dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -337,14 +337,14 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/shape_button"
-        android:text="Editar"
+        android:text="Atualizar Valor"
         android:textColor="#EEE1E1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.308"
+        app:layout_constraintHorizontal_bias="0.203"
         app:layout_constraintStart_toEndOf="@+id/button10"
         app:layout_constraintTop_toBottomOf="@+id/textView20"
-        app:layout_constraintVertical_bias="0.31" />
+        app:layout_constraintVertical_bias="0.311" />
 
     <Button
         android:id="@+id/button12"
