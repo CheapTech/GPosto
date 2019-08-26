@@ -15,7 +15,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class CombustivellController {
+public class CombustivelController {
     private final String BASE_URL = "http://www.gestoo.com.br/gposto/api/";
 
     public void getCombustivelWeb (final CombustivelCallback callback) throws Exception{
