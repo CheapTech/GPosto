@@ -4,8 +4,11 @@ import java.util.List;
 
 import br.com.senacrs.gposto.LibClass.Combustivel;
 import br.com.senacrs.gposto.LibClass.TopPostos;
+import br.com.senacrs.gposto.LibClass.Usuario;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface RetrofitService {
@@ -14,4 +17,7 @@ public interface RetrofitService {
 
     @GET("gasolinaTeste.php")
     Call<List<TopPostos>> getListTopPostos(@Query(value = "id") int id);
+
+    @POST("inserir.php")
+    Call<Usuario> cadastrarUsuario(@Body Usuario usuario);
 }
