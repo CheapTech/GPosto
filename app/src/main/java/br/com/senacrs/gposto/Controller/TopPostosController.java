@@ -7,7 +7,7 @@ import java.util.List;
 
 import br.com.senacrs.gposto.GUI.Callback.TopPostosCallback;
 import br.com.senacrs.gposto.LibClass.TopPostos;
-import br.com.senacrs.gposto.Utilities.TopPostosDeserializer;
+import br.com.senacrs.gposto.Utilities.Deserializer.TopPostosDeserializer;
 import br.com.senacrs.gposto.WebApis.RetrofitService;
 import retrofit2.Call;
 import retrofit2.Callback;

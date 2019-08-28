@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">GPosto</string>
+    <string name="dd_mm_aa">DD/MM/AA</string>
+    <string name="endere_o">Endereço</string>
+    <string name="nome_do_posto">Nome do Posto</string>
+    <string name="r_0_00">R$ 0,00</string>
 </resources>

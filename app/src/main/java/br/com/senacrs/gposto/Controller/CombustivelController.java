@@ -7,7 +7,7 @@ import java.util.List;
 
 import br.com.senacrs.gposto.GUI.Callback.CombustivelCallback;
 import br.com.senacrs.gposto.LibClass.Combustivel;
-import br.com.senacrs.gposto.Utilities.CombustivelDeserializer;
+import br.com.senacrs.gposto.Utilities.Deserializer.CombustivelDeserializer;
 import br.com.senacrs.gposto.WebApis.RetrofitService;
 import retrofit2.Call;
 import retrofit2.Callback;

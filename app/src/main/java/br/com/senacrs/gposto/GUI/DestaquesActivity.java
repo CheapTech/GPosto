@@ -1,4 +1,4 @@
-package br.com.senacrs.gposto.GUI.Callback;
+package br.com.senacrs.gposto.GUI;
 
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +15,8 @@ import java.util.List;
 
 import br.com.senacrs.gposto.Controller.CombustivelController;
 import br.com.senacrs.gposto.Controller.TopPostosController;
-import br.com.senacrs.gposto.GUI.MainActivity;
+import br.com.senacrs.gposto.GUI.Callback.CombustivelCallback;
+import br.com.senacrs.gposto.GUI.Callback.TopPostosCallback;
 import br.com.senacrs.gposto.LibClass.Combustivel;
 import br.com.senacrs.gposto.LibClass.TopPostos;
 import br.com.senacrs.gposto.R;

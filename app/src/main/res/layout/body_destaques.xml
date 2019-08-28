@@ -1,41 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:background="@color/browser_actions_bg_grey">
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginStart="45dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginEnd="45dp"
         android:background="@drawable/shape_border_edittext"
-        android:gravity="center"
-        android:text="R$ 0,00"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="200dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="30dp"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nome do Posto"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="16dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="20dp"/>
 
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Endereço"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="16dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="20dp"/>
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/r_0_00"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="30sp"/>
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/nome_do_posto"
+            android:layout_marginLeft="7dp"
+            android:layout_marginStart="7dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/endere_o"
+            android:layout_marginLeft="7dp"
+            android:layout_marginStart="7dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dd_mm_aa"
+            android:layout_marginLeft="7dp"
+            android:layout_marginStart="7dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
 </LinearLayout>
