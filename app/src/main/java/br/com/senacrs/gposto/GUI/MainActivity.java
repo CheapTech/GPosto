@@ -29,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void goToLogin(View view) {
-        Utils.longToast(MainActivity.this,"Função (Login) Não Implementada");
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
     }
 
     public void goToModoV(View view) {
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToCadastro(View view) {
-        Utils.longToast(MainActivity.this,"Função (Cadastro) Não Implementada");
+        Intent intent = new Intent(MainActivity.this, CadastroActivity.class);
+        startActivity(intent);
     }
 }

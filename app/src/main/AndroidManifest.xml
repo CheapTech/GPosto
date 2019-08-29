@@ -22,6 +22,8 @@
         </activity>
         <activity android:name=".GUI.LoginActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:name=".GUI.CadastroActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
     </application>
 
 </manifest>

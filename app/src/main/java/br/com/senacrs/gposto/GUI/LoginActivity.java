@@ -1,6 +1,5 @@
 package br.com.senacrs.gposto.GUI;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -12,7 +11,7 @@ import br.com.senacrs.gposto.R;
 public class LoginActivity extends AppCompatActivity {
 
     TextInputEditText editEmail,editSenha;
-    Button btnLogin,btnLoginFacebook;
+    Button btnLogin;
 
 
     @Override
@@ -24,6 +23,6 @@ public class LoginActivity extends AppCompatActivity {
         editSenha = findViewById(R.id.editSenha);
 
         btnLogin = findViewById(R.id.btnLogin);
-        btnLoginFacebook = findViewById(R.id.btnLoginFacebook);
+
     }
 }
