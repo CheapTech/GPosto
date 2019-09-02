@@ -39,6 +39,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/shape_border_edittext"
             android:hint="E-mail:"
+            android:textSize="16sp"
             android:inputType="textEmailAddress"
             android:textColorHint="@color/colorAccent" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -57,6 +58,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/shape_border_edittext"
             android:hint="*Usuário:"
+            android:textSize="16sp"
             android:inputType="text"
             android:textColorHint="@color/colorAccent" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -85,6 +87,27 @@
             android:layout_height="match_parent"
             android:background="@drawable/shape_border_edittext"
             android:hint="Senha:"
+            android:textSize="16sp"
+            android:inputType="textPassword"
+            android:textColorHint="@color/colorAccent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="64dp"
+        android:layout_marginRight="64dp"
+        app:passwordToggleEnabled="true"
+        android:textColorHint="@color/colorPrimary">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editConfirmarSenha"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_border_edittext"
+            android:hint="Confirme sua Senha:"
+            android:textSize="16sp"
             android:inputType="textPassword"
             android:textColorHint="@color/colorAccent" />
     </com.google.android.material.textfield.TextInputLayout>

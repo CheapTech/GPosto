@@ -20,7 +20,7 @@ import br.com.senacrs.gposto.Utilities.Utils;
 public class CadastroActivity extends AppCompatActivity implements UsuarioCallback {
 
     TextView txtUsuarioSugerido;
-    TextInputEditText editEmail,editUser,editSenha;
+    TextInputEditText editEmail,editUser,editSenha,editConfirmarSenha;
     Button btnCadastrar;
 
     @Override
@@ -33,6 +33,7 @@ public class CadastroActivity extends AppCompatActivity implements UsuarioCallba
         editEmail = findViewById(R.id.editEmail);
         editUser = findViewById(R.id.editUsuario);
         editSenha = findViewById(R.id.editSenha);
+        editConfirmarSenha = findViewById(R.id.editConfirmarSenha);
 
         btnCadastrar = findViewById(R.id.btnCadastrar);
     }
@@ -64,7 +65,15 @@ public class CadastroActivity extends AppCompatActivity implements UsuarioCallba
                 if (editSenha.getText().toString().trim().isEmpty()){
                     editSenha.setError("Campo Obrigatorio");
                 }else {
-                    testarCampos = false;
+                    if (editConfirmarSenha.getText().toString().trim().isEmpty()){
+                        editConfirmarSenha.setError("Campo Obrigatorio");
+                    }else {
+                        if (editSenha.getText().toString().trim().equals(editConfirmarSenha.getText().toString().trim())){
+                            testarCampos = false;
+                        } else {
+                            Utils.shortToast(this, "Senhas Diferentes");
+                        }
+                    }
                 }
             }
         }
@@ -72,17 +81,11 @@ public class CadastroActivity extends AppCompatActivity implements UsuarioCallba
     }
 
     @Override
-    public void onUsuarioSuccess(Usuario usuario) {
-        Utils.longToast(CadastroActivity.this,"Cadastro Efetuado com Sucesso");
-    }
+    public void onUsuarioSuccess(Usuario usuario) { Utils.longToast(CadastroActivity.this,"Cadastro Efetuado com Sucesso"); }
 
     @Override
-    public void onUsuarioFailure(String message) {
-        Utils.longToast(CadastroActivity.this,message);
-    }
+    public void onUsuarioFailure(String message) { Utils.longToast(CadastroActivity.this,message); }
 
     @Override
-    public void onBackPressed() {
-        finish();
-    }
+    public void onBackPressed() { finish(); }
 }
