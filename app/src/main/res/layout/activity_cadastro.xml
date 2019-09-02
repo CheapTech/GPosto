@@ -27,7 +27,6 @@
         android:textColor="@color/colorPrimaryDark"/>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="64dp"
@@ -35,6 +34,7 @@
         android:textColorHint="@color/colorPrimary">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editEmail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/shape_border_edittext"
@@ -44,7 +44,6 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -53,6 +52,7 @@
         android:textColorHint="@color/colorPrimary">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editUsuario"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/shape_border_edittext"
@@ -62,7 +62,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/txtUsuarioSugerido"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="70dp"
@@ -71,7 +71,6 @@
         android:textColor="@color/colorPrimaryDark"/>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -81,6 +80,7 @@
         android:textColorHint="@color/colorPrimary">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editSenha"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/shape_border_edittext"
@@ -90,13 +90,14 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnCadastrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="80dp"
         android:layout_marginRight="80dp"
-        android:textSize="17dp"
+        android:textSize="17sp"
+        android:onClick="cadastrarUsuario"
         android:background="@drawable/shape_button"
         android:text="Cadastre-se"
         android:textColor="#EEE1E1"/>
