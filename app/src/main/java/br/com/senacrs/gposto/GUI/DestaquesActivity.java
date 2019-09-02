@@ -20,6 +20,8 @@ import br.com.senacrs.gposto.GUI.Callback.TopPostosCallback;
 import br.com.senacrs.gposto.LibClass.Combustivel;
 import br.com.senacrs.gposto.LibClass.TopPostos;
 import br.com.senacrs.gposto.R;
+import br.com.senacrs.gposto.Utilities.Utils;
+import okhttp3.internal.Util;
 
 public class DestaquesActivity extends AppCompatActivity implements CombustivelCallback, TopPostosCallback {
 
@@ -127,6 +129,18 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
 
     @Override
     public void onTopPostosFailure(String message) {
-        Toast.makeText(DestaquesActivity.this, message, Toast.LENGTH_LONG).show();
+        Utils.longToast(this,message);
+    }
+
+    public void verTodosPostos(View view) {
+    }
+
+    public void atualizarValores(View view) {
+    }
+
+    public void goToCadastrarPostos(View view) {
+    }
+
+    public void goToConfiguracoes(View view) {
     }
 }
