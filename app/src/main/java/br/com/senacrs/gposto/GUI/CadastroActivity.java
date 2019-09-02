@@ -58,16 +58,16 @@ public class CadastroActivity extends AppCompatActivity implements UsuarioCallba
         boolean testarCampos = true;
         if (editEmail.getText().toString().trim().isEmpty()){
             editEmail.setError("Campo Obrigatorio");
-        }else {
+        } else {
             if (editUser.getText().toString().trim().isEmpty()){
                 editUser.setError("Campo Obrigatorio");
-            }else {
+            } else {
                 if (editSenha.getText().toString().trim().isEmpty()){
                     editSenha.setError("Campo Obrigatorio");
-                }else {
+                } else {
                     if (editConfirmarSenha.getText().toString().trim().isEmpty()){
                         editConfirmarSenha.setError("Campo Obrigatorio");
-                    }else {
+                    } else {
                         if (editSenha.getText().toString().trim().equals(editConfirmarSenha.getText().toString().trim())){
                             testarCampos = false;
                         } else {
