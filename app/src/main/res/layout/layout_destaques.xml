@@ -99,8 +99,6 @@
                 android:background="@drawable/shape_button"
                 android:text="Configurações"
                 android:textColor="#EEE1E1" />
-
         </LinearLayout>
     </LinearLayout>
-
 </LinearLayout>

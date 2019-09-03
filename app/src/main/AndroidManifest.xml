@@ -24,6 +24,9 @@
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity android:name=".GUI.CadastroActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:name=".GUI.DestaquesActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:name=".GUI.CadastroPostosActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
     </application>
-
 </manifest>

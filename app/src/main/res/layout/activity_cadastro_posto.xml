@@ -21,7 +21,6 @@
         android:textSize="20sp"/>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
@@ -29,6 +28,7 @@
         android:textColorHint="@color/colorPrimaryDark">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editRazaoSocial"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_border_edittext"
@@ -37,7 +37,6 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -48,6 +47,7 @@
         android:textColorHint="@color/colorPrimaryDark">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editNomeFantasia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_border_edittext"
@@ -66,39 +66,40 @@
         android:layout_marginRight="16dp">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/colorPrimaryDark"
             android:layout_weight="1">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editCNPJ"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_border_edittext"
                 android:hint="*CNPJ:"
                 android:layout_marginRight="8dp"
-                android:textColor="@color/colorPrimaryDark"/>
+                android:textColor="@color/colorPrimaryDark"
+                android:inputType="number"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout16"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/colorPrimaryDark"
             android:layout_weight="1">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editCEP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_border_edittext"
                 android:hint="*CEP"
-                android:textColor="@color/colorPrimaryDark"/>
+                android:textColor="@color/colorPrimaryDark"
+                android:inputType="number"/>
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout11"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
@@ -106,6 +107,7 @@
         android:textColorHint="@color/colorPrimaryDark">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editLogradouro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_border_edittext"
@@ -120,29 +122,30 @@
         android:layout_marginRight="16dp">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColorHint="@color/colorPrimaryDark">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editNumero"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_border_edittext"
                 android:hint="*Nº"
                 android:layout_marginRight="8dp"
-                android:textColor="@color/colorPrimaryDark"/>
+                android:textColor="@color/colorPrimaryDark"
+                android:inputType="number"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColorHint="@color/colorPrimaryDark">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editEstado"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_border_edittext"
@@ -152,7 +155,6 @@
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout9"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
@@ -160,6 +162,7 @@
         android:textColorHint="@color/colorPrimaryDark">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editBairro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_border_edittext"
@@ -168,7 +171,6 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout14"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
@@ -176,6 +178,7 @@
         android:textColorHint="@color/colorPrimaryDark">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editCidade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimaryDark"
@@ -183,75 +186,47 @@
             android:hint="*Cidade:"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <LinearLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp">
+        android:layout_marginRight="16dp"
+        android:textColorHint="@color/colorPrimaryDark">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout15"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTel01"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColorHint="@color/colorPrimaryDark">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_border_edittext"
-                android:hint="*Telefone 1:"
-                android:layout_marginRight="8dp"
-                android:textColor="@color/colorPrimaryDark"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout17"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColorHint="@color/colorPrimaryDark">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_border_edittext"
-                android:hint="Telefone 2:"
-                android:textColor="@color/colorPrimaryDark"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-    </LinearLayout>
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/shape_border_edittext"
+            android:hint="*Telefone:"
+            android:inputType="number"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/button13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/imagePosto"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_marginTop="8dp"
             android:layout_marginLeft="16dp"
-            android:background="@drawable/shape_button"
-            android:text="Inserir Foto"
-            android:textColor="#EEE1E1"
-            android:textSize="12dp"/>
+            android:onClick="salvarImage"
+            android:background="@drawable/shape_border_edittext"/>
 
         <Button
-            android:id="@+id/button14"
+            android:id="@+id/btnCadastrarPosto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="8dp"
+            android:onClick="cadastrarPosto"
             android:background="@drawable/shape_button"
             android:text="Cadastrar Posto"
             android:textColor="#EEE1E1"/>
     </LinearLayout>
-
-
-
-
-
 </LinearLayout>
