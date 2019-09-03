@@ -74,6 +74,7 @@
         android:layout_marginRight="80dp"
         android:textSize="17sp"
         android:text="Login"
+        android:onClick="login"
         android:textColor="#EEE1E1"/>
 
     <TextView
