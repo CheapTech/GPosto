@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.lang.ref.SoftReference;
+
 import br.com.senacrs.gposto.R;
 
 public class CadastroPostosActivity extends AppCompatActivity {
@@ -39,6 +41,16 @@ public class CadastroPostosActivity extends AppCompatActivity {
 
     public void cadastrarPosto(View view) {
         if (!testarCampos()){
+            String rsocial = editRSocial.getText().toString();
+            String nfantasia = editNFantasia.getText().toString();
+            String cnpj = editCNPJ.getText().toString();
+            String cep = editCEP.getText().toString();
+            String logradouro = editLogradouro.getText().toString();
+            String numero = editNumero.getText().toString();
+            String bairro = editBairro.getText().toString();
+            String cidade = editCidade.getText().toString();
+            String estado = editEstado.getText().toString();
+            String tel = editTel.getText().toString();
 
         }
     }
