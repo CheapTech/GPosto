@@ -17,43 +17,64 @@
 
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/preco"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/r_0_00"
+            android:text="R$ 0,00"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="30sp"/>
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/nomeFantasia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/nome_do_posto"
+            android:text="Nome"
             android:layout_marginLeft="7dp"
             android:layout_marginStart="7dp"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="20sp"/>
 
         <TextView
-            android:id="@+id/textView10"
+            android:id="@+id/logradouro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/endere_o"
+            android:text="logradouro"
             android:layout_marginLeft="7dp"
             android:layout_marginStart="7dp"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="20sp"/>
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/bairro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="bairro"
+            android:layout_marginLeft="7dp"
+            android:layout_marginStart="7dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp"/>
+        <TextView
+            android:id="@+id/numero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="numero"
+            android:layout_marginLeft="7dp"
+            android:layout_marginStart="7dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp"/>
+
+
+        <TextView
+            android:id="@+id/atualizado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:layout_marginLeft="7dp"
+            android:inputType="date"
             android:text="@string/dd_mm_aa"
-            android:layout_marginLeft="7dp"
-            android:layout_marginStart="7dp"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
     </LinearLayout>
 </LinearLayout>

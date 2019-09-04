@@ -9,7 +9,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.List;
 
@@ -20,6 +23,7 @@ import br.com.senacrs.gposto.GUI.Callback.TopPostosCallback;
 import br.com.senacrs.gposto.LibClass.Combustivel;
 import br.com.senacrs.gposto.LibClass.TopPostos;
 import br.com.senacrs.gposto.R;
+import br.com.senacrs.gposto.Utilities.LineAdapter;
 import br.com.senacrs.gposto.Utilities.Utils;
 import okhttp3.internal.Util;
 
@@ -36,11 +40,11 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_destaques);
 
-      //  textDescricao = findViewById(R.id.textDescricao);
+        //  textDescricao = findViewById(R.id.textDescricao);
 
         spinner = findViewById(R.id.spinner);
 
-     //   rvTopPostos = findViewById(R.id.rvPrecosCombustivel);
+        rvTopPostos = findViewById(R.id.rvPrecosCombustivel);
 
 
         CombustivelController controller = new CombustivelController();
@@ -80,9 +84,8 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
 
-
                 Combustivel combustivel = (Combustivel) parent.getItemAtPosition(position);
-                Toast.makeText(DestaquesActivity.this, "Id Comb: "+combustivel.getId(), Toast.LENGTH_LONG).show();
+                Toast.makeText(DestaquesActivity.this, "Id Comb: " + combustivel.getId(), Toast.LENGTH_LONG).show();
 
                 TopPostosController controller = new TopPostosController();
                 try {
@@ -112,7 +115,7 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
     public void onTopPostosSuccess(List<TopPostos> list) {
 
 
-      /*  rvTopPostos.setAdapter(new LineAdapter(list));
+        rvTopPostos.setAdapter(new LineAdapter(list));
         RecyclerView.LayoutManager layout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
         rvTopPostos.setLayoutManager(layout);
@@ -120,16 +123,16 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
         LineAdapter adapter = new LineAdapter(list);
         rvTopPostos.setAdapter(adapter);
 
-        //GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
-        //rvTopPostos.setLayoutManager(layoutManager);
+        /*GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+        rvTopPostos.setLayoutManager(layoutManager);*/
         StaggeredGridLayoutManager layoutManager =
                 new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        rvTopPostos.setLayoutManager(layoutManager);*/
+        rvTopPostos.setLayoutManager(layoutManager);
     }
 
     @Override
     public void onTopPostosFailure(String message) {
-        Utils.longToast(this,message);
+        Utils.longToast(this, message);
     }
 
     public void verTodosPostos(View view) {
