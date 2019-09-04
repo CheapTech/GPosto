@@ -3,6 +3,7 @@ package br.com.senacrs.gposto.WebApis;
 import java.util.List;
 
 import br.com.senacrs.gposto.LibClass.Combustivel;
+import br.com.senacrs.gposto.LibClass.Postos;
 import br.com.senacrs.gposto.LibClass.TopPostos;
 import br.com.senacrs.gposto.LibClass.Usuario;
 import retrofit2.Call;
@@ -23,4 +24,7 @@ public interface RetrofitService {
 
     @POST("inserir.php")
     Call<Usuario> cadastrarUsuario(@Body Usuario usuario);
+
+    @POST("inserir.php")
+    Call<Postos> cadastrarPostos(@Body Postos postos);
 }
