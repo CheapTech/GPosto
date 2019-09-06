@@ -1,6 +1,8 @@
 package br.com.senacrs.gposto.GUI;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -9,10 +11,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -29,6 +35,10 @@ import okhttp3.internal.Util;
 
 public class DestaquesActivity extends AppCompatActivity implements CombustivelCallback, TopPostosCallback {
 
+    private FloatingActionButton btnVerTodos;
+    private Toolbar toolbar;
+    private SearchView searchPosto;
+    private TextView textDescricao;
     public Spinner spinner;
     public RecyclerView rvTopPostos;
     public List<TopPostos> list;
@@ -38,22 +48,21 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_destaques);
-        spinner = findViewById(R.id.spinner);
 
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        //  textDescricao = findViewById(R.id.textDescricao);
+
+        btnVerTodos = findViewById(R.id.btnVerTodos);
+        searchPosto = findViewById(R.id.search_posto);
+        spinner = findViewById(R.id.spinner);
         rvTopPostos = findViewById(R.id.rvPrecosCombustivel);
 
 
         CombustivelController controller = new CombustivelController();
 
-
-        try {
-            controller.getCombustivelWeb(DestaquesActivity.this);
-        } catch (Exception e) {
-            Toast.makeText(DestaquesActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-
-
-      /*  TopPostosController topPostosController = new TopPostosController();
+        TopPostosController topPostosController = new TopPostosController();
         try {
             TopPostos topPostos = new TopPostos();
 
@@ -62,7 +71,14 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
 
         } catch (Exception e) {
             Toast.makeText(DestaquesActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-        }*/
+        }
+
+
+        try {
+            controller.getCombustivelWeb(DestaquesActivity.this);
+        } catch (Exception e) {
+            Toast.makeText(DestaquesActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
 
     }
 
@@ -132,15 +148,15 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
         Utils.longToast(this, message);
     }
 
+    private void setStateSearchView(){
+        if(searchPosto.getVisibility()==View.VISIBLE){
+            searchPosto.setVisibility(View.GONE);
+        }else{
+            searchPosto.setVisibility(View.VISIBLE);
+        }
+    }
+
     public void verTodosPostos(View view) {
-    }
-
-    public void atualizarValores(View view) {
-    }
-
-    public void goToCadastrarPostos(View view) {
-    }
-
-    public void goToConfiguracoes(View view) {
+        setStateSearchView();
     }
 }
