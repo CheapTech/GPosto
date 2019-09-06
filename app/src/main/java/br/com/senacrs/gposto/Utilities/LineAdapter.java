@@ -1,6 +1,7 @@
 package br.com.senacrs.gposto.Utilities;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -11,7 +12,7 @@ import java.util.List;
 import br.com.senacrs.gposto.LibClass.TopPostos;
 import br.com.senacrs.gposto.R;
 
-public class LineAdapter extends RecyclerView.Adapter<LineHolder> {
+public class LineAdapter extends RecyclerView.Adapter<LineHolder>  {
 
     private List<TopPostos> list;
 
@@ -23,7 +24,7 @@ public class LineAdapter extends RecyclerView.Adapter<LineHolder> {
     @Override
     public LineHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         return new LineHolder(LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.body_destaques, viewGroup, false)
+                .inflate(R.layout.view_holder_destaque, viewGroup, false)
         );
     }
 
@@ -42,4 +43,5 @@ public class LineAdapter extends RecyclerView.Adapter<LineHolder> {
     public int getItemCount() {
         return list.size();
     }
+
 }

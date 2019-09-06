@@ -29,7 +29,6 @@ import okhttp3.internal.Util;
 
 public class DestaquesActivity extends AppCompatActivity implements CombustivelCallback, TopPostosCallback {
 
-    private TextView textDescricao;
     public Spinner spinner;
     public RecyclerView rvTopPostos;
     public List<TopPostos> list;
@@ -39,9 +38,6 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_destaques);
-
-        //  textDescricao = findViewById(R.id.textDescricao);
-
         spinner = findViewById(R.id.spinner);
 
         rvTopPostos = findViewById(R.id.rvPrecosCombustivel);
@@ -49,7 +45,15 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
 
         CombustivelController controller = new CombustivelController();
 
-        TopPostosController topPostosController = new TopPostosController();
+
+        try {
+            controller.getCombustivelWeb(DestaquesActivity.this);
+        } catch (Exception e) {
+            Toast.makeText(DestaquesActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+
+
+      /*  TopPostosController topPostosController = new TopPostosController();
         try {
             TopPostos topPostos = new TopPostos();
 
@@ -58,14 +62,7 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
 
         } catch (Exception e) {
             Toast.makeText(DestaquesActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-
-
-        try {
-            controller.getCombustivelWeb(DestaquesActivity.this);
-        } catch (Exception e) {
-            Toast.makeText(DestaquesActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-        }
+        }*/
 
     }
 
