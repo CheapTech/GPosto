@@ -23,6 +23,7 @@ import br.com.senacrs.gposto.GUI.Callback.TopPostosCallback;
 import br.com.senacrs.gposto.LibClass.Combustivel;
 import br.com.senacrs.gposto.LibClass.TopPostos;
 import br.com.senacrs.gposto.R;
+import br.com.senacrs.gposto.Utilities.AdapterLvCombustivel;
 import br.com.senacrs.gposto.Utilities.LineAdapter;
 import br.com.senacrs.gposto.Utilities.Utils;
 import okhttp3.internal.Util;
@@ -53,17 +54,6 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
         }
 
 
-      /*  TopPostosController topPostosController = new TopPostosController();
-        try {
-            TopPostos topPostos = new TopPostos();
-
-
-            topPostosController.getTopPostosWeb(topPostos.getId(), DestaquesActivity.this);
-
-        } catch (Exception e) {
-            Toast.makeText(DestaquesActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-        }*/
-
     }
 
 
@@ -72,7 +62,8 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
         final Combustivel combustivel = new Combustivel();
         combustivel.getId();
 
-        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, list);
+        AdapterLvCombustivel adapter = new AdapterLvCombustivel(DestaquesActivity.this, R.layout.layout_item_lv_combustivel, list);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
