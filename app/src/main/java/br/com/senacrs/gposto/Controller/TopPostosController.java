@@ -16,7 +16,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TopPostosController {
-    private final String BASE_URL = "http://www.gestoo.com.br/gposto/api/bernardoapi";
+    private final String BASE_URL = "http://www.gestoo.com.br/gposto/api/BernardoApi/";//
 
     public void getTopPostosWeb(int id, final TopPostosCallback callback) throws Exception {
         Gson gson = new GsonBuilder()
