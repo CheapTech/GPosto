@@ -161,6 +161,7 @@
             android:layout_marginRight="8dp"
             android:background="@drawable/shape_button"
             android:text="Atualizar Valor"
+            android:onClick="atualizarValor"
             android:textColor="#EEE1E1" />
 
     </LinearLayout>
