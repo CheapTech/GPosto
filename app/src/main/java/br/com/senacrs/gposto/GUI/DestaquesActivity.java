@@ -1,6 +1,7 @@
 package br.com.senacrs.gposto.GUI;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,15 +11,20 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
 
@@ -33,9 +39,11 @@ import br.com.senacrs.gposto.Utilities.LineAdapter;
 import br.com.senacrs.gposto.Utilities.Utils;
 import okhttp3.internal.Util;
 
-public class DestaquesActivity extends AppCompatActivity implements CombustivelCallback, TopPostosCallback {
+public class DestaquesActivity extends AppCompatActivity implements CombustivelCallback, TopPostosCallback, NavigationView.OnNavigationItemSelectedListener {
 
     private FloatingActionButton btnVerTodos;
+    private NavigationView navigationView;
+    private DrawerLayout drawerLayout;
     private Toolbar toolbar;
     private SearchView searchPosto;
     private TextView textDescricao;
@@ -49,8 +57,7 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_destaques);
 
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        navigationDrawer();
 
         //  textDescricao = findViewById(R.id.textDescricao);
 
@@ -153,6 +160,52 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
             searchPosto.setVisibility(View.GONE);
         }else{
             searchPosto.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void navigationDrawer(){
+        navigationView = findViewById(R.id.navigation_view);
+        drawerLayout = findViewById(R.id.drawerLayout);
+        toolbar = findViewById(R.id.toolbar);
+
+        navigationView.setNavigationItemSelectedListener(this);
+
+        setSupportActionBar(toolbar);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open_drawer,R.string.close_drawer);
+        drawerLayout.addDrawerListener(toggle);
+
+        toggle.syncState();
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+       switch (menuItem.getItemId()){
+           case R.id.menu_cadastrar_posto: {
+               Utils.shortToast(this,"funciono1");
+               break;
+           }
+           case R.id.menu_editar_perfil: {
+               Utils.shortToast(this,"funciono2");
+               break;
+           }
+           case R.id.menu_sair: {
+               Utils.shortToast(this,"funciono3");
+               break;
+           }
+       }
+
+       drawerLayout.closeDrawer(GravityCompat.START);
+
+       return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }else {
+            super.onBackPressed();
         }
     }
 
