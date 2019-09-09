@@ -1,79 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:layout_margin="5dp"
+    android:layout_width="175dp"
+    android:layout_height="175dp"
     android:background="@drawable/shape_border_edittext">
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/nomeFantasia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nome do Posto"
-        android:layout_gravity="center"
-        android:textColor="@color/colorPrimaryDark"
-        />
+        <TextView
+            android:id="@+id/nomeFantasia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Auto Posto Bitencourt"
+            android:layout_gravity="center"
+            android:textColor="@color/colorPrimaryDark"/>
 
+        <TextView
+            android:id="@+id/preco"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="R$ 4.49"
+            android:layout_gravity="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"/>
 
-    <TextView
-        android:id="@+id/preco"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="R$ 0.000"
-        android:layout_gravity="center"
-        android:textColor="@color/colorPrimaryDark"
-        android:textStyle="bold"/>
-    <TextView
-        android:id="@+id/logradouro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="logradouro"
-        android:layout_gravity="center"
-        android:textColor="@color/colorPrimaryDark"
-        />
-    <TextView
-        android:id="@+id/numero"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Numero"
-        android:layout_gravity="center"
-        android:textColor="@color/colorPrimaryDark"
-        />
-    <TextView
-        android:id="@+id/bairro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Bairro"
-        android:layout_gravity="center"
-        android:textColor="@color/colorPrimaryDark"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
+        <TextView
+            android:id="@+id/logradouro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Av. Walter Jobin"
+            android:layout_gravity="center"
+            android:textColor="@color/colorPrimaryDark"/>
+
+        <TextView
+            android:id="@+id/numero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:text="Nº: 755"
+            android:layout_gravity="center"
+            android:textColor="@color/colorPrimaryDark"/>
+
+        <TextView
+            android:id="@+id/bairro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:text="Patronato"
+            android:layout_gravity="center"
+            android:textColor="@color/colorPrimaryDark"/>
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        >
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Atualizado: "
+            android:text="Em: "
             android:layout_gravity="left"
             android:textColor="@color/colorPrimaryDark"/>
+
         <TextView
             android:id="@+id/atualizado"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Data - hora"
+            android:text="06/09/2019 14:31"
             android:layout_gravity="right"
             android:textColor="@color/colorPrimaryDark"/>
     </LinearLayout>
-
-
-
-
-</LinearLayout>
+</RelativeLayout>

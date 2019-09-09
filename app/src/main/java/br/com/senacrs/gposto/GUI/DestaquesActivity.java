@@ -1,5 +1,6 @@
 package br.com.senacrs.gposto.GUI;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -103,12 +104,12 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
     public void onTopPostosSuccess(List<TopPostos> list) {
 
 
-        rvTopPostos.setAdapter(new LineAdapter(list));
+        rvTopPostos.setAdapter(new LineAdapter(list, DestaquesActivity.this));
         RecyclerView.LayoutManager layout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
         rvTopPostos.setLayoutManager(layout);
 
-        LineAdapter adapter = new LineAdapter(list);
+        LineAdapter adapter = new LineAdapter(list, DestaquesActivity.this);
         rvTopPostos.setAdapter(adapter);
 
         /*GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
