@@ -9,24 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".GUI.SplashScreen"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity android:name=".GUI.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GUI.MainActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-        </activity>
-        <activity android:name=".GUI.LoginActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
-        <activity android:name=".GUI.CadastroActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
-        <activity android:name=".GUI.DestaquesActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
-        <activity android:name=".GUI.CadastroPostosActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:name=".GUI.MainActivity"/>
+        <activity android:name=".GUI.LoginActivity"/>
+        <activity android:name=".GUI.CadastroActivity"/>
+        <activity android:name=".GUI.DestaquesActivity"/>
+        <activity android:name=".GUI.CadastroPostosActivity"/>
     </application>
 </manifest>
