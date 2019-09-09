@@ -57,7 +57,7 @@ public class LineAdapter extends RecyclerView.Adapter<LineHolder> implements OnI
 
     @Override
     public void onItemClicked(int itemPosition) {
-        //TODO ação do botão - chamar a lista completa
+        //TODO ação do botão - chamar o perfil do posto
         Toast.makeText(context,list.get(itemPosition).getPreco(),Toast.LENGTH_LONG).show();
     }
 }
