@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -15,6 +16,7 @@ import br.com.senacrs.gposto.R;
 public class CadastroPostosActivity extends AppCompatActivity {
 
     TextInputEditText editRSocial,editNFantasia,editCNPJ,editCEP,editLogradouro,editNumero,editBairro,editCidade,editEstado, editTel;
+    private Toolbar toolbar;
     ImageView imagePosto;
     Button btnCadstrarPosto;
 

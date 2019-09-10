@@ -1,6 +1,7 @@
 package br.com.senacrs.gposto.GUI;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -58,8 +59,6 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_destaques);
 
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         navigationDrawer();
 
         //  textDescricao = findViewById(R.id.textDescricao);
@@ -136,8 +135,6 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
 
     @Override
     public void onTopPostosSuccess(List<TopPostos> list) {
-
-
         rvTopPostos.setAdapter(new LineAdapter(list, DestaquesActivity.this));
         RecyclerView.LayoutManager layout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
@@ -159,7 +156,9 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
     }
 
     private void navigationDrawer(){
-
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Destaques");
         navigationView = findViewById(R.id.navigation_view);
         drawerLayout = findViewById(R.id.drawerLayout);
 
@@ -174,7 +173,8 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
        switch (menuItem.getItemId()){
            case R.id.menu_cadastrar_posto: {
-               Utils.shortToast(this,"funciono1");
+               Intent intent =  new Intent(DestaquesActivity.this,CadastroPostosActivity.class);
+               startActivity(intent);
                break;
            }
            case R.id.menu_editar_perfil: {
