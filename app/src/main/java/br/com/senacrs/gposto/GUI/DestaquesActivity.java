@@ -58,6 +58,8 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_destaques);
 
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         navigationDrawer();
 
         //  textDescricao = findViewById(R.id.textDescricao);
@@ -156,27 +158,16 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
         Utils.longToast(this, message);
     }
 
-    private void setStateSearchView(){
-        if(searchPosto.getVisibility()==View.VISIBLE){
-            searchPosto.setVisibility(View.GONE);
-        }else{
-            searchPosto.setVisibility(View.VISIBLE);
-        }
-    }
-
     private void navigationDrawer(){
+
         navigationView = findViewById(R.id.navigation_view);
         drawerLayout = findViewById(R.id.drawerLayout);
-        toolbar = findViewById(R.id.toolbar);
-
-        navigationView.setNavigationItemSelectedListener(this);
-
-        setSupportActionBar(toolbar);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open_drawer,R.string.close_drawer);
         drawerLayout.addDrawerListener(toggle);
 
         toggle.syncState();
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
@@ -212,5 +203,13 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
 
     public void verTodosPostos(View view) {
         setStateSearchView();
+    }
+
+    private void setStateSearchView(){
+        if(searchPosto.getVisibility()==View.VISIBLE){
+            searchPosto.setVisibility(View.GONE);
+        }else{
+            searchPosto.setVisibility(View.VISIBLE);
+        }
     }
 }
