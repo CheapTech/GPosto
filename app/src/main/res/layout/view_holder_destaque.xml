@@ -27,7 +27,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:text="Auto Posto Bitencourt"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/logradouroFull"
