@@ -58,12 +58,10 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_destaques);
 
-        //navigationDrawer();
+        navigationDrawer();
 
-        //  textDescricao = findViewById(R.id.textDescricao);
-
-        //  btnVerTodos = findViewById(R.id.btnVerTodos);
-        // searchPosto = findViewById(R.id.search_posto);
+        btnVerTodos = findViewById(R.id.btnVerTodos);
+        searchPosto = findViewById(R.id.search_posto);
         spinner = findViewById(R.id.spinner);
         rvTopPostos = findViewById(R.id.rvPrecosCombustivel);
 
@@ -159,7 +157,7 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
         }
     }
 
-/*    private void navigationDrawer(){
+    private void navigationDrawer() {
         navigationView = findViewById(R.id.navigation_view);
         drawerLayout = findViewById(R.id.drawerLayout);
         toolbar = findViewById(R.id.toolbar);
@@ -168,11 +166,11 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
 
         setSupportActionBar(toolbar);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open_drawer,R.string.close_drawer);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer);
         drawerLayout.addDrawerListener(toggle);
 
         toggle.syncState();
-    }*/
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
