@@ -30,11 +30,8 @@ public class LineAdapter extends RecyclerView.Adapter<LineHolder> implements OnI
     @NonNull
     @Override
     public LineHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-     /*   return new LineHolder(LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.view_holder_destaque, viewGroup, false)
-        );*/
-        View view = LayoutInflater.from(context).inflate(R.layout.view_holder_destaque,viewGroup,false);
-        LineHolder lineHolder = new LineHolder(view,this);
+        View view = LayoutInflater.from(context).inflate(R.layout.view_holder_destaque, viewGroup, false);
+        LineHolder lineHolder = new LineHolder(view, this);
 
         return lineHolder;
     }
@@ -42,12 +39,16 @@ public class LineAdapter extends RecyclerView.Adapter<LineHolder> implements OnI
     @Override
     public void onBindViewHolder(@NonNull LineHolder holder, int position) {
 
-        //holder.nomeFantasia.setText(list.get(position).getNomeFantasia());
-        //holder.logradouro.setText(list.get(position).getLogradouro());
-        //holder.bairro.setText(list.get(position).getBairro());
-        //holder.numero.setText(list.get(position).getNumero());
+        StringBuilder strBuilder = new StringBuilder();
+        strBuilder.append(list.get(position).getLogradouro());
+        strBuilder.append(", ");
+        strBuilder.append(list.get(position).getNumero());
+
+        holder.nomeFantasia.setText(list.get(position).getNomeFantasia());
+        holder.logradouro.setText(strBuilder.toString());
+        holder.bairro.setText(list.get(position).getBairro());
         holder.preco.setText(list.get(position).getPreco());
-        //holder.atualizado.setText(list.get(position).getAtualizado());
+        holder.atualizado.setText(list.get(position).getAtualizado());
     }
 
     @Override
@@ -58,6 +59,6 @@ public class LineAdapter extends RecyclerView.Adapter<LineHolder> implements OnI
     @Override
     public void onItemClicked(int itemPosition) {
         //TODO ação do botão - chamar o perfil do posto.
-        Toast.makeText(context,list.get(itemPosition).getPreco(),Toast.LENGTH_LONG).show();
+        Toast.makeText(context, list.get(itemPosition).getPreco(), Toast.LENGTH_LONG).show();
     }
 }

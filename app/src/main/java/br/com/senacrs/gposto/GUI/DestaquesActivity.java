@@ -58,12 +58,12 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_destaques);
 
-        navigationDrawer();
+        //navigationDrawer();
 
         //  textDescricao = findViewById(R.id.textDescricao);
 
-        btnVerTodos = findViewById(R.id.btnVerTodos);
-        searchPosto = findViewById(R.id.search_posto);
+        //  btnVerTodos = findViewById(R.id.btnVerTodos);
+        // searchPosto = findViewById(R.id.search_posto);
         spinner = findViewById(R.id.spinner);
         rvTopPostos = findViewById(R.id.rvPrecosCombustivel);
 
@@ -144,11 +144,6 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
         LineAdapter adapter = new LineAdapter(list, DestaquesActivity.this);
         rvTopPostos.setAdapter(adapter);
 
-        /*GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
-        rvTopPostos.setLayoutManager(layoutManager);*/
-        StaggeredGridLayoutManager layoutManager =
-                new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        rvTopPostos.setLayoutManager(layoutManager);
     }
 
     @Override
@@ -156,15 +151,15 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
         Utils.longToast(this, message);
     }
 
-    private void setStateSearchView(){
-        if(searchPosto.getVisibility()==View.VISIBLE){
+    private void setStateSearchView() {
+        if (searchPosto.getVisibility() == View.VISIBLE) {
             searchPosto.setVisibility(View.GONE);
-        }else{
+        } else {
             searchPosto.setVisibility(View.VISIBLE);
         }
     }
 
-    private void navigationDrawer(){
+/*    private void navigationDrawer(){
         navigationView = findViewById(R.id.navigation_view);
         drawerLayout = findViewById(R.id.drawerLayout);
         toolbar = findViewById(R.id.toolbar);
@@ -177,35 +172,35 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
         drawerLayout.addDrawerListener(toggle);
 
         toggle.syncState();
-    }
+    }*/
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-       switch (menuItem.getItemId()){
-           case R.id.menu_cadastrar_posto: {
-               Utils.shortToast(this,"funciono1");
-               break;
-           }
-           case R.id.menu_editar_perfil: {
-               Utils.shortToast(this,"funciono2");
-               break;
-           }
-           case R.id.menu_sair: {
-               Utils.shortToast(this,"funciono3");
-               break;
-           }
-       }
+        switch (menuItem.getItemId()) {
+            case R.id.menu_cadastrar_posto: {
+                Utils.shortToast(this, "funciono1");
+                break;
+            }
+            case R.id.menu_editar_perfil: {
+                Utils.shortToast(this, "funciono2");
+                break;
+            }
+            case R.id.menu_sair: {
+                Utils.shortToast(this, "funciono3");
+                break;
+            }
+        }
 
-       drawerLayout.closeDrawer(GravityCompat.START);
+        drawerLayout.closeDrawer(GravityCompat.START);
 
-       return false;
+        return false;
     }
 
     @Override
     public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        }else {
+        } else {
             super.onBackPressed();
         }
     }

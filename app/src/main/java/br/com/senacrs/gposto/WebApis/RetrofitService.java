@@ -16,7 +16,7 @@ public interface RetrofitService {
     @GET("CombustivelGet.php")
     Call<List<Combustivel>> getListCombustivel();
 
-    @GET("combustivel.php")
+    @GET("ListarCombustivel.php")
     Call<List<TopPostos>> getListTopPostos(@Query(value = "id") int id);
 
     @GET("UsuarioGETid.php")

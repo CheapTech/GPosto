@@ -24,9 +24,8 @@ public class LineHolder extends RecyclerView.ViewHolder {
 
         nomeFantasia = itemView.findViewById(R.id.nomeFantasia);
         preco = itemView.findViewById(R.id.preco);
-        logradouro = itemView.findViewById(R.id.logradouro);
+        logradouro = itemView.findViewById(R.id.logradouroFull);
         bairro = itemView.findViewById(R.id.bairro);
-        numero = itemView.findViewById(R.id.numero);
         atualizado = itemView.findViewById(R.id.atualizado);
 
         itemView.setOnClickListener(new View.OnClickListener() {
