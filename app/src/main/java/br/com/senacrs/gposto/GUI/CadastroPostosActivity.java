@@ -55,8 +55,6 @@ public class CadastroPostosActivity extends AppCompatActivity {
         }
     }
 
-    public void salvarImage(View view) {
-    }
 
     public boolean testarCampos(){
 
