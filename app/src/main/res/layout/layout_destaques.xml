@@ -48,7 +48,8 @@ tools:openDrawer="start">
                 android:layout_marginBottom="10dp"
                 android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_border_edittext"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvPrecosCombustivel"
