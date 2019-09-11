@@ -47,10 +47,8 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
     private SearchView searchPosto;
-    private TextView textDescricao;
     public Spinner spinner;
     public RecyclerView rvTopPostos;
-    public List<TopPostos> list;
 
 
     @Override
@@ -67,18 +65,6 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
 
 
         CombustivelController controller = new CombustivelController();
-
-        TopPostosController topPostosController = new TopPostosController();
-        try {
-            TopPostos topPostos = new TopPostos();
-
-
-            topPostosController.getTopPostosWeb(topPostos.getId(), DestaquesActivity.this);
-
-        } catch (Exception e) {
-            Toast.makeText(DestaquesActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-
 
         try {
             controller.getCombustivelWeb(DestaquesActivity.this);
@@ -104,7 +90,6 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
 
 
                 Combustivel combustivel = (Combustivel) parent.getItemAtPosition(position);
-                Toast.makeText(DestaquesActivity.this, "Id Comb: " + combustivel.getId(), Toast.LENGTH_LONG).show();
 
                 TopPostosController controller = new TopPostosController();
                 try {
@@ -120,8 +105,6 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
 
             }
         });
-
-
     }
 
     @Override
@@ -133,15 +116,10 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
     @Override
     public void onTopPostosSuccess(List<TopPostos> list) {
 
-
         rvTopPostos.setAdapter(new LineAdapter(list, DestaquesActivity.this));
         RecyclerView.LayoutManager layout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
         rvTopPostos.setLayoutManager(layout);
-
-        LineAdapter adapter = new LineAdapter(list, DestaquesActivity.this);
-        rvTopPostos.setAdapter(adapter);
-
     }
 
     @Override

@@ -14,7 +14,6 @@ public class LineHolder extends RecyclerView.ViewHolder {
     public TextView nomeFantasia;
     public TextView preco;
     public TextView logradouro;
-    public TextView numero;
     public TextView bairro;
     public TextView atualizado;
 

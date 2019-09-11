@@ -1,10 +1,11 @@
 package br.com.senacrs.gposto.Utilities;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import br.com.senacrs.gposto.GUI.DestaquesActivity;
+import br.com.senacrs.gposto.GUI.PerfilPostosActivity;
 import br.com.senacrs.gposto.LibClass.OnItemViewHolderClick;
 import br.com.senacrs.gposto.LibClass.TopPostos;
 import br.com.senacrs.gposto.R;
@@ -58,7 +60,12 @@ public class LineAdapter extends RecyclerView.Adapter<LineHolder> implements OnI
 
     @Override
     public void onItemClicked(int itemPosition) {
-        //TODO ação do botão - chamar o perfil do posto.
-        Toast.makeText(context, list.get(itemPosition).getPreco(), Toast.LENGTH_LONG).show();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("posto", list.get(itemPosition));
+
+        Intent intent = new Intent(context, PerfilPostosActivity.class);
+        intent.putExtras(bundle);
+
+        context.startActivity(intent);
     }
 }

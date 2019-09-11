@@ -15,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class PostosController {
     private final String BASE_URL = "http://www.gestoo.com.br/gposto/api/";
 
-    public void sendUsuarioWeb(final Postos postos, final PostosCallback callback) throws Exception{
+    public void getPostosWeb(final Postos postos, final PostosCallback callback) throws Exception{
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
