@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import br.com.senacrs.gposto.LibClass.OnItemViewHolderClick;
 import br.com.senacrs.gposto.R;
 
-public class LineHolder extends RecyclerView.ViewHolder {
+public class HolderTopPostos extends RecyclerView.ViewHolder {
 
     public TextView nomeFantasia;
     public TextView preco;
@@ -18,7 +18,7 @@ public class LineHolder extends RecyclerView.ViewHolder {
     public TextView atualizado;
 
 
-    public LineHolder(View itemView, final OnItemViewHolderClick itemClicked) {
+    public HolderTopPostos(View itemView, final OnItemViewHolderClick itemClicked) {
         super(itemView);
 
         nomeFantasia = itemView.findViewById(R.id.nomeFantasia);

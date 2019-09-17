@@ -11,6 +11,7 @@ public class TopPostos implements Serializable {
     String bairro;
     String numero;
     String atualizado;
+    String telefone;
 
     public int getId() {
         return id;
@@ -46,6 +47,14 @@ public class TopPostos implements Serializable {
 
     public String getLogradouro() {
         return logradouro;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
     public void setLogradouro(String logradouro) {

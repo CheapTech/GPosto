@@ -12,18 +12,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import br.com.senacrs.gposto.GUI.DestaquesActivity;
 import br.com.senacrs.gposto.GUI.PerfilPostosActivity;
 import br.com.senacrs.gposto.LibClass.OnItemViewHolderClick;
 import br.com.senacrs.gposto.LibClass.TopPostos;
 import br.com.senacrs.gposto.R;
 
-public class LineAdapter extends RecyclerView.Adapter<LineHolder> implements OnItemViewHolderClick {
+public class AdapterTopPostos extends RecyclerView.Adapter<HolderTopPostos> implements OnItemViewHolderClick {
 
     private List<TopPostos> list;
     private Context context;
 
-    public LineAdapter(List postos, Context context) {
+    public AdapterTopPostos(List postos, Context context) {
 
         this.list = postos;
         this.context = context;
@@ -31,15 +30,15 @@ public class LineAdapter extends RecyclerView.Adapter<LineHolder> implements OnI
 
     @NonNull
     @Override
-    public LineHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public HolderTopPostos onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.view_holder_destaque, viewGroup, false);
-        LineHolder lineHolder = new LineHolder(view, this);
+        HolderTopPostos holderTopPostos = new HolderTopPostos(view, this);
 
-        return lineHolder;
+        return holderTopPostos;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull LineHolder holder, int position) {
+    public void onBindViewHolder(@NonNull HolderTopPostos holder, int position) {
 
         StringBuilder strBuilder = new StringBuilder();
         strBuilder.append(list.get(position).getLogradouro());

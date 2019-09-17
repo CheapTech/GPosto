@@ -1,15 +1,11 @@
 package br.com.senacrs.gposto.GUI;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,10 +15,8 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -36,9 +30,8 @@ import br.com.senacrs.gposto.GUI.Callback.TopPostosCallback;
 import br.com.senacrs.gposto.LibClass.Combustivel;
 import br.com.senacrs.gposto.LibClass.TopPostos;
 import br.com.senacrs.gposto.R;
-import br.com.senacrs.gposto.Utilities.LineAdapter;
+import br.com.senacrs.gposto.Utilities.AdapterTopPostos;
 import br.com.senacrs.gposto.Utilities.Utils;
-import okhttp3.internal.Util;
 
 public class DestaquesActivity extends AppCompatActivity implements CombustivelCallback, TopPostosCallback, NavigationView.OnNavigationItemSelectedListener {
 
@@ -71,7 +64,6 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
         } catch (Exception e) {
             Toast.makeText(DestaquesActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
-
     }
 
 
@@ -116,7 +108,7 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
     @Override
     public void onTopPostosSuccess(List<TopPostos> list) {
 
-        rvTopPostos.setAdapter(new LineAdapter(list, DestaquesActivity.this));
+        rvTopPostos.setAdapter(new AdapterTopPostos(list, DestaquesActivity.this));
         RecyclerView.LayoutManager layout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
         rvTopPostos.setLayoutManager(layout);
