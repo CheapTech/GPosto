@@ -4,15 +4,15 @@
 
         <item android:title="Cadastar Posto"
             android:id="@+id/menu_cadastrar_posto"
-            android:icon="@drawable/baseline_local_gas_station_black_18dp"/>
+            android:icon="@drawable/icon_gas_station"/>
 
         <item android:title="Editar Perfil"
             android:id="@+id/menu_editar_perfil"
-            android:icon="@drawable/baseline_edit_black_18dp"/>
+            android:icon="@drawable/icon_edit"/>
 
         <item android:title="Sair"
             android:id="@+id/menu_sair"
-            android:icon="@drawable/baseline_exit_to_app_black_18dp"/>
+            android:icon="@drawable/icon_exit"/>
 
     </group>
 </menu>

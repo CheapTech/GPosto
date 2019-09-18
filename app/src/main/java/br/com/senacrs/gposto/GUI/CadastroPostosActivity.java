@@ -1,104 +1,125 @@
 package br.com.senacrs.gposto.GUI;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.lang.ref.SoftReference;
 
 import br.com.senacrs.gposto.R;
+import br.com.senacrs.gposto.Utilities.Utils;
 
-public class CadastroPostosActivity extends AppCompatActivity {
+public class CadastroPostosActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    TextInputEditText editRSocial,editNFantasia,editCNPJ,editCEP,editLogradouro,editNumero,editBairro,editCidade,editEstado, editTel;
+    private TextInputEditText editNFantasia,editLogradouro,editBairro,editTel;
     private Toolbar toolbar;
-    ImageView imagePosto;
-    Button btnCadstrarPosto;
+    private NavigationView navigationView;
+    private DrawerLayout drawerLayout;
+    private FloatingActionButton btnCadstrarPosto;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_posto);
+        navigationDrawer();
 
-        editRSocial = findViewById(R.id.editRazaoSocial);
         editNFantasia = findViewById(R.id.editNomeFantasia);
-        editCNPJ = findViewById(R.id.editCNPJ);
-        editCEP = findViewById(R.id.editCEP);
         editLogradouro = findViewById(R.id.editLogradouro);
-        editNumero = findViewById(R.id.editNumero);
         editBairro = findViewById(R.id.editBairro);
-        editCidade = findViewById(R.id.editCidade);
-        editEstado = findViewById(R.id.editEstado);
         editTel = findViewById(R.id.editTel01);
-
-        imagePosto = findViewById(R.id.imagePosto);
 
         btnCadstrarPosto = findViewById(R.id.btnCadastrarPosto);
     }
 
     public void cadastrarPosto(View view) {
         if (!testarCampos()){
-            String rsocial = editRSocial.getText().toString();
             String nfantasia = editNFantasia.getText().toString();
-            String cnpj = editCNPJ.getText().toString();
-            String cep = editCEP.getText().toString();
             String logradouro = editLogradouro.getText().toString();
-            String numero = editNumero.getText().toString();
             String bairro = editBairro.getText().toString();
-            String cidade = editCidade.getText().toString();
-            String estado = editEstado.getText().toString();
             String tel = editTel.getText().toString();
 
         }
     }
 
 
+
     public boolean testarCampos(){
 
         boolean testarCampos = true;
 
-        if (editNFantasia.getText().toString().trim().isEmpty()){
+        if(editNFantasia.getText().toString().trim().isEmpty()){
             editNFantasia.setError("Campo Obrigatorio");
         }else {
-            if (editCNPJ.getText().toString().trim().isEmpty()){
-                editCNPJ.setError("Campo Obrigatorio");
+            if (editLogradouro.getText().toString().trim().isEmpty()){
+                editLogradouro.setError("Campo Obrigatorio");
             }else {
-                if (editCEP.getText().toString().trim().isEmpty()){
-                    editCEP.setError("Campo Obrigatorio");
-                }else {
-                    if (editLogradouro.getText().toString().trim().isEmpty()){
-                        editLogradouro.setError("Campo Obrigatorio");
-                    }else {
-                        if (editNumero.getText().toString().trim().isEmpty()){
-                            editNumero.setError("Campo Obrigatorio");
-                        }else {
-                            if (editEstado.getText().toString().trim().isEmpty()){
-                                editEstado.setError("Campo Obrigatorio");
-                            }else {
-                                if (editBairro.getText().toString().trim().isEmpty()){
-                                    editBairro.setError("Campo Obrigatorio");
-                                }else {
-                                    if (editCidade.getText().toString().trim().isEmpty()){
-                                        editCidade.setError("Campo Obrigatorio");
-                                    }else {
-                                        if (editTel.getText().toString().trim().isEmpty()){
-                                            editTel.setError("Campo Obrigatorio");
-                                        }else {
-                                            testarCampos = false;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                if (editBairro.getText().toString().trim().isEmpty()){
+                    editBairro.setError("Campo Obrigatorio");
                 }
             }
         }
         return testarCampos;
+    }
+
+    private void navigationDrawer() {
+        drawerLayout = findViewById(R.id.drawerLayout);
+        navigationView = findViewById(R.id.navigation_view);
+        toolbar = findViewById(R.id.toolbar);
+
+        toolbar.setTitle("Cadastro Posto");
+        setSupportActionBar(toolbar);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer);
+        drawerLayout.addDrawerListener(toggle);
+
+        navigationView.setNavigationItemSelectedListener(this);
+
+        toggle.syncState();
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.menu_cadastrar_posto: {
+                Utils.shortToast(this, "?????___??????");
+                break;
+            }
+            case R.id.menu_editar_perfil: {
+                Intent intent = new Intent(this,PerfilUsuarioActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.menu_sair: {
+                Utils.shortToast(this, "funciono3");
+                break;
+            }
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START);
+
+        return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 }

@@ -27,7 +27,7 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_perfil_postos);
+        setContentView(R.layout.layout_perfil_postos);
 
 
         Intent intent = getIntent();

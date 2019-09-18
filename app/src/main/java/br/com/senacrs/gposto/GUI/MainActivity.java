@@ -34,7 +34,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToModoV(View view) {
-        Utils.longToast(MainActivity.this,"Função (Modo Visitante) Não Implementada");
+        Intent intent = new Intent(MainActivity.this, DestaquesActivity.class);
+        startActivity(intent);
     }
 
     public void goToCadastro(View view) {

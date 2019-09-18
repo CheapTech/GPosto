@@ -1,11 +1,16 @@
 package br.com.senacrs.gposto.GUI;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,8 +20,10 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -32,6 +39,7 @@ import br.com.senacrs.gposto.LibClass.TopPostos;
 import br.com.senacrs.gposto.R;
 import br.com.senacrs.gposto.Utilities.AdapterTopPostos;
 import br.com.senacrs.gposto.Utilities.Utils;
+import okhttp3.internal.Util;
 
 public class DestaquesActivity extends AppCompatActivity implements CombustivelCallback, TopPostosCallback, NavigationView.OnNavigationItemSelectedListener {
 
@@ -40,8 +48,10 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
     private SearchView searchPosto;
+    private TextView textDescricao;
     public Spinner spinner;
     public RecyclerView rvTopPostos;
+    public List<TopPostos> list;
 
 
     @Override
@@ -59,11 +69,24 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
 
         CombustivelController controller = new CombustivelController();
 
+        TopPostosController topPostosController = new TopPostosController();
+        try {
+            TopPostos topPostos = new TopPostos();
+
+
+            topPostosController.getTopPostosWeb(topPostos.getId(), DestaquesActivity.this);
+
+        } catch (Exception e) {
+            Toast.makeText(DestaquesActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+
+
         try {
             controller.getCombustivelWeb(DestaquesActivity.this);
         } catch (Exception e) {
             Toast.makeText(DestaquesActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
+
     }
 
 
@@ -82,6 +105,7 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
 
 
                 Combustivel combustivel = (Combustivel) parent.getItemAtPosition(position);
+                Toast.makeText(DestaquesActivity.this, "Id Comb: " + combustivel.getId(), Toast.LENGTH_LONG).show();
 
                 TopPostosController controller = new TopPostosController();
                 try {
@@ -97,6 +121,8 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
 
             }
         });
+
+
     }
 
     @Override
@@ -111,7 +137,11 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
         rvTopPostos.setAdapter(new AdapterTopPostos(list, DestaquesActivity.this));
         RecyclerView.LayoutManager layout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
+
+
+
         rvTopPostos.setLayoutManager(layout);
+
     }
 
     @Override
@@ -134,6 +164,7 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
 
         navigationView.setNavigationItemSelectedListener(this);
 
+        toolbar.setTitle("Destaques");
         setSupportActionBar(toolbar);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer);
@@ -146,11 +177,13 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.menu_cadastrar_posto: {
-                Utils.shortToast(this, "funciono1");
+                Intent intent = new Intent(this,CadastroPostosActivity.class);
+                startActivity(intent);
                 break;
             }
             case R.id.menu_editar_perfil: {
-                Utils.shortToast(this, "funciono2");
+                Intent intent = new Intent(this,PerfilUsuarioActivity.class);
+                startActivity(intent);
                 break;
             }
             case R.id.menu_sair: {
