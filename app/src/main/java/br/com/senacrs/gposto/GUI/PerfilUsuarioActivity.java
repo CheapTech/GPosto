@@ -122,6 +122,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
         }
     }
 
+    //CustomAlertDialog
     public void editarPerfil(View view) {
         setAlertDialog();
     }
