@@ -3,10 +3,8 @@ package br.com.senacrs.gposto.Utilities;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import br.com.senacrs.gposto.LibClass.OnItemViewHolderClick;
 import br.com.senacrs.gposto.R;
 
 public class HolderTopPostos extends RecyclerView.ViewHolder {

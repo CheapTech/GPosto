@@ -25,7 +25,7 @@
         android:text="Login"
         android:onClick="goToLogin"
         android:textSize="17sp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="100dp"
         android:layout_marginLeft="80dp"
         android:layout_marginRight="80dp"
         android:textColor="#EEE1E1"/>
@@ -44,7 +44,7 @@
         android:textColor="#EEE1E1"/>
 
     <LinearLayout
-        android:layout_marginTop="105dp"
+        android:layout_marginTop="170dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -53,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimaryDark"
-            android:layout_marginLeft="100dp"
+            android:layout_marginLeft="107dp"
             android:text="Novo Por Aqui? "
             android:layout_gravity="center"/>
 

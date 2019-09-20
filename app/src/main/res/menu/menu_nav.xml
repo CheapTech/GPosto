@@ -2,6 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
 
+        <item android:title="Destaques"
+            android:id="@+id/menu_destaques"
+            android:icon="@drawable/icon_star_full"/>
+
         <item android:title="Cadastar Posto"
             android:id="@+id/menu_cadastrar_posto"
             android:icon="@drawable/icon_gas_station"/>

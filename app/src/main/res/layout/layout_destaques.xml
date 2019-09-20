@@ -62,6 +62,7 @@ tools:openDrawer="start">
             android:src="@drawable/icon_search"
             android:layout_margin="7dp"
             android:elevation="5dp"
+            android:backgroundTint="@color/colorSecundary"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"

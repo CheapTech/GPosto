@@ -9,14 +9,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.DialogFragment;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Layout;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -29,12 +35,15 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 import java.io.IOException;
 
 import br.com.senacrs.gposto.R;
+import br.com.senacrs.gposto.Utilities.CustomAlertDialog;
 import br.com.senacrs.gposto.Utilities.Utils;
 
 public class PerfilUsuarioActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     TextView txtEmail,txtUser,txtSenha;
-    ImageView editEmail,editUser,editSenha,imageViewPerfil;
+    ImageView imageEditPerfil,imageViewPerfil;
+
+    Layout alertdialog_edit_perfil;
 
     Uri mCropImageUri;
 
@@ -54,12 +63,10 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
 
     private void findViewById(){
         imageViewPerfil = findViewById(R.id.imagePerfil);
+        imageEditPerfil = findViewById(R.id.imageEditPerfil);
         txtEmail = findViewById(R.id.txtEmail);
         txtUser = findViewById(R.id.txtUsuario);
         txtSenha = findViewById(R.id.txtSenha);
-        editEmail = findViewById(R.id.image_edit_Email);
-        editUser = findViewById(R.id.image_edit_Usuario);
-        editSenha = findViewById(R.id.image_edit_Senha);
     }
 
     //Get Image Perfil(Usuario)
@@ -115,22 +122,13 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
         }
     }
 
-    public void editSenha(View view) {
-        setAlertDialog("Sua Senha");
+    public void editarPerfil(View view) {
+        setAlertDialog();
     }
 
-    public void editUser(View view) {
-        setAlertDialog("Seu Usuario");
-    }
-
-    public void editEmail(View view) {
-        setAlertDialog("Seu Email");
-    }
-
-    private void setAlertDialog(String op){
+    private void setAlertDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setMessage("Deseja Modificar "+op);
+        builder.setMessage("Deseja Modificar seu Perfil");
 
         builder.setPositiveButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
@@ -142,21 +140,15 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
         builder.setNegativeButton("Editar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Utils.shortToast(PerfilUsuarioActivity.this,"Funciono");
+                CustomAlertDialog cAlertDialog = new CustomAlertDialog(PerfilUsuarioActivity.this);
+                cAlertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                cAlertDialog.setCancelable(true);
+                cAlertDialog.show();
             }
         });
-
         alertDialog = builder.create();
         alertDialog.show();
     }
-
-    private void setEditEmail(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-    }
-
-
-
 
     //NavigationDrawer (Menu)
     private void navigationDrawer() {
@@ -178,6 +170,13 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
+
+            case R.id.menu_destaques:{
+                Intent intent = new Intent(this,DestaquesActivity.class);
+                startActivity(intent);
+                break;
+            }
+
             case R.id.menu_cadastrar_posto: {
                 Intent intent = new Intent(this,CadastroPostosActivity.class);
                 startActivity(intent);
@@ -206,4 +205,5 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
             super.onBackPressed();
         }
     }
+
 }

@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import br.com.senacrs.gposto.GUI.PerfilPostosActivity;
-import br.com.senacrs.gposto.LibClass.OnItemViewHolderClick;
 import br.com.senacrs.gposto.LibClass.TopPostos;
 import br.com.senacrs.gposto.R;
 
