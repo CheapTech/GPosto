@@ -1,17 +1,13 @@
 package br.com.senacrs.gposto.GUI;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.DialogFragment;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -22,13 +18,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Layout;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.textfield.TextInputEditText;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -40,8 +37,10 @@ import br.com.senacrs.gposto.Utilities.Utils;
 
 public class PerfilUsuarioActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-    TextView txtEmail,txtUser,txtSenha;
+    TextView txtEmail, txtUsuario,txtSenha;
+    TextInputEditText editEmail,editUsuario,editSenha,editConfirmarSenha;
     ImageView imageEditPerfil,imageViewPerfil;
+    Button btnUpdateUsuario;
 
     Layout alertdialog_edit_perfil;
 
@@ -65,8 +64,13 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
         imageViewPerfil = findViewById(R.id.imagePerfil);
         imageEditPerfil = findViewById(R.id.imageEditPerfil);
         txtEmail = findViewById(R.id.txtEmail);
-        txtUser = findViewById(R.id.txtUsuario);
+        txtUsuario = findViewById(R.id.txtUsuario);
         txtSenha = findViewById(R.id.txtSenha);
+        editEmail = findViewById(R.id.editEmail);
+        editUsuario = findViewById(R.id.editUsuario);
+        editSenha = findViewById(R.id.editSenha);
+        editConfirmarSenha = findViewById(R.id.editConfirmarSenha);
+        btnUpdateUsuario = findViewById(R.id.btnUpdateUsuario);
     }
 
     //Get Image Perfil(Usuario)
@@ -103,7 +107,6 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
                     e.printStackTrace();
                 }
 
-                //Set the Image on User Perfil
                 imageViewPerfil.setImageBitmap(thePic);
 
             }else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
@@ -175,12 +178,14 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
             case R.id.menu_destaques:{
                 Intent intent = new Intent(this,DestaquesActivity.class);
                 startActivity(intent);
+                finish();
                 break;
             }
 
             case R.id.menu_cadastrar_posto: {
                 Intent intent = new Intent(this,CadastroPostosActivity.class);
                 startActivity(intent);
+                finish();
                 break;
             }
             case R.id.menu_editar_perfil: {
@@ -207,4 +212,20 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
         }
     }
 
+    private void getUser(){
+        String email = editEmail.getText().toString();
+        String usuario = editUsuario.getText().toString();
+        String senha = editSenha.getText().toString();
+        String confirmarSenha = editConfirmarSenha.getText().toString();
+
+        txtEmail.setText(email);
+        txtUsuario.setText(usuario);
+        txtSenha.setText(senha);
+    }
+
+    public void updateUser(View view) {
+        Utils.shortToast(this,"Vamo Caralho");
+        getUser();
+        alertDialog.cancel();
+    }
 }
