@@ -27,8 +27,7 @@ import br.com.senacrs.gposto.Utilities.Utils;
 public class PerfilPostosActivity extends AppCompatActivity implements TopPostosCallback , NavigationView.OnNavigationItemSelectedListener{
 
     private TopPostos posto;
-    public TextView perfilNome,endereco,telefone;
-    public TextView preco;
+    public TextView perfilNome,endereco,telefone,bairro;
 
     NavigationView navigationView;
     DrawerLayout drawerLayout;
@@ -66,10 +65,12 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
         perfilNome = findViewById(R.id.perfil_nome);
         endereco = findViewById(R.id.perfil_endereco);
         telefone = findViewById(R.id.perfil_telefone);
+        bairro = findViewById(R.id.perfil_bairro);
 
 
         perfilNome.setText(posto.getNomeFantasia());
         endereco.setText(strBuilder.toString());
+        bairro.setText(posto.getBairro());
         telefone.setText(posto.getTelefone());
     }
 
@@ -105,17 +106,20 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
             case R.id.menu_destaques:{
                 Intent intent = new Intent(this,DestaquesActivity.class);
                 startActivity(intent);
+                finish();
                 break;
             }
 
             case R.id.menu_cadastrar_posto: {
                 Intent intent = new Intent(this,CadastroPostosActivity.class);
                 startActivity(intent);
+                finish();
                 break;
             }
             case R.id.menu_editar_perfil: {
                 Intent intent = new Intent(this,PerfilUsuarioActivity.class);
                 startActivity(intent);
+                finish();
                 break;
             }
             case R.id.menu_sair: {

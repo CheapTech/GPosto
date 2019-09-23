@@ -31,11 +31,13 @@ public class MainActivity extends AppCompatActivity {
     public void goToLogin(View view) {
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void goToModoV(View view) {
         Intent intent = new Intent(MainActivity.this, DestaquesActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void goToCadastro(View view) {

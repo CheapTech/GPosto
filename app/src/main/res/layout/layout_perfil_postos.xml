@@ -5,8 +5,7 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:openDrawer="start"
+
     tools:context=".GUI.PerfilPostosActivity">
 
     <RelativeLayout
@@ -42,7 +41,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimaryLight"
+                android:background="@color/colorSecundaryLight"
                 android:orientation="vertical">
 
                 <TextView
@@ -108,7 +107,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/textView28"
+                android:id="@+id/perfil_bairro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Bairro"
@@ -211,8 +210,7 @@
                 android:id="@+id/button11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_margin="8dp"
                 android:background="@drawable/shape_button"
                 android:onClick="atualizarValor"
                 android:text=" Atualizar Valor "

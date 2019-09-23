@@ -10,6 +10,7 @@ import br.com.senacrs.gposto.GUI.Callback.CombustivelCallback;
 import br.com.senacrs.gposto.LibClass.Combustivel;
 import br.com.senacrs.gposto.R;
 import br.com.senacrs.gposto.Utilities.AdapterLvCombustivel;
+import br.com.senacrs.gposto.Utilities.Utils;
 
 public class CombustivelActivity extends AppCompatActivity implements CombustivelCallback {
 
@@ -32,6 +33,6 @@ public class CombustivelActivity extends AppCompatActivity implements Combustive
 
     @Override
     public void onCombustivelFailure(String message) {
-
+        Utils.shortToast(this,message);
     }
 }

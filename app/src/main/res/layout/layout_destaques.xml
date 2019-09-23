@@ -43,12 +43,12 @@ tools:openDrawer="start">
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/search_posto"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="10dp"
-                android:layout_margin="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:visibility="gone"
                 android:background="@drawable/shape_border_holder"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvPrecosCombustivel"

@@ -52,7 +52,6 @@ public class CadastroPostosActivity extends AppCompatActivity implements Navigat
             String logradouro = editLogradouro.getText().toString();
             String bairro = editBairro.getText().toString();
             String tel = editTel.getText().toString();
-
         }
     }
 
@@ -99,6 +98,7 @@ public class CadastroPostosActivity extends AppCompatActivity implements Navigat
             case R.id.menu_destaques:{
                 Intent intent = new Intent(this,DestaquesActivity.class);
                 startActivity(intent);
+                finish();
                 break;
             }
 
@@ -109,6 +109,7 @@ public class CadastroPostosActivity extends AppCompatActivity implements Navigat
             case R.id.menu_editar_perfil: {
                 Intent intent = new Intent(this,PerfilUsuarioActivity.class);
                 startActivity(intent);
+                finish();
                 break;
             }
             case R.id.menu_sair: {

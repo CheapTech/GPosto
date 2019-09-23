@@ -4,6 +4,6 @@
     <color name="colorPrimaryDark">#001061</color>
     <color name="colorPrimaryLight">#625fc0</color>
     <color name="colorSecundary">#3e843f</color>
-    <color name="colorSecundaryDark">#6eb46b</color>
-    <color name="colorSecundaryLight">#045615</color>
+    <color name="colorSecundaryDark">#045615</color>
+    <color name="colorSecundaryLight">#6eb46b</color>
 </resources>
