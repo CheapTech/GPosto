@@ -25,7 +25,7 @@ public interface RetrofitService {
     @GET("UsuarioGETid.php")
     Call<Usuario> logarUsuario(@Query(value = "email", encoded = true) String email, @Query(value = "senha", encoded = true) String senha);
 
-    @POST("inserir.php")
+    @POST("InserirUsuario.php")
     Call<Usuario> cadastrarUsuario(@Body Usuario usuario);
 
     @POST("inserir.php")

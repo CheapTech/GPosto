@@ -162,6 +162,12 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
+
+            case R.id.menu_destaques:{
+                Utils.shortToast(this, "?????___??????");
+                break;
+            }
+
             case R.id.menu_cadastrar_posto: {
                 Intent intent = new Intent(this,CadastroPostosActivity.class);
                 startActivity(intent);

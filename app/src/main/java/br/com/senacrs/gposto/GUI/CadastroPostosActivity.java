@@ -1,6 +1,7 @@
 package br.com.senacrs.gposto.GUI;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -94,6 +95,13 @@ public class CadastroPostosActivity extends AppCompatActivity implements Navigat
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
+
+            case R.id.menu_destaques:{
+                Intent intent = new Intent(this,DestaquesActivity.class);
+                startActivity(intent);
+                break;
+            }
+
             case R.id.menu_cadastrar_posto: {
                 Utils.shortToast(this, "?????___??????");
                 break;
