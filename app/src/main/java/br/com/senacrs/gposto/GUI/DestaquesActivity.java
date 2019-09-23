@@ -53,7 +53,6 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
     public RecyclerView rvTopPostos;
     public List<TopPostos> list;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,17 +67,6 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
 
 
         CombustivelController controller = new CombustivelController();
-
-        TopPostosController topPostosController = new TopPostosController();
-        try {
-            TopPostos topPostos = new TopPostos();
-
-
-            topPostosController.getTopPostosWeb(topPostos.getId(), DestaquesActivity.this);
-
-        } catch (Exception e) {
-            Toast.makeText(DestaquesActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-        }
 
 
         try {
@@ -105,8 +93,6 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
 
 
                 Combustivel combustivel = (Combustivel) parent.getItemAtPosition(position);
-                Toast.makeText(DestaquesActivity.this, "Id Comb: " + combustivel.getId(), Toast.LENGTH_LONG).show();
-
                 TopPostosController controller = new TopPostosController();
                 try {
                     controller.getTopPostosWeb(combustivel.getId(), DestaquesActivity.this);

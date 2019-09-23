@@ -18,7 +18,7 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
 
     private TopPostos posto;
     public TextView perfilNome;
-    public TextView preco;
+    public TextView bairro;
     public TextView endereco;
     public TextView telefone;
 
@@ -55,6 +55,7 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
         perfilNome = findViewById(R.id.perfil_nome);
         endereco = findViewById(R.id.perfil_endereco);
         telefone = findViewById(R.id.perfil_telefone);
+        bairro = findViewById(R.id.perfil_bairro);
 
 
         perfilNome.setText(posto.getNomeFantasia());
