@@ -1,12 +1,9 @@
 package br.com.senacrs.gposto.GUI;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -18,8 +15,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
-
-import java.lang.ref.SoftReference;
 
 import br.com.senacrs.gposto.R;
 import br.com.senacrs.gposto.Utilities.Utils;
@@ -41,7 +36,7 @@ public class CadastroPostosActivity extends AppCompatActivity implements Navigat
         editNFantasia = findViewById(R.id.editNomeFantasia);
         editLogradouro = findViewById(R.id.editLogradouro);
         editBairro = findViewById(R.id.editBairro);
-        editTel = findViewById(R.id.editTel01);
+        editTel = findViewById(R.id.editTel);
 
         btnCadstrarPosto = findViewById(R.id.btnCadastrarPosto);
     }

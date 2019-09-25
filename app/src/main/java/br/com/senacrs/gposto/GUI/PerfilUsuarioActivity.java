@@ -1,5 +1,6 @@
 package br.com.senacrs.gposto.GUI;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
@@ -21,9 +22,11 @@ import android.text.Layout;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.theartofdev.edmodo.cropper.CropImage;
@@ -31,6 +34,7 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.IOException;
 
+import br.com.senacrs.gposto.LibClass.Usuario;
 import br.com.senacrs.gposto.R;
 import br.com.senacrs.gposto.Utilities.CustomAlertDialog;
 import br.com.senacrs.gposto.Utilities.Utils;
@@ -38,7 +42,7 @@ import br.com.senacrs.gposto.Utilities.Utils;
 public class PerfilUsuarioActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     TextView txtEmail, txtUsuario,txtSenha;
-    TextInputEditText editEmail,editUsuario,editSenha,editConfirmarSenha;
+    EditText editEmail,editUsuario,editSenha,editConfirmarSenha;
     ImageView imageEditPerfil,imageViewPerfil;
     Button btnUpdateUsuario;
 
@@ -70,7 +74,6 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
         editUsuario = findViewById(R.id.editUsuario);
         editSenha = findViewById(R.id.editSenha);
         editConfirmarSenha = findViewById(R.id.editConfirmarSenha);
-        btnUpdateUsuario = findViewById(R.id.btnUpdateUsuario);
     }
 
     //Get Image Perfil(Usuario)
@@ -107,7 +110,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
                     e.printStackTrace();
                 }
 
-                imageViewPerfil.setImageBitmap(thePic);
+                Glide.with(this).load(thePic).circleCrop().into(imageViewPerfil);
 
             }else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
                 Exception error = result.getError();
@@ -132,8 +135,8 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
 
     private void setAlertDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Deseja Modificar seu Perfil");
-
+        builder.setView(R.layout.alertdialog_edit_perfil);
+        builder.setMessage("Deseja Modificar seu Perfil?");
         builder.setPositiveButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -141,13 +144,10 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
             }
         });
 
-        builder.setNegativeButton("Editar", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Salvar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                CustomAlertDialog cAlertDialog = new CustomAlertDialog(PerfilUsuarioActivity.this);
-                cAlertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                cAlertDialog.setCancelable(true);
-                cAlertDialog.show();
+                Utils.longToast(PerfilUsuarioActivity.this,"Vamo Caralho");
             }
         });
         alertDialog = builder.create();
@@ -210,22 +210,5 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
         } else {
             super.onBackPressed();
         }
-    }
-
-    private void getUser(){
-        String email = editEmail.getText().toString();
-        String usuario = editUsuario.getText().toString();
-        String senha = editSenha.getText().toString();
-        String confirmarSenha = editConfirmarSenha.getText().toString();
-
-        txtEmail.setText(email);
-        txtUsuario.setText(usuario);
-        txtSenha.setText(senha);
-    }
-
-    public void updateUser(View view) {
-        Utils.shortToast(this,"Vamo Caralho");
-        getUser();
-        alertDialog.cancel();
     }
 }

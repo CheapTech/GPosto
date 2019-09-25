@@ -46,6 +46,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editNomeFantasia"
+                    android:inputType="text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="*Nome Fantasia:"
@@ -73,6 +74,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editLogradouro"
+                    android:inputType="text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="*Logradouro"
@@ -90,6 +92,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editBairro"
+                    android:inputType="text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="*Bairro"
@@ -106,7 +109,7 @@
                 android:textColorHint="@color/colorPrimaryDark">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTel01"
+                    android:id="@+id/editTel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="*Telefone:"

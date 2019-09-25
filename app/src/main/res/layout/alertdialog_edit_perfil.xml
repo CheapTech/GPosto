@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="280dp"
-    android:layout_height="305dp"
+    android:layout_height="260dp"
     android:layout_gravity="center"
     android:background="@drawable/shape_alert_dialog"
     android:id="@+id/alertDialog_editPerfil"
@@ -22,6 +22,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editEmail"
             android:hint="Email:"
+            android:inputType="textEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -38,6 +39,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editUsuario"
             android:hint="Usuario:"
+            android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -78,14 +80,5 @@
             android:hint="Confirmar Senha:" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/btnUpdateUsuario"
-        android:text="Salvar"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:onClick="updateUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
 </LinearLayout>
