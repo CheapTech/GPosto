@@ -21,11 +21,11 @@ import br.com.senacrs.gposto.Utilities.Utils;
 
 public class CadastroPostosActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private TextInputEditText editNFantasia,editLogradouro,editBairro,editTel;
-    private Toolbar toolbar;
-    private NavigationView navigationView;
-    private DrawerLayout drawerLayout;
-    private FloatingActionButton btnCadstrarPosto;
+    TextInputEditText editNFantasia,editLogradouro,editBairro,editTel;
+    Toolbar toolbar;
+    NavigationView navigationView;
+    DrawerLayout drawerLayout;
+    FloatingActionButton btnCadstrarPosto;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,34 +41,17 @@ public class CadastroPostosActivity extends AppCompatActivity implements Navigat
         btnCadstrarPosto = findViewById(R.id.btnCadastrarPosto);
     }
 
-    public void cadastrarPosto(View view) {
-        if (!testarCampos()){
-            String nfantasia = editNFantasia.getText().toString();
-            String logradouro = editLogradouro.getText().toString();
-            String bairro = editBairro.getText().toString();
-            String tel = editTel.getText().toString();
-        }
-    }
+    public void cadastrarPosto(View view) {  }
 
 
 
+    /*
     public boolean testarCampos(){
 
         boolean testarCampos = true;
 
-        if(editNFantasia.getText().toString().trim().isEmpty()){
-            editNFantasia.setError("Campo Obrigatorio");
-        }else {
-            if (editLogradouro.getText().toString().trim().isEmpty()){
-                editLogradouro.setError("Campo Obrigatorio");
-            }else {
-                if (editBairro.getText().toString().trim().isEmpty()){
-                    editBairro.setError("Campo Obrigatorio");
-                }
-            }
-        }
         return testarCampos;
-    }
+    }*/
 
     private void navigationDrawer() {
         drawerLayout = findViewById(R.id.drawerLayout);

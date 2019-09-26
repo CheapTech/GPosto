@@ -1,16 +1,12 @@
 package br.com.senacrs.gposto.GUI;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.material.textfield.TextInputEditText;
 
 import br.com.senacrs.gposto.Controller.UsuarioController;
 import br.com.senacrs.gposto.GUI.Callback.UsuarioCallback;
@@ -48,7 +44,7 @@ public class CadastroActivity extends AppCompatActivity implements UsuarioCallba
             Usuario body = new Usuario(user, senha, email);
             UsuarioController usuarioController = new UsuarioController();
             try {
-                usuarioController.sendUsuarioWeb(body, this);
+                usuarioController.postUserWeb(body, this);
             } catch (Exception e) {
                 Utils.longToast(this, e.getMessage());
             }

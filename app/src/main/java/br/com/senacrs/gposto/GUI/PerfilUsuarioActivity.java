@@ -1,6 +1,5 @@
 package br.com.senacrs.gposto.GUI;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
@@ -13,8 +12,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -28,25 +25,21 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.textfield.TextInputEditText;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.IOException;
 
+import br.com.senacrs.gposto.Controller.UsuarioController;
+import br.com.senacrs.gposto.GUI.Callback.UsuarioCallback;
 import br.com.senacrs.gposto.LibClass.Usuario;
 import br.com.senacrs.gposto.R;
-import br.com.senacrs.gposto.Utilities.CustomAlertDialog;
 import br.com.senacrs.gposto.Utilities.Utils;
 
-public class PerfilUsuarioActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class PerfilUsuarioActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, UsuarioCallback{
 
     TextView txtEmail, txtUsuario,txtSenha;
-    EditText editEmail,editUsuario,editSenha,editConfirmarSenha;
     ImageView imageEditPerfil,imageViewPerfil;
-    Button btnUpdateUsuario;
-
-    Layout alertdialog_edit_perfil;
 
     Uri mCropImageUri;
 
@@ -55,25 +48,16 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
     Toolbar toolbar;
     AlertDialog alertDialog;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_usuario);
         navigationDrawer();
-        findViewById();
-    }
-
-    private void findViewById(){
         imageViewPerfil = findViewById(R.id.imagePerfil);
         imageEditPerfil = findViewById(R.id.imageEditPerfil);
         txtEmail = findViewById(R.id.txtEmail);
         txtUsuario = findViewById(R.id.txtUsuario);
         txtSenha = findViewById(R.id.txtSenha);
-        editEmail = findViewById(R.id.editEmail);
-        editUsuario = findViewById(R.id.editUsuario);
-        editSenha = findViewById(R.id.editSenha);
-        editConfirmarSenha = findViewById(R.id.editConfirmarSenha);
     }
 
     //Get Image Perfil(Usuario)
@@ -128,14 +112,20 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
         }
     }
 
-    //CustomAlertDialog
+    //CustomAlertDialog && Update User, Email, Password
     public void editarPerfil(View view) {
-        setAlertDialog();
+        setAlertDialog(view);
     }
 
-    private void setAlertDialog(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setView(R.layout.alertdialog_edit_perfil);
+    private void setAlertDialog(final View v){
+        AlertDialog.Builder builder = new AlertDialog.Builder(PerfilUsuarioActivity.this);
+        View mView = getLayoutInflater().inflate(R.layout.alertdialog_edit_perfil,null);
+
+        final EditText editEmail = mView.findViewById(R.id.editEmail);
+        final EditText editUsuario = mView.findViewById(R.id.editUsuario);
+        final EditText editSenha = mView.findViewById(R.id.editSenha);
+        final EditText editConfirmarSenha = mView.findViewById(R.id.editConfirmarSenha);
+
         builder.setMessage("Deseja Modificar seu Perfil?");
         builder.setPositiveButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
@@ -147,11 +137,41 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
         builder.setNegativeButton("Salvar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Utils.longToast(PerfilUsuarioActivity.this,"Vamo Caralho");
+                if (editSenha.getText().toString().trim().equals(editConfirmarSenha.getText().toString().trim())){
+                    String user = editUsuario.getText().toString();
+                    String senha = editSenha.getText().toString();
+                    String email = editEmail.getText().toString();
+
+                    txtUsuario.setText(user);
+                    txtSenha.setText(senha);
+                    txtEmail.setText(email);
+
+                   // Usuario body = new Usuario(user,senha,email);
+                   // UsuarioController usuarioController = new UsuarioController();
+                    try {
+                        //usuarioController.updateUserWeb(body,PerfilUsuarioActivity.this);
+                    } catch (Exception e) {
+                        //Utils.longToast(PerfilUsuarioActivity.this, e.getMessage());
+                    }
+                }else {
+                    Utils.shortToast(PerfilUsuarioActivity.this,"Error => Senhas Diferentes");
+                    editarPerfil(v);
+                }
             }
         });
+        builder.setView(mView);
         alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    @Override
+    public void onUsuarioSuccess(Usuario usuario) {
+        Utils.longToast(PerfilUsuarioActivity.this,"Usuario Alterado Com Sucesso");
+    }
+
+    @Override
+    public void onUsuarioFailure(String message) {
+        Utils.longToast(PerfilUsuarioActivity.this,message);
     }
 
     //NavigationDrawer (Menu)
