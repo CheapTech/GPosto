@@ -48,4 +48,35 @@ public class CombustivelController {
             }
         });
     }
+
+    public void getCombustivelById (int id, final CombustivelCallback callback) throws Exception {
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Combustivel.class, new CombustivelDeserializer())
+                .create();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        RetrofitService precosService = retrofit.create(RetrofitService.class);
+
+        Call<List<Combustivel>> precosWeb = precosService.getListCombustivelByPosto(id);
+
+        precosWeb.enqueue(new Callback<List<Combustivel>>() {
+            @Override
+            public void onResponse(Call<List<Combustivel>> call, Response<List<Combustivel>> response) {
+                if (response.isSuccessful()) {
+                    callback.onCombustivelSuccess(response.body());
+                } else {
+                    callback.onCombustivelFailure("Erro " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Combustivel>> call, Throwable t) {
+                callback.onCombustivelFailure(t.getMessage());
+            }
+        });
+    }
 }

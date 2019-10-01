@@ -66,20 +66,17 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
         rvTopPostos = findViewById(R.id.rvPrecosCombustivel);
 
 
-        CombustivelController controller = new CombustivelController();
-
-
+        CombustivelController controller = new CombustivelController(); // classe chamada pra trazer os combustiveis, será usada no spinner
         try {
             controller.getCombustivelWeb(DestaquesActivity.this);
         } catch (Exception e) {
             Toast.makeText(DestaquesActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
-
     }
 
 
     @Override
-    public void onCombustivelSuccess(final List<Combustivel> list) {
+    public void onCombustivelSuccess(final List<Combustivel> list) {//monta as opções de combustiveis no spinner
         final Combustivel combustivel = new Combustivel();
         combustivel.getId();
 
@@ -87,28 +84,21 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
         spinner.setAdapter(adapter);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {//Quando selecionado o combustivel monta a lista de destaques por ordem
                 Combustivel combustivel = (Combustivel) parent.getItemAtPosition(position);
                 TopPostosController controller = new TopPostosController();
                 try {
                     controller.getTopPostosWeb(combustivel.getId(), DestaquesActivity.this);
                 } catch (Exception e) {
                     Toast.makeText(DestaquesActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
-
-
     }
 
     @Override
@@ -118,16 +108,11 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
 
 
     @Override
-    public void onTopPostosSuccess(List<TopPostos> list) {
-
+    public void onTopPostosSuccess(List<TopPostos> list) {//Monta a lista de postos com o combustivel especificado recebida da api
         rvTopPostos.setAdapter(new AdapterTopPostos(list, DestaquesActivity.this));
         RecyclerView.LayoutManager layout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
-
-
-
         rvTopPostos.setLayoutManager(layout);
-
     }
 
     @Override
@@ -163,18 +148,18 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
 
-            case R.id.menu_destaques:{
+            case R.id.menu_destaques: {
                 Utils.shortToast(this, "?????___??????");
                 break;
             }
 
             case R.id.menu_cadastrar_posto: {
-                Intent intent = new Intent(this,CadastroPostosActivity.class);
+                Intent intent = new Intent(this, CadastroPostosActivity.class);
                 startActivity(intent);
                 break;
             }
             case R.id.menu_editar_perfil: {
-                Intent intent = new Intent(this,PerfilUsuarioActivity.class);
+                Intent intent = new Intent(this, PerfilUsuarioActivity.class);
                 startActivity(intent);
                 break;
             }

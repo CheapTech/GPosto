@@ -5,8 +5,6 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:openDrawer="start"
     tools:context=".GUI.PerfilPostosActivity">
 
     <RelativeLayout
@@ -61,7 +59,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp">
 
                 <TextView
                     android:id="@+id/textView13"
@@ -93,6 +92,7 @@
 
             <TextView
                 android:id="@+id/perfil_nome"
+                android:layout_margin="7dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nome do Posto"
@@ -101,6 +101,7 @@
 
             <TextView
                 android:id="@+id/perfil_endereco"
+                android:layout_margin="7dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Endereço"
@@ -108,7 +109,8 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/textView28"
+                android:id="@+id/perfil_bairro"
+                android:layout_margin="7dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Bairro"
@@ -117,106 +119,19 @@
 
             <TextView
                 android:id="@+id/perfil_telefone"
+                android:layout_margin="7dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Telefone"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="16sp" />
-            <LinearLayout
+            
+            <ListView
+                android:id="@+id/lv_precos"
+                android:layout_margin="7dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp">
+                android:layout_height="wrap_content"/>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="3dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView17"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Gasolina:"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/textView18"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Diesel:"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/textView19"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Alcool:"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/textView20"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Gás:"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp" />
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView21"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="R$ 0,00"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/textView22"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="R$ 0,00"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/textView23"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="R$ 0,00"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/textView24"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="R$ 0,00"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp" />
-                </LinearLayout>
-            </LinearLayout>
-            <Button
-                android:id="@+id/button11"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:background="@drawable/shape_button"
-                android:onClick="atualizarValor"
-                android:text=" Atualizar Valor "
-                android:textColor="#EEE1E1" />
         </LinearLayout>
 
     </RelativeLayout>

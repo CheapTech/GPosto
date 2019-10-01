@@ -5,6 +5,8 @@ import java.io.Serializable;
 public class Combustivel implements Serializable {
     private int id;
     private String descricao;
+    private float preco;
+
 
     public int getId() {
         return id;
@@ -22,6 +24,13 @@ public class Combustivel implements Serializable {
         this.descricao = descricao;
     }
 
+    public float getPreco() {
+        return preco;
+    }
+
+    public void setPreco(float preco) {
+        this.preco = preco;
+    }
 
     @Override
     public String toString() {

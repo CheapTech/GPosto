@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class TopPostos implements Serializable {
     int id;
+    int idPosto;
     String nomeFantasia;
     String preco;
     String descricao;
@@ -19,6 +20,14 @@ public class TopPostos implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getIdPosto() {
+        return idPosto;
+    }
+
+    public void setIdPosto(int idPosto) {
+        this.idPosto = idPosto;
     }
 
     public String getNomeFantasia() {
