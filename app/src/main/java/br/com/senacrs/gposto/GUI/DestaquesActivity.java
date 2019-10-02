@@ -1,10 +1,12 @@
 package br.com.senacrs.gposto.GUI;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -35,6 +37,7 @@ import br.com.senacrs.gposto.Controller.TopPostosController;
 import br.com.senacrs.gposto.GUI.Callback.CombustivelCallback;
 import br.com.senacrs.gposto.GUI.Callback.TopPostosCallback;
 import br.com.senacrs.gposto.LibClass.Combustivel;
+import br.com.senacrs.gposto.LibClass.Postos;
 import br.com.senacrs.gposto.LibClass.TopPostos;
 import br.com.senacrs.gposto.R;
 import br.com.senacrs.gposto.Utilities.AdapterTopPostos;
@@ -48,7 +51,6 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
     private SearchView searchPosto;
-    private TextView textDescricao;
     public Spinner spinner;
     public RecyclerView rvTopPostos;
     public List<TopPostos> list;
@@ -57,7 +59,7 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_destaques);
-
+        fieldSpinner();
         navigationDrawer();
 
         btnVerTodos = findViewById(R.id.btnVerTodos);
@@ -65,7 +67,9 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
         spinner = findViewById(R.id.spinner);
         rvTopPostos = findViewById(R.id.rvPrecosCombustivel);
 
+    }
 
+    private void fieldSpinner(){
         CombustivelController controller = new CombustivelController(); // classe chamada pra trazer os combustiveis, será usada no spinner
         try {
             controller.getCombustivelWeb(DestaquesActivity.this);
@@ -74,13 +78,12 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
         }
     }
 
-
     @Override
     public void onCombustivelSuccess(final List<Combustivel> list) {//monta as opções de combustiveis no spinner
         final Combustivel combustivel = new Combustivel();
         combustivel.getId();
 
-        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, list);
+        final ArrayAdapter adapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, list);
         spinner.setAdapter(adapter);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -106,13 +109,28 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
         Toast.makeText(DestaquesActivity.this, message, Toast.LENGTH_LONG).show();
     }
 
-
     @Override
     public void onTopPostosSuccess(List<TopPostos> list) {//Monta a lista de postos com o combustivel especificado recebida da api
-        rvTopPostos.setAdapter(new AdapterTopPostos(list, DestaquesActivity.this));
+        final AdapterTopPostos adapter = new AdapterTopPostos(list, DestaquesActivity.this);
+        //rvTopPostos.setAdapter(new AdapterTopPostos(list, DestaquesActivity.this));
+        rvTopPostos.setAdapter(adapter);
+
         RecyclerView.LayoutManager layout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
         rvTopPostos.setLayoutManager(layout);
+
+        searchPosto.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
     }
 
     @Override

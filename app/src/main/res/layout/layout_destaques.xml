@@ -45,8 +45,9 @@ tools:openDrawer="start">
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
+                app:queryHint="Procurar Posto"
+                app:iconifiedByDefault="false"
                 android:visibility="gone"
-                android:background="@drawable/shape_border_holder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

@@ -17,6 +17,5 @@
         <item android:title="Sair"
             android:id="@+id/menu_sair"
             android:icon="@drawable/icon_exit"/>
-
     </group>
 </menu>

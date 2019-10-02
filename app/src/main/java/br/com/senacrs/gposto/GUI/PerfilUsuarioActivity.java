@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -32,6 +33,7 @@ import java.io.IOException;
 
 import br.com.senacrs.gposto.Controller.UsuarioController;
 import br.com.senacrs.gposto.GUI.Callback.UsuarioCallback;
+import br.com.senacrs.gposto.LibClass.Imagem;
 import br.com.senacrs.gposto.LibClass.Usuario;
 import br.com.senacrs.gposto.R;
 import br.com.senacrs.gposto.Utilities.Utils;
@@ -93,7 +95,6 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
                 Glide.with(this).load(thePic).circleCrop().into(imageViewPerfil);
 
             }else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
@@ -165,14 +166,10 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
     }
 
     @Override
-    public void onUsuarioSuccess(Usuario usuario) {
-        Utils.longToast(PerfilUsuarioActivity.this,"Usuario Alterado Com Sucesso");
-    }
+    public void onUsuarioSuccess(Usuario usuario) { Utils.longToast(PerfilUsuarioActivity.this,"Usuario Alterado Com Sucesso"); }
 
     @Override
-    public void onUsuarioFailure(String message) {
-        Utils.longToast(PerfilUsuarioActivity.this,message);
-    }
+    public void onUsuarioFailure(String message) { Utils.longToast(PerfilUsuarioActivity.this,message); }
 
     //NavigationDrawer (Menu)
     private void navigationDrawer() {

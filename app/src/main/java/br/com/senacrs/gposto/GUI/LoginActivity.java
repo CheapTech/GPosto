@@ -74,6 +74,6 @@ public class LoginActivity extends AppCompatActivity implements UsuarioCallback 
 
     @Override
     public void onUsuarioFailure(String message) {
-        Utils.longToast(this, "LOGIN FALHOU!");
+        Utils.longToast(this, message);
     }
 }

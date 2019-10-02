@@ -6,24 +6,30 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import br.com.senacrs.gposto.GUI.PerfilPostosActivity;
+import br.com.senacrs.gposto.LibClass.Postos;
 import br.com.senacrs.gposto.LibClass.TopPostos;
 import br.com.senacrs.gposto.R;
 
-public class AdapterTopPostos extends RecyclerView.Adapter<HolderTopPostos> implements OnItemViewHolderClick {
+public class AdapterTopPostos extends RecyclerView.Adapter<HolderTopPostos> implements OnItemViewHolderClick, Filterable {
 
+    private List<TopPostos> searchList;
     private List<TopPostos> list;
     private Context context;
 
     public AdapterTopPostos(List postos, Context context) {
-
         this.list = postos;
+        searchList = new ArrayList<>(postos);
         this.context = context;
     }
 
@@ -51,6 +57,8 @@ public class AdapterTopPostos extends RecyclerView.Adapter<HolderTopPostos> impl
         holder.atualizado.setText(list.get(position).getAtualizado());
     }
 
+
+
     @Override
     public int getItemCount() {
         return list.size();
@@ -66,4 +74,39 @@ public class AdapterTopPostos extends RecyclerView.Adapter<HolderTopPostos> impl
 
         context.startActivity(intent);
     }
+
+    @Override
+    public Filter getFilter() {
+        return searchFilter;
+    }
+
+    private Filter searchFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+           List<TopPostos> filteredList = new ArrayList<>();
+
+           if (constraint == null || constraint.length() == 0){
+               filteredList.addAll(searchList);
+           }else {
+               String filterPattern = constraint.toString().toLowerCase().trim();
+
+               for (TopPostos postos : searchList){
+                   if(postos.getNomeFantasia().toLowerCase().contains(filterPattern)){
+                       filteredList.add(postos);
+                   }
+               }
+           }
+           FilterResults results = new FilterResults();
+           results.values = filteredList;
+
+           return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            list.clear();
+            list.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
 }
