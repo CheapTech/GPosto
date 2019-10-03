@@ -1,18 +1,14 @@
 package br.com.senacrs.gposto.GUI;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,10 +18,8 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -37,16 +31,16 @@ import br.com.senacrs.gposto.Controller.TopPostosController;
 import br.com.senacrs.gposto.GUI.Callback.CombustivelCallback;
 import br.com.senacrs.gposto.GUI.Callback.TopPostosCallback;
 import br.com.senacrs.gposto.LibClass.Combustivel;
-import br.com.senacrs.gposto.LibClass.Postos;
 import br.com.senacrs.gposto.LibClass.TopPostos;
 import br.com.senacrs.gposto.R;
 import br.com.senacrs.gposto.Utilities.AdapterTopPostos;
 import br.com.senacrs.gposto.Utilities.Utils;
-import okhttp3.internal.Util;
 
 public class DestaquesActivity extends AppCompatActivity implements CombustivelCallback, TopPostosCallback, NavigationView.OnNavigationItemSelectedListener {
 
     private FloatingActionButton btnVerTodos;
+    private RadioButton rbtn_SearchPosto,rbtn_SearchBairro;
+    private LinearLayout layout_searchPosto;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
@@ -65,8 +59,10 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
         btnVerTodos = findViewById(R.id.btnVerTodos);
         searchPosto = findViewById(R.id.search_posto);
         spinner = findViewById(R.id.spinner);
+        layout_searchPosto = findViewById(R.id.layout_searchPosto);
+        rbtn_SearchPosto = findViewById(R.id.search_by_Posto);
+        rbtn_SearchBairro = findViewById(R.id.search_by_Bairro);
         rvTopPostos = findViewById(R.id.rvPrecosCombustivel);
-
     }
 
     private void fieldSpinner(){
@@ -112,7 +108,7 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
     @Override
     public void onTopPostosSuccess(List<TopPostos> list) {//Monta a lista de postos com o combustivel especificado recebida da api
         final AdapterTopPostos adapter = new AdapterTopPostos(list, DestaquesActivity.this);
-        //rvTopPostos.setAdapter(new AdapterTopPostos(list, DestaquesActivity.this));
+
         rvTopPostos.setAdapter(adapter);
 
         RecyclerView.LayoutManager layout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -127,7 +123,13 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
+                if (rbtn_SearchPosto.isChecked()){
+                    adapter.getFilter().filter(newText);
+                }else {
+                    if (rbtn_SearchBairro.isChecked()){
+                        adapter.getFilterBairro().filter(newText);
+                    }
+                }
                 return false;
             }
         });
@@ -136,14 +138,6 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
     @Override
     public void onTopPostosFailure(String message) {
         Utils.longToast(this, message);
-    }
-
-    private void setStateSearchView() {
-        if (searchPosto.getVisibility() == View.VISIBLE) {
-            searchPosto.setVisibility(View.GONE);
-        } else {
-            searchPosto.setVisibility(View.VISIBLE);
-        }
     }
 
     private void navigationDrawer() {
@@ -202,6 +196,11 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
     }
 
     public void verTodosPostos(View view) {
-        setStateSearchView();
+        if (layout_searchPosto.getVisibility() == View.VISIBLE) {
+            layout_searchPosto.setVisibility(View.GONE);
+        } else {
+            layout_searchPosto.setVisibility(View.VISIBLE);
+            searchPosto.requestFocus();
+        }
     }
 }

@@ -75,12 +75,18 @@ public class AdapterTopPostos extends RecyclerView.Adapter<HolderTopPostos> impl
         context.startActivity(intent);
     }
 
+
     @Override
     public Filter getFilter() {
-        return searchFilter;
+        return searchFilterPosto;
     }
 
-    private Filter searchFilter = new Filter() {
+    @Override
+    public Filter getFilterBairro(){
+        return searchFilterBairro;
+    }
+
+    private Filter searchFilterPosto = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
            List<TopPostos> filteredList = new ArrayList<>();
@@ -100,6 +106,36 @@ public class AdapterTopPostos extends RecyclerView.Adapter<HolderTopPostos> impl
            results.values = filteredList;
 
            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            list.clear();
+            list.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
+
+    private Filter searchFilterBairro = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<TopPostos> filteredList = new ArrayList<>();
+
+            if (constraint == null || constraint.length() == 0){
+                filteredList.addAll(searchList);
+            }else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for (TopPostos postos : searchList){
+                    if(postos.getBairro().toLowerCase().contains(filterPattern)){
+                        filteredList.add(postos);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+
+            return results;
         }
 
         @Override
