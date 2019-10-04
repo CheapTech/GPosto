@@ -42,4 +42,34 @@ public class PostosController {
             }
         });
     }
+
+    public void postPostosWeb(final Postos postos, final PostosCallback postosCallback) throws Exception{
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        RetrofitService service = retrofit.create(RetrofitService.class);
+
+        final Call<Postos> posto = service.cadastrarPostos(postos);
+        posto.enqueue(new Callback<Postos>() {
+            @Override
+            public void onResponse(Call<Postos> call, Response<Postos> response) {
+                if (response.isSuccessful()){
+                    postosCallback.onPostosSuccess(response.body());
+                }else {
+                    postosCallback.onPostosFailure("ERROR: "+response.code()+" - "+ response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Postos> call, Throwable t) {
+                postosCallback.onPostosFailure(t.getMessage());
+            }
+        });
+    }
 }

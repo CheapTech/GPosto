@@ -4,11 +4,21 @@ import java.io.Serializable;
 
 public class Postos implements Serializable {
    private  int id;
+   private int id_bandeira;
    private String nomeFantasia;
    private  String logradouro;
    private  String bairro;
    private String tel;
+   private String numero;
 
+    public Postos(String nomeFantasia, String logradouro, String bairro, String tel, String numero, int id_bandeira) {
+        this.nomeFantasia = nomeFantasia;
+        this.logradouro = logradouro;
+        this.bairro = bairro;
+        this.tel = tel;
+        this.numero = numero;
+        this.id_bandeira = id_bandeira;
+    }
 
     public int getId() {
         return id;
@@ -50,4 +60,19 @@ public class Postos implements Serializable {
         this.tel = tel;
     }
 
+    public int getId_bandeira() {
+        return id_bandeira;
+    }
+
+    public void setId_bandeira(int id_bandeira) {
+        this.id_bandeira = id_bandeira;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
 }
