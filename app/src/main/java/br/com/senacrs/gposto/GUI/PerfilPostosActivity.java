@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -105,6 +106,7 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
 
 
     public void atualizarValor(View view) {
+
     }
 
     //NavigationDrawer (Menu)
@@ -113,7 +115,18 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
         drawerLayout = findViewById(R.id.drawerLayout);
         toolbar = findViewById(R.id.toolbar);
 
+        View navView = navigationView.getHeaderView(0);
+
         navigationView.setNavigationItemSelectedListener(this);
+        TextView nav_user = navView.findViewById(R.id.nav_header_user);
+        TextView nav_email = navView.findViewById(R.id.nav_header_email);
+        ImageView nav_photo = navView.findViewById(R.id.nav_header_photo);
+
+        String user = "teste";
+        String email = "Teste@gmail.com";
+
+        nav_email.setText(email);
+        nav_user.setText(user);
 
         toolbar.setTitle("Perfil Usuario");
         setSupportActionBar(toolbar);

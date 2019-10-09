@@ -34,13 +34,12 @@
             <ImageView
                 android:id="@+id/imageView6"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="100dp"
                 android:background="@drawable/ic_launcher_background" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimaryLight"
                 android:orientation="vertical">
 
                 <TextView
@@ -92,7 +91,9 @@
 
             <TextView
                 android:id="@+id/perfil_nome"
-                android:layout_margin="7dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginTop="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nome do Posto"
@@ -101,7 +102,9 @@
 
             <TextView
                 android:id="@+id/perfil_endereco"
-                android:layout_margin="7dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginTop="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Endereço"
@@ -110,7 +113,9 @@
 
             <TextView
                 android:id="@+id/perfil_bairro"
-                android:layout_margin="7dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginTop="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Bairro"
@@ -119,7 +124,9 @@
 
             <TextView
                 android:id="@+id/perfil_telefone"
-                android:layout_margin="7dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginTop="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Telefone"
@@ -128,7 +135,9 @@
             
             <ListView
                 android:id="@+id/lv_precos"
-                android:layout_margin="7dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginTop="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 

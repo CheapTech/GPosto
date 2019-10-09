@@ -6,9 +6,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -143,9 +145,18 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
     private void navigationDrawer() {
         navigationView = findViewById(R.id.navigation_view);
         drawerLayout = findViewById(R.id.drawerLayout);
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);View navView = navigationView.getHeaderView(0);
 
         navigationView.setNavigationItemSelectedListener(this);
+        TextView nav_user = navView.findViewById(R.id.nav_header_user);
+        TextView nav_email = navView.findViewById(R.id.nav_header_email);
+        ImageView nav_photo = navView.findViewById(R.id.nav_header_photo);
+
+        String user = "teste";
+        String email = "Teste@gmail.com";
+
+        nav_email.setText(email);
+        nav_user.setText(user);
 
         toolbar.setTitle("Destaques");
         setSupportActionBar(toolbar);

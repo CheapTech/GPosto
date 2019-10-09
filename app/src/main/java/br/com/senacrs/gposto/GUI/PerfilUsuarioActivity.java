@@ -157,6 +157,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
                 }else {
                     Utils.shortToast(PerfilUsuarioActivity.this,"Error => Senhas Diferentes");
                     editarPerfil(v);
+                    editEmail.requestFocus();
                 }
             }
         });
@@ -177,7 +178,18 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
         drawerLayout = findViewById(R.id.drawerLayout);
         toolbar = findViewById(R.id.toolbar);
 
+        View navView = navigationView.getHeaderView(0);
+
         navigationView.setNavigationItemSelectedListener(this);
+        TextView nav_user = navView.findViewById(R.id.nav_header_user);
+        TextView nav_email = navView.findViewById(R.id.nav_header_email);
+        ImageView nav_photo = navView.findViewById(R.id.nav_header_photo);
+
+        String user = "teste";
+        String email = "Teste@gmail.com";
+
+        nav_email.setText(email);
+        nav_user.setText(user);
 
         toolbar.setTitle("Perfil Usuario");
         setSupportActionBar(toolbar);

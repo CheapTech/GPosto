@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -96,13 +98,25 @@ public class CadastroPostosActivity extends AppCompatActivity implements Navigat
         navigationView = findViewById(R.id.navigation_view);
         toolbar = findViewById(R.id.toolbar);
 
+        View navView = navigationView.getHeaderView(0);
+
+        navigationView.setNavigationItemSelectedListener(this);
+
+        TextView nav_user = navView.findViewById(R.id.nav_header_user);
+        TextView nav_email = navView.findViewById(R.id.nav_header_email);
+        ImageView nav_photo = navView.findViewById(R.id.nav_header_photo);
+
+        String user = "teste";
+        String email = "Teste@gmail.com";
+
+        nav_email.setText(email);
+        nav_user.setText(user);
+
         toolbar.setTitle("Cadastro Posto");
         setSupportActionBar(toolbar);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer);
         drawerLayout.addDrawerListener(toggle);
-
-        navigationView.setNavigationItemSelectedListener(this);
 
         toggle.syncState();
     }
