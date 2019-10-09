@@ -65,8 +65,8 @@
             android:textColorHint="@color/colorPrimaryDark" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <androidx.appcompat.widget.AppCompatCheckBox
-        android:id="@+id/rbtnRemenber"
+    <CheckBox
+        android:id="@+id/chkBoxLogin"
         android:textColor="@color/colorPrimaryDark"
         android:text = "Permanecer Logado"
         android:layout_width="wrap_content"
@@ -87,4 +87,12 @@
         android:text="Login"
         android:onClick="login"
         android:textColor="#EEE1E1"/>
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp" />
 </LinearLayout>

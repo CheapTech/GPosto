@@ -10,6 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.media.Image;
@@ -39,6 +40,9 @@ import br.com.senacrs.gposto.R;
 import br.com.senacrs.gposto.Utilities.Utils;
 
 public class PerfilUsuarioActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, UsuarioCallback{
+
+    public static final String LOGIN_SAVE = "loginref";
+    SharedPreferences loginPreferences;
 
     TextView txtEmail, txtUsuario,txtSenha;
     ImageView imageEditPerfil,imageViewPerfil;
@@ -222,7 +226,10 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
                 break;
             }
             case R.id.menu_sair: {
-                Utils.shortToast(this, "funciono3");
+                loginPreferences = getSharedPreferences(LOGIN_SAVE, MODE_PRIVATE);
+                loginPreferences.edit().clear().commit();
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
                 break;
             }
         }
