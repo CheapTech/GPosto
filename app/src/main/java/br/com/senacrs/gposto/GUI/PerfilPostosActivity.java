@@ -190,22 +190,27 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
                     final AlertDialog.Builder builder = new AlertDialog.Builder(PerfilPostosActivity.this);
                     final View mView = getLayoutInflater().inflate(R.layout.alertdialog_edit_combustivel, null);//CRIA O ALERT PARA FAZER O UPDATE
 
-                    builder.setPositiveButton("SALVAR", new DialogInterface.OnClickListener() {//AÇÃO QUANDO CLICAR NO BOTÃO SALVAR
+
+                    final EditText editValor = mView.findViewById(R.id.edit_valor_combustivel);
+                    final TextView editCombustivel = mView.findViewById(R.id.textCombustivel);
+                    final Button btnSalvar = mView.findViewById(R.id.btn_salvar_preco);
+
+
+                    editCombustivel.setText(combustivel.getDescricao());
+                    editValor.setText(String.valueOf(combustivel.getPreco()));
+                    editValor.requestFocus();
+
+                    btnSalvar.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onClick(final DialogInterface dialog, int which) {
-
-                            final EditText editValor = mView.findViewById(R.id.edit_valor_combustivel);
-
+                        public void onClick(View v) {
                             Float preco = Float.valueOf(editValor.getText().toString());
-
                             if(preco <= 2 || preco >=6){
-                                Utils.longToast(mView.getContext(),"Valor incompatível");
+                                editValor.setError("Valor incompatível");
                                 editValor.requestFocus();
-                            }
-                            else{
+                            }else{
                                 CombustivelController controller = new CombustivelController();
                                 try {
-                                    controller.updateCombustivelWeb(combustivel.getIdValor(), preco, (CombustivelUpdateCallback) view.getContext());
+                                    controller.updateCombustivelWeb(combustivel.getIdValor(),preco,PerfilPostosActivity.this);
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
@@ -213,23 +218,6 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
 
                         }
                     });
-
-                    builder.setNegativeButton("VOLTAR", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    });
-
-                    final EditText editValor = mView.findViewById(R.id.edit_valor_combustivel);
-                    final TextView editCombustivel = mView.findViewById(R.id.textCombustivel);
-
-                    //TODO editar preço dos combustiveis - tratamento de valores
-
-
-                    editCombustivel.setText(combustivel.getDescricao());
-                    editValor.setText(String.valueOf(combustivel.getPreco()));
-                    editValor.requestFocus();
 
                     builder.setView(mView);
                     alertDialog = builder.create();
@@ -258,6 +246,6 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
 
     @Override
     public void onCombustivelUpdateFailure(String message) {
-        Utils.longToast(PerfilPostosActivity.this, message);
+        Utils.longToast(PerfilPostosActivity.this,"Erro: "+message);
     }
 }
