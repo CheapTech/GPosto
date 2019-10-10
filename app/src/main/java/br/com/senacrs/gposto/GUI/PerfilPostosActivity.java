@@ -191,6 +191,7 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
                     final View mView = getLayoutInflater().inflate(R.layout.alertdialog_edit_combustivel, null);//CRIA O ALERT PARA FAZER O UPDATE
 
 
+
                     final EditText editValor = mView.findViewById(R.id.edit_valor_combustivel);
                     final TextView editCombustivel = mView.findViewById(R.id.textCombustivel);
                     final Button btnSalvar = mView.findViewById(R.id.btn_salvar_preco);
