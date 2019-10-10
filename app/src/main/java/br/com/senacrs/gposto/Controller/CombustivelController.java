@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder;
 import java.util.List;
 
 import br.com.senacrs.gposto.GUI.Callback.CombustivelCallback;
+import br.com.senacrs.gposto.GUI.Callback.CombustivelUpdateCallback;
 import br.com.senacrs.gposto.LibClass.Combustivel;
 import br.com.senacrs.gposto.Utilities.Deserializer.CombustivelDeserializer;
 import br.com.senacrs.gposto.WebApis.RetrofitService;
@@ -76,6 +77,34 @@ public class CombustivelController {
             @Override
             public void onFailure(Call<List<Combustivel>> call, Throwable t) {
                 callback.onCombustivelFailure(t.getMessage());
+            }
+        });
+    }
+
+    public void updateCombustivelWeb(int id, Float preco, final CombustivelUpdateCallback callback) throws Exception{
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        RetrofitService services = retrofit.create(RetrofitService.class);
+
+        final Call<Combustivel> user = services.updateValorCombustivel(id, preco);
+        user.enqueue(new Callback<Combustivel>() {
+            @Override
+            public void onResponse(Call<Combustivel> call, Response<Combustivel> response) {
+                if (response.isSuccessful()){
+                    callback.onCombustivelUpdateSuccess(true);
+                }else {
+                    callback.onCombustivelUpdateFailure("ERROR: " + response.code() + " - " + response.message());
+                }
+            }
+            @Override
+            public void onFailure(Call<Combustivel> call, Throwable t) {
+                callback.onCombustivelUpdateFailure(t.getMessage());
             }
         });
     }

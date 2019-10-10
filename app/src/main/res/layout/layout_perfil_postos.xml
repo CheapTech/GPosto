@@ -124,7 +124,8 @@
                 android:layout_height="wrap_content"
                 android:text="Telefone"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:visibility="gone"/>
             
             <ListView
                 android:id="@+id/lv_precos"

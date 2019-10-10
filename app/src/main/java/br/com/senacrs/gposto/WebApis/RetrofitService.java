@@ -10,6 +10,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 public interface RetrofitService {
@@ -27,6 +28,9 @@ public interface RetrofitService {
 
     @POST("InserirUsuario.php")
     Call<Usuario> registerUser(@Body Usuario usuario);
+
+    @PUT("AtualizarPreco.php")
+    Call<Combustivel> updateValorCombustivel(@Query (value = "idValor")int id, @Query(value = "preco") float preco);
 
     @POST()
     Call<Usuario> updateUser(@Body Usuario usuario);

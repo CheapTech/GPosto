@@ -4,9 +4,17 @@ import java.io.Serializable;
 
 public class Combustivel implements Serializable {
     private int id;
+    private int idValor;
     private String descricao;
     private float preco;
 
+    public int getIdValor() {
+        return idValor;
+    }
+
+    public void setIdValor(int idValor) {
+        this.idValor = idValor;
+    }
 
     public int getId() {
         return id;
