@@ -37,4 +37,5 @@ public interface RetrofitService {
 
     @POST("inserir.php")
     Call<Postos> cadastrarPostos(@Body Postos postos);
+
 }

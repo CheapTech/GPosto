@@ -10,6 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.media.Image;
@@ -32,6 +33,7 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 import java.io.IOException;
 
 import br.com.senacrs.gposto.Controller.UsuarioController;
+import br.com.senacrs.gposto.Controller.UsuarioLoginController;
 import br.com.senacrs.gposto.GUI.Callback.UsuarioCallback;
 import br.com.senacrs.gposto.LibClass.Imagem;
 import br.com.senacrs.gposto.LibClass.Usuario;
@@ -39,6 +41,9 @@ import br.com.senacrs.gposto.R;
 import br.com.senacrs.gposto.Utilities.Utils;
 
 public class PerfilUsuarioActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, UsuarioCallback{
+
+    public static final String LOGIN_SAVE = "loginref";
+    SharedPreferences loginPreferences;
 
     TextView txtEmail, txtUsuario,txtSenha;
     ImageView imageEditPerfil,imageViewPerfil;
@@ -60,6 +65,8 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
         txtEmail = findViewById(R.id.txtEmail);
         txtUsuario = findViewById(R.id.txtUsuario);
         txtSenha = findViewById(R.id.txtSenha);
+
+
     }
 
     //Get Image Perfil(Usuario)
@@ -157,6 +164,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
                 }else {
                     Utils.shortToast(PerfilUsuarioActivity.this,"Error => Senhas Diferentes");
                     editarPerfil(v);
+                    editEmail.requestFocus();
                 }
             }
         });
@@ -177,7 +185,18 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
         drawerLayout = findViewById(R.id.drawerLayout);
         toolbar = findViewById(R.id.toolbar);
 
+        View navView = navigationView.getHeaderView(0);
+
         navigationView.setNavigationItemSelectedListener(this);
+        TextView nav_user = navView.findViewById(R.id.nav_header_user);
+        TextView nav_email = navView.findViewById(R.id.nav_header_email);
+        ImageView nav_photo = navView.findViewById(R.id.nav_header_photo);
+
+        String user = "teste";
+        String email = "Teste@gmail.com";
+
+        nav_email.setText(email);
+        nav_user.setText(user);
 
         toolbar.setTitle("Perfil Usuario");
         setSupportActionBar(toolbar);
@@ -210,7 +229,10 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
                 break;
             }
             case R.id.menu_sair: {
-                Utils.shortToast(this, "funciono3");
+                loginPreferences = getSharedPreferences(LOGIN_SAVE, MODE_PRIVATE);
+                loginPreferences.edit().clear().commit();
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
                 break;
             }
         }

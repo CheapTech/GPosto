@@ -19,20 +19,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GUI.PerfilUsuarioActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".GUI.MainActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".GUI.LoginActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".GUI.CadastroActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".GUI.DestaquesActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".GUI.CadastroPostosActivity"
-            android:launchMode="singleTask" />
-        <activity android:name=".GUI.PerfilPostosActivity"
-            android:launchMode="singleTask"/>
+        <activity android:name=".GUI.PerfilUsuarioActivity"/>
+        <activity android:name=".GUI.MainActivity"/>
+        <activity android:name=".GUI.LoginActivity"/>
+        <activity android:name=".GUI.CadastroActivity"/>
+        <activity android:name=".GUI.DestaquesActivity"/>
+        <activity android:name=".GUI.CadastroPostosActivity"/>
+        <activity android:name=".GUI.PerfilPostosActivity"/>
         <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat"/>
     </application>
