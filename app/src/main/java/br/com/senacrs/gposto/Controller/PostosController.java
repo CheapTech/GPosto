@@ -15,7 +15,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class PostosController {
     private final String BASE_URL = "http://www.gestoo.com.br/gposto/api/";
 
-    public void getPostosWeb(final Postos postos, final PostosCallback callback) throws Exception{
+    /*
+    public void getPostosWeb(final PostosCallback callback) throws Exception{
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
@@ -26,7 +27,7 @@ public class PostosController {
                 .build();
         RetrofitService services = retrofit.create(RetrofitService.class);
 
-        final Call<Postos> posto = services.cadastrarPostos(postos);
+        final Call<Postos> posto = services;
         posto.enqueue(new Callback<Postos>() {
             @Override
             public void onResponse(Call<Postos> call, Response<Postos> response) {
@@ -41,7 +42,7 @@ public class PostosController {
                 callback.onPostosFailure(t.getMessage());
             }
         });
-    }
+    }*/
 
     public void postPostosWeb(final Postos postos, final PostosCallback postosCallback) throws Exception{
         Gson gson = new GsonBuilder()

@@ -7,6 +7,8 @@ import br.com.senacrs.gposto.GUI.Callback.UsuarioCallback;
 import br.com.senacrs.gposto.LibClass.Combustivel;
 import br.com.senacrs.gposto.LibClass.Usuario;
 import br.com.senacrs.gposto.Utilities.Deserializer.CombustivelDeserializer;
+import br.com.senacrs.gposto.Utilities.Deserializer.UsuarioDeserializer;
+import br.com.senacrs.gposto.Utilities.Utils;
 import br.com.senacrs.gposto.WebApis.RetrofitService;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -17,9 +19,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class UsuarioController {
     private final String BASE_URL = "http://www.gestoo.com.br/gposto/api/";
 
-    public void getUserWeb(int id, final UsuarioCallback callback){
+    public void getUserWeb(int id, final UsuarioCallback callback)throws Exception{
         Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Combustivel.class, new CombustivelDeserializer())
+                .registerTypeAdapter(Usuario.class, new UsuarioDeserializer())
                 .create();
 
         Retrofit retrofit = new Retrofit.Builder()

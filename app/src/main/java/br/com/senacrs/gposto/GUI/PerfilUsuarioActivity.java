@@ -45,10 +45,13 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
     public static final String LOGIN_SAVE = "loginref";
     SharedPreferences loginPreferences;
 
-    TextView txtEmail, txtUsuario,txtSenha;
+    TextView txtEmail, txtUsuario;
     ImageView imageEditPerfil,imageViewPerfil;
-
+    EditText editPosto;
+    Button btnEnviarBandeira;
     Uri mCropImageUri;
+
+    String marca,logo;
 
     NavigationView navigationView;
     DrawerLayout drawerLayout;
@@ -60,13 +63,12 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_usuario);
         navigationDrawer();
+        editPosto = findViewById(R.id.editPosto);
+        btnEnviarBandeira = findViewById(R.id.btnSalvarBandeira);
         imageViewPerfil = findViewById(R.id.imagePerfil);
         imageEditPerfil = findViewById(R.id.imageEditPerfil);
         txtEmail = findViewById(R.id.txtEmail);
         txtUsuario = findViewById(R.id.txtUsuario);
-        txtSenha = findViewById(R.id.txtSenha);
-
-
     }
 
     //Get Image Perfil(Usuario)
@@ -102,7 +104,9 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                Glide.with(this).load(thePic).circleCrop().into(imageViewPerfil);
+                Glide.with(this).load(thePic).into(imageViewPerfil);
+
+
 
             }else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
                 Exception error = result.getError();
@@ -119,6 +123,8 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
             }
         }
     }
+
+
 
     //CustomAlertDialog && Update User, Email, Password
     public void editarPerfil(View view) {
@@ -151,7 +157,6 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
                     String email = editEmail.getText().toString();
 
                     txtUsuario.setText(user);
-                    txtSenha.setText(senha);
                     txtEmail.setText(email);
 
                    // Usuario body = new Usuario(user,senha,email);
@@ -249,5 +254,10 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
         } else {
             super.onBackPressed();
         }
+    }
+
+    public void enviarBandeira(View view) {
+
+
     }
 }
