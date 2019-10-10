@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
     SharedPreferences loginPreferences;
 
     private TopPostos posto;
+    private RatingBar avaliação_posto;
     public TextView perfilNome, endereco, telefone, bairro;
     public TextView preco;
     public ListView lvPrecos;
@@ -54,6 +56,13 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_perfil_postos);
         navigationDrawer();
+        avaliação_posto = findViewById(R.id.ratingBar);
+        avaliação_posto.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+
+            }
+        });
 
         lvPrecos = findViewById(R.id.lv_precos);
 

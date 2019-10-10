@@ -33,6 +33,7 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 import java.io.IOException;
 
 import br.com.senacrs.gposto.Controller.UsuarioController;
+import br.com.senacrs.gposto.Controller.UsuarioLoginController;
 import br.com.senacrs.gposto.GUI.Callback.UsuarioCallback;
 import br.com.senacrs.gposto.LibClass.Imagem;
 import br.com.senacrs.gposto.LibClass.Usuario;
@@ -64,6 +65,8 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
         txtEmail = findViewById(R.id.txtEmail);
         txtUsuario = findViewById(R.id.txtUsuario);
         txtSenha = findViewById(R.id.txtSenha);
+
+
     }
 
     //Get Image Perfil(Usuario)
