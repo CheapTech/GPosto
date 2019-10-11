@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,7 +16,7 @@ import java.util.List;
 import br.com.senacrs.gposto.LibClass.TopPostos;
 import br.com.senacrs.gposto.R;
 
-public class LineAdapter extends RecyclerView.Adapter<LineHolder> implements OnItemViewHolderClick {
+public class LineAdapter extends RecyclerView.Adapter<LineHolder> implements OnItemViewHolderClick, Filterable {
 
     private List<TopPostos> list;
     private Context context;
@@ -58,5 +60,15 @@ public class LineAdapter extends RecyclerView.Adapter<LineHolder> implements OnI
     public void onItemClicked(int itemPosition) {
         //TODO ação do botão - chamar o perfil do posto.
         Toast.makeText(context, list.get(itemPosition).getPreco(), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public Filter getFilterBairro() {
+        return null;
+    }
+
+    @Override
+    public Filter getFilter() {
+        return null;
     }
 }

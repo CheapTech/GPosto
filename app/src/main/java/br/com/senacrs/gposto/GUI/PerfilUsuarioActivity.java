@@ -18,6 +18,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Layout;
+import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -64,7 +65,6 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
         imageEditPerfil = findViewById(R.id.imageEditPerfil);
         txtEmail = findViewById(R.id.txtEmail);
         txtUsuario = findViewById(R.id.txtUsuario);
-        txtSenha = findViewById(R.id.txtSenha);
 
 
     }
@@ -102,6 +102,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
                 Glide.with(this).load(thePic).circleCrop().into(imageViewPerfil);
 
             }else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
