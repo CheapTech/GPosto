@@ -8,6 +8,9 @@ import br.com.senacrs.gposto.LibClass.Bandeira;
 import br.com.senacrs.gposto.LibClass.Combustivel;
 import br.com.senacrs.gposto.Utilities.Deserializer.BandeiraDeserializer;
 import br.com.senacrs.gposto.WebApis.RetrofitService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -16,6 +19,7 @@ public class BandeiraController {
     private final String BASE_URL = "http://www.gestoo.com.br/gposto/api/";
 
 
+    /*
     public void getBandeiraWeb(int id, final BandeiraCallback callback) throws Exception{
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Bandeira.class, new BandeiraDeserializer())
@@ -26,8 +30,25 @@ public class BandeiraController {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
-        RetrofitService services = retrofit.create(RetrofitService.class);
-    }
+        RetrofitService service = retrofit.create(RetrofitService.class);
+
+        final Call<Bandeira> bandeiraCall = service.registerBandeira();
+        bandeiraCall.enqueue(new Callback<Bandeira>() {
+            @Override
+            public void onResponse(Call<Bandeira> call, Response<Bandeira> response) {
+                if (response.isSuccessful()){
+                    callback.onBandeiraSuccess(response.body());
+                }else {
+                    callback.onBandeiraFailure("ERROR: " + response.code() + " - " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Bandeira> call, Throwable t) {
+                callback.onBandeiraFailure(t.getMessage());
+            }
+        });
+    } */
 
     public void postBandeiraWeb(final Bandeira bandeira, final BandeiraCallback callback) throws Exception{
         Gson gson = new GsonBuilder()
@@ -38,7 +59,24 @@ public class BandeiraController {
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
-        RetrofitService services = retrofit.create(RetrofitService.class);
 
+        RetrofitService service = retrofit.create(RetrofitService.class);
+
+        final Call<Bandeira> bandeiraCall = service.registerBandeira(bandeira);
+        bandeiraCall.enqueue(new Callback<Bandeira>() {
+            @Override
+            public void onResponse(Call<Bandeira> call, Response<Bandeira> response) {
+                if (response.isSuccessful()){
+                    callback.onBandeiraSuccess(response.body());
+                }else {
+                    callback.onBandeiraFailure("ERROR: " + response.code() + " - " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Bandeira> call, Throwable t) {
+                callback.onBandeiraFailure(t.getMessage());
+            }
+        });
     }
 }

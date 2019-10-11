@@ -2,6 +2,7 @@ package br.com.senacrs.gposto.WebApis;
 
 import java.util.List;
 
+import br.com.senacrs.gposto.LibClass.Bandeira;
 import br.com.senacrs.gposto.LibClass.Combustivel;
 import br.com.senacrs.gposto.LibClass.Postos;
 import br.com.senacrs.gposto.LibClass.TopPostos;
@@ -35,7 +36,13 @@ public interface RetrofitService {
     @POST()
     Call<Usuario> updateUser(@Body Usuario usuario);
 
-    @POST("inserir.php")
+    @POST()
+    Call<Bandeira> registerBandeira(@Body Bandeira bandeira);
+
+    @GET()
+    Call<Bandeira> getBandeira(@Body Bandeira bandeira);
+
+    @POST()
     Call<Postos> cadastrarPostos(@Body Postos postos);
 
 }
