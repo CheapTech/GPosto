@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
@@ -36,6 +37,7 @@ import java.io.IOException;
 import br.com.senacrs.gposto.Controller.UsuarioController;
 import br.com.senacrs.gposto.Controller.UsuarioLoginController;
 import br.com.senacrs.gposto.GUI.Callback.UsuarioCallback;
+import br.com.senacrs.gposto.LibClass.Bandeira;
 import br.com.senacrs.gposto.LibClass.Imagem;
 import br.com.senacrs.gposto.LibClass.Usuario;
 import br.com.senacrs.gposto.R;
@@ -47,9 +49,12 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
     SharedPreferences loginPreferences;
 
     TextView txtEmail, txtUsuario,txtSenha;
+    EditText editPosto;
     ImageView imageEditPerfil,imageViewPerfil;
 
+    String marca,logo;
     Uri mCropImageUri;
+    Button btnFodase;
 
     NavigationView navigationView;
     DrawerLayout drawerLayout;
@@ -61,6 +66,8 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_usuario);
         navigationDrawer();
+        editPosto = findViewById(R.id.editPosto);
+        btnFodase = findViewById(R.id.btnSalvarBandeira);
         imageViewPerfil = findViewById(R.id.imagePerfil);
         imageEditPerfil = findViewById(R.id.imageEditPerfil);
         txtEmail = findViewById(R.id.txtEmail);
@@ -103,7 +110,8 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
                     e.printStackTrace();
                 }
 
-                Glide.with(this).load(thePic).circleCrop().into(imageViewPerfil);
+                Glide.with(this).load(thePic).into(imageViewPerfil);
+
 
             }else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
                 Exception error = result.getError();
@@ -250,5 +258,13 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
         } else {
             super.onBackPressed();
         }
+    }
+
+    public void enviarBandeira(View view) {
+
+        Bandeira bandeira = new Bandeira();
+        bandeira.setLogo(Utils.convertBitmapToBase64(((BitmapDrawable) imageViewPerfil.getDrawable()).getBitmap()));
+        bandeira.setMarca(editPosto.getText().toString());
+
     }
 }
