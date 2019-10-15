@@ -186,6 +186,7 @@ public class CadastroPostosActivity extends AppCompatActivity implements Navigat
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Bandeira bandeiras = (Bandeira) parent.getItemAtPosition(position);
                 id_bandeira = bandeiras.getId();
+                Utils.longToast(CadastroPostosActivity.this,bandeiras.getMarca());
             }
 
             @Override
