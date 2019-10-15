@@ -11,15 +11,6 @@ public class Postos implements Serializable {
    private String tel;
    private String numero;
 
-    public Postos(String nomeFantasia, String logradouro, String bairro, String tel, String numero, int id_bandeira) {
-        this.nomeFantasia = nomeFantasia;
-        this.logradouro = logradouro;
-        this.bairro = bairro;
-        this.tel = tel;
-        this.numero = numero;
-        this.id_bandeira = id_bandeira;
-    }
-
     public int getId() {
         return id;
     }

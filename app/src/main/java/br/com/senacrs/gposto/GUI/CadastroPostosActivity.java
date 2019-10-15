@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -17,13 +19,18 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.List;
+
+import br.com.senacrs.gposto.Controller.BandeiraController;
 import br.com.senacrs.gposto.Controller.PostosController;
+import br.com.senacrs.gposto.GUI.Callback.BandeiraCallback;
 import br.com.senacrs.gposto.GUI.Callback.PostosCallback;
+import br.com.senacrs.gposto.LibClass.Bandeira;
 import br.com.senacrs.gposto.LibClass.Postos;
 import br.com.senacrs.gposto.R;
 import br.com.senacrs.gposto.Utilities.Utils;
 
-public class CadastroPostosActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, PostosCallback {
+public class CadastroPostosActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, PostosCallback, BandeiraCallback {
 
     TextInputEditText editNFantasia,editLogradouro,editNumero,editBairro,editTel;
     Toolbar toolbar;
@@ -31,12 +38,14 @@ public class CadastroPostosActivity extends AppCompatActivity implements Navigat
     NavigationView navigationView;
     DrawerLayout drawerLayout;
     FloatingActionButton btnCadstrarPosto;
+    int id_bandeira = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_posto);
         navigationDrawer();
+        fieldSpinner();
         editNFantasia = findViewById(R.id.editNomeFantasia);
         editLogradouro = findViewById(R.id.editLogradouro);
         editNumero = findViewById(R.id.editNumero);
@@ -47,23 +56,28 @@ public class CadastroPostosActivity extends AppCompatActivity implements Navigat
         btnCadstrarPosto = findViewById(R.id.btnCadastrarPosto);
     }
 
-    //
-    //!!!!!! Ajustar Cadstro Postos !!!!!!
-    //
+    private void fieldSpinner(){
+        BandeiraController controller = new BandeiraController();
+        try {
+            controller.getBandeiraWeb(CadastroPostosActivity.this);
+        } catch (Exception e) {
+            Utils.longToast(this,e.getMessage());
+        }
+    }
 
     public void cadastrarPosto(View view) {
         if (!testarCampos()){
-            int id_bandira = 0;
-            String nfantasia = editNFantasia.getText().toString();
-            String logradouro = editLogradouro.getText().toString();
-            String numero = editNumero.getText().toString();
-            String bairro = editBairro.getText().toString();
-            String tel = editTel.getText().toString();
+            Postos posto = new Postos();
+            posto.setNomeFantasia(editNFantasia.getText().toString());
+            posto.setId_bandeira(id_bandeira);
+            posto.setLogradouro(editLogradouro.getText().toString());
+            posto.setBairro(editBairro.getText().toString());
+            posto.setNumero(editNumero.getText().toString());
+            posto.setTel(editTel.getText().toString());
 
-            Postos body = new Postos(nfantasia,logradouro,bairro,tel,numero,id_bandira);
             PostosController postosController = new PostosController();
             try {
-                postosController.postPostosWeb(body, this);
+                postosController.postPostosWeb(posto, this);
             } catch (Exception e) {
                 Utils.longToast(this, e.getMessage());
             }
@@ -84,7 +98,11 @@ public class CadastroPostosActivity extends AppCompatActivity implements Navigat
                     editBairro.requestFocus();
                     editBairro.setError("Campo Obrigatorio");
                 }else {
-                    testarCampos = false;
+                    if (id_bandeira == 0){
+                        Utils.longToast(this, "Selecione uma Marca");
+                    }else {
+                        testarCampos = false;
+                    }
                 }
             }
         }
@@ -153,4 +171,32 @@ public class CadastroPostosActivity extends AppCompatActivity implements Navigat
 
     @Override
     public void onPostosFailure(String message) { Utils.longToast(CadastroPostosActivity.this,message); }
+
+    @Override
+    public void onBandeiraSuccess(List<Bandeira> list)  {
+        final Bandeira bandeira = new Bandeira();
+        bandeira.getId();
+
+        final ArrayAdapter adapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item,list);
+
+        spBandeira.setAdapter(adapter);
+
+        spBandeira.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Bandeira bandeiras = (Bandeira) parent.getItemAtPosition(position);
+                id_bandeira = bandeiras.getId();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onBandeiraFailure(String message) {
+        Utils.longToast(this,message);
+    }
 }

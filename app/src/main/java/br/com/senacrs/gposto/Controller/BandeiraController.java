@@ -3,6 +3,8 @@ package br.com.senacrs.gposto.Controller;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.List;
+
 import br.com.senacrs.gposto.GUI.Callback.BandeiraCallback;
 import br.com.senacrs.gposto.LibClass.Bandeira;
 import br.com.senacrs.gposto.LibClass.Combustivel;
@@ -15,12 +17,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BandeiraController {
-
     private final String BASE_URL = "http://www.gestoo.com.br/gposto/api/";
 
-
-    /*
-    public void getBandeiraWeb(int id, final BandeiraCallback callback) throws Exception{
+    public void getBandeiraWeb(final BandeiraCallback callback) throws Exception{
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Bandeira.class, new BandeiraDeserializer())
                 .create();
@@ -32,10 +31,10 @@ public class BandeiraController {
 
         RetrofitService service = retrofit.create(RetrofitService.class);
 
-        final Call<Bandeira> bandeiraCall = service.registerBandeira();
-        bandeiraCall.enqueue(new Callback<Bandeira>() {
+        final Call<List<Bandeira>> bandeiraCall = service.getBandeira();
+        bandeiraCall.enqueue(new Callback<List<Bandeira>>() {
             @Override
-            public void onResponse(Call<Bandeira> call, Response<Bandeira> response) {
+            public void onResponse(Call<List<Bandeira>> call, Response<List<Bandeira>> response) {
                 if (response.isSuccessful()){
                     callback.onBandeiraSuccess(response.body());
                 }else {
@@ -44,12 +43,13 @@ public class BandeiraController {
             }
 
             @Override
-            public void onFailure(Call<Bandeira> call, Throwable t) {
+            public void onFailure(Call<List<Bandeira>> call, Throwable t) {
                 callback.onBandeiraFailure(t.getMessage());
             }
         });
-    } */
+    }
 
+    /*
     public void postBandeiraWeb(final Bandeira bandeira, final BandeiraCallback callback) throws Exception{
         Gson gson = new GsonBuilder()
                 .setLenient()
@@ -78,5 +78,5 @@ public class BandeiraController {
                 callback.onBandeiraFailure(t.getMessage());
             }
         });
-    }
+    }*/
 }

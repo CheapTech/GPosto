@@ -8,6 +8,7 @@ import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
 
+import br.com.senacrs.gposto.LibClass.Bandeira;
 import br.com.senacrs.gposto.LibClass.Combustivel;
 
 public class BandeiraDeserializer implements JsonDeserializer {
@@ -19,6 +20,6 @@ public class BandeiraDeserializer implements JsonDeserializer {
             jsonElement = json.getAsJsonObject();
         }
 
-        return (new Gson().fromJson(jsonElement, Combustivel.class));
+        return (new Gson().fromJson(jsonElement, Bandeira.class));
     }
 }

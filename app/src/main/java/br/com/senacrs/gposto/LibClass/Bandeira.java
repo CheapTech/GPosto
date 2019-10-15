@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Bandeira implements Serializable {
     private int id;
-    private String marca;
+    private String nome;
     private String logo;
 
     public int getId() {
@@ -16,11 +16,11 @@ public class Bandeira implements Serializable {
     }
 
     public String getMarca() {
-        return marca;
+        return nome;
     }
 
-    public void setMarca(String marca) {
-        this.marca = marca;
+    public void setMarca(String nome) {
+        this.nome = nome;
     }
 
     public String getLogo() {
@@ -29,5 +29,10 @@ public class Bandeira implements Serializable {
 
     public void setLogo(String logo) {
         this.logo = logo;
+    }
+
+    @Override
+    public String toString() {
+        return getMarca();
     }
 }
