@@ -10,16 +10,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Layout;
-import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -35,26 +31,17 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 import java.io.IOException;
 
 import br.com.senacrs.gposto.Controller.UsuarioController;
-import br.com.senacrs.gposto.Controller.UsuarioLoginController;
 import br.com.senacrs.gposto.GUI.Callback.UsuarioCallback;
-import br.com.senacrs.gposto.LibClass.Bandeira;
-import br.com.senacrs.gposto.LibClass.Imagem;
 import br.com.senacrs.gposto.LibClass.Usuario;
 import br.com.senacrs.gposto.R;
 import br.com.senacrs.gposto.Utilities.Utils;
 
 public class PerfilUsuarioActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, UsuarioCallback{
 
-    public static final String LOGIN_SAVE = "loginref";
-    SharedPreferences loginPreferences;
-
     TextView txtEmail, txtUsuario,txtSenha;
-    EditText editPosto;
     ImageView imageEditPerfil,imageViewPerfil;
 
-    String marca,logo;
     Uri mCropImageUri;
-    Button btnFodase;
 
     NavigationView navigationView;
     DrawerLayout drawerLayout;
@@ -66,14 +53,11 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_usuario);
         navigationDrawer();
-        editPosto = findViewById(R.id.editPosto);
-        btnFodase = findViewById(R.id.btnSalvarBandeira);
         imageViewPerfil = findViewById(R.id.imagePerfil);
         imageEditPerfil = findViewById(R.id.imageEditPerfil);
         txtEmail = findViewById(R.id.txtEmail);
         txtUsuario = findViewById(R.id.txtUsuario);
-
-
+        txtSenha = findViewById(R.id.txtSenha);
     }
 
     //Get Image Perfil(Usuario)
@@ -110,8 +94,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
                     e.printStackTrace();
                 }
 
-                Glide.with(this).load(thePic).into(imageViewPerfil);
-
+                Glide.with(this).load(thePic).circleCrop().into(imageViewPerfil);
 
             }else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
                 Exception error = result.getError();
@@ -173,7 +156,6 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
                 }else {
                     Utils.shortToast(PerfilUsuarioActivity.this,"Error => Senhas Diferentes");
                     editarPerfil(v);
-                    editEmail.requestFocus();
                 }
             }
         });
@@ -183,10 +165,14 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
     }
 
     @Override
-    public void onUsuarioSuccess(Usuario usuario) { Utils.longToast(PerfilUsuarioActivity.this,"Usuario Alterado Com Sucesso"); }
+    public void onUsuarioSuccess(Usuario usuario) {
+        Utils.longToast(PerfilUsuarioActivity.this,"Usuario Alterado Com Sucesso");
+    }
 
     @Override
-    public void onUsuarioFailure(String message) { Utils.longToast(PerfilUsuarioActivity.this,message); }
+    public void onUsuarioFailure(String message) {
+        Utils.longToast(PerfilUsuarioActivity.this,message);
+    }
 
     //NavigationDrawer (Menu)
     private void navigationDrawer() {
@@ -194,18 +180,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
         drawerLayout = findViewById(R.id.drawerLayout);
         toolbar = findViewById(R.id.toolbar);
 
-        View navView = navigationView.getHeaderView(0);
-
         navigationView.setNavigationItemSelectedListener(this);
-        TextView nav_user = navView.findViewById(R.id.nav_header_user);
-        TextView nav_email = navView.findViewById(R.id.nav_header_email);
-        ImageView nav_photo = navView.findViewById(R.id.nav_header_photo);
-
-        String user = "teste";
-        String email = "Teste@gmail.com";
-
-        nav_email.setText(email);
-        nav_user.setText(user);
 
         toolbar.setTitle("Perfil Usuario");
         setSupportActionBar(toolbar);
@@ -238,10 +213,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
                 break;
             }
             case R.id.menu_sair: {
-                loginPreferences = getSharedPreferences(LOGIN_SAVE, MODE_PRIVATE);
-                loginPreferences.edit().clear().commit();
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
+                Utils.shortToast(this, "funciono3");
                 break;
             }
         }
@@ -258,13 +230,5 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
         } else {
             super.onBackPressed();
         }
-    }
-
-    public void enviarBandeira(View view) {
-
-        Bandeira bandeira = new Bandeira();
-        bandeira.setLogo(Utils.convertBitmapToBase64(((BitmapDrawable) imageViewPerfil.getDrawable()).getBitmap()));
-        bandeira.setMarca(editPosto.getText().toString());
-
     }
 }

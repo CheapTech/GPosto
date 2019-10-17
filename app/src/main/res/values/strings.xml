@@ -6,4 +6,7 @@
     <string name="r_0_00">R$ 0,00</string>
     <string name="open_drawer">Abrir</string>
     <string name="close_drawer">Fechar</string>
+    <string name="facebook_app_id">770267326740534</string>
+    <string name="fb_login_protocol_scheme">fb770267326740534</string>
+    <string name="loginref"></string>
 </resources>
