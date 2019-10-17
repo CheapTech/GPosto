@@ -19,6 +19,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.senacrs.gposto.Controller.BandeiraController;
@@ -175,9 +176,18 @@ public class CadastroPostosActivity extends AppCompatActivity implements Navigat
     @Override
     public void onBandeiraSuccess(List<Bandeira> list)  {
         final Bandeira bandeira = new Bandeira();
-        bandeira.getId();
+        bandeira.setId(0);
+        bandeira.setMarca("Selecione");
+        bandeira.setLogo("");
+        List<Bandeira> newList = new ArrayList<>();
+        newList.add(bandeira);
 
-        final ArrayAdapter adapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item,list);
+        for (int i = 0 ; i < list.size(); i++ ){
+            newList.add(list.get(i));
+        }
+
+
+        final ArrayAdapter adapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item,newList);
 
         spBandeira.setAdapter(adapter);
 
