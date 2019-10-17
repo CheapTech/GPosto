@@ -52,6 +52,7 @@ public class CadastroPostosActivity extends AppCompatActivity implements Navigat
         editNumero = findViewById(R.id.editNumero);
         editBairro = findViewById(R.id.editBairro);
         editTel = findViewById(R.id.editTel);
+
         spBandeira = findViewById(R.id.spBandeira);
 
         btnCadstrarPosto = findViewById(R.id.btnCadastrarPosto);
