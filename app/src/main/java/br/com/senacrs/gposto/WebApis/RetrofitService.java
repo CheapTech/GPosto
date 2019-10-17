@@ -40,6 +40,7 @@ public interface RetrofitService {
     Call<Bandeira> registerBandeira(@Body Bandeira bandeira);
 
     @GET("ListarBandeiras.php")
+
     Call<List<Bandeira>> getBandeira();
 
     @POST()
