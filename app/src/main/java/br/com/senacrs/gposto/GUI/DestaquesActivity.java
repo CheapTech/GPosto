@@ -1,6 +1,7 @@
 package br.com.senacrs.gposto.GUI;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,6 +38,9 @@ import br.com.senacrs.gposto.Utilities.AdapterTopPostos;
 import br.com.senacrs.gposto.Utilities.Utils;
 
 public class DestaquesActivity extends AppCompatActivity implements CombustivelCallback, TopPostosCallback, NavigationView.OnNavigationItemSelectedListener {
+
+    public static final String LOGIN_SAVE = "loginref";
+    SharedPreferences loginPreferences;
 
     private FloatingActionButton btnVerTodos;
     private RadioButton rbtn_SearchPosto,rbtn_SearchBairro;
@@ -176,7 +180,10 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
                 break;
             }
             case R.id.menu_sair: {
-                Utils.shortToast(this, "funciono3");
+                loginPreferences = getSharedPreferences(LOGIN_SAVE, MODE_PRIVATE);
+                loginPreferences.edit().clear().commit();
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
                 break;
             }
         }

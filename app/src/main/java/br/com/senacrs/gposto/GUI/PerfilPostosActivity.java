@@ -11,6 +11,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -41,6 +42,9 @@ import br.com.senacrs.gposto.Utilities.AdapterLvPrecos;
 import br.com.senacrs.gposto.Utilities.Utils;
 
 public class PerfilPostosActivity extends AppCompatActivity implements TopPostosCallback, CombustivelCallback, CombustivelUpdateCallback, NavigationView.OnNavigationItemSelectedListener {
+
+    public static final String LOGIN_SAVE = "loginref";
+    SharedPreferences loginPreferences;
 
     private TopPostos posto;
     public TextView perfilNome, endereco, telefone, bairro;
@@ -154,7 +158,10 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
                 break;
             }
             case R.id.menu_sair: {
-                Utils.shortToast(this, "funciono3");
+                loginPreferences = getSharedPreferences(LOGIN_SAVE, MODE_PRIVATE);
+                loginPreferences.edit().clear().commit();
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
                 break;
             }
         }

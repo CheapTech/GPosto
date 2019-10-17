@@ -49,12 +49,10 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
     SharedPreferences loginPreferences;
 
     TextView txtEmail, txtUsuario,txtSenha;
-    EditText editPosto;
     ImageView imageEditPerfil,imageViewPerfil;
 
     String marca,logo;
     Uri mCropImageUri;
-    Button btnFodase;
 
     NavigationView navigationView;
     DrawerLayout drawerLayout;
@@ -66,8 +64,6 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_usuario);
         navigationDrawer();
-        editPosto = findViewById(R.id.editPosto);
-        btnFodase = findViewById(R.id.btnSalvarBandeira);
         imageViewPerfil = findViewById(R.id.imagePerfil);
         imageEditPerfil = findViewById(R.id.imageEditPerfil);
         txtEmail = findViewById(R.id.txtEmail);
@@ -240,7 +236,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
             case R.id.menu_sair: {
                 loginPreferences = getSharedPreferences(LOGIN_SAVE, MODE_PRIVATE);
                 loginPreferences.edit().clear().commit();
-                Intent intent = new Intent(this, LoginActivity.class);
+                Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 break;
             }
@@ -260,11 +256,12 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
         }
     }
 
+    /*
     public void enviarBandeira(View view) {
 
         Bandeira bandeira = new Bandeira();
         bandeira.setLogo(Utils.convertBitmapToBase64(((BitmapDrawable) imageViewPerfil.getDrawable()).getBitmap()));
         bandeira.setMarca(editPosto.getText().toString());
 
-    }
+    }*/
 }

@@ -24,7 +24,7 @@ public interface RetrofitService {
     @GET("ListarCombustivel.php")
     Call<List<TopPostos>> getListTopPostos(@Query(value = "id") int id);
 
-    @GET("UsuarioGETid.php")
+    @GET("LoginUsuario.php")
     Call<Usuario> logarUsuario(@Query(value = "email", encoded = true) String email, @Query(value = "senha", encoded = true) String senha);
 
     @POST("InserirUsuario.php")

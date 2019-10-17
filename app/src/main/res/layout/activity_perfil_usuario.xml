@@ -101,21 +101,6 @@
                     android:layout_height="50dp"/>
           </LinearLayout>
 
-            <EditText
-                android:id="@+id/editPosto"
-                android:layout_margin="10dp"
-                android:hint="Posto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <Button
-                android:layout_margin="10dp"
-                android:id="@+id/btnSalvarBandeira"
-                android:layout_width="wrap_content"
-                android:onClick="enviarBandeira"
-                android:layout_height="wrap_content"
-                android:hint="Salvar"/>
-
         </LinearLayout>
     </RelativeLayout>
 

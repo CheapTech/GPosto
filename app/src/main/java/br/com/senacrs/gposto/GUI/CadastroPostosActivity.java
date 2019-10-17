@@ -1,6 +1,7 @@
 package br.com.senacrs.gposto.GUI;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,6 +33,9 @@ import br.com.senacrs.gposto.R;
 import br.com.senacrs.gposto.Utilities.Utils;
 
 public class CadastroPostosActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, PostosCallback, BandeiraCallback {
+
+    public static final String LOGIN_SAVE = "loginref";
+    SharedPreferences loginPreferences;
 
     TextInputEditText editNFantasia,editLogradouro,editNumero,editBairro,editTel;
     Toolbar toolbar;
@@ -147,7 +151,10 @@ public class CadastroPostosActivity extends AppCompatActivity implements Navigat
                 break;
             }
             case R.id.menu_sair: {
-                Utils.shortToast(this, "funciono3");
+                loginPreferences = getSharedPreferences(LOGIN_SAVE, MODE_PRIVATE);
+                loginPreferences.edit().clear().commit();
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
                 break;
             }
         }
