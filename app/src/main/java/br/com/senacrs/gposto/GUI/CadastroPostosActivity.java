@@ -52,9 +52,7 @@ public class CadastroPostosActivity extends AppCompatActivity implements Navigat
         editNumero = findViewById(R.id.editNumero);
         editBairro = findViewById(R.id.editBairro);
         editTel = findViewById(R.id.editTel);
-
         spBandeira = findViewById(R.id.spBandeira);
-
         btnCadstrarPosto = findViewById(R.id.btnCadastrarPosto);
     }
 
@@ -186,7 +184,6 @@ public class CadastroPostosActivity extends AppCompatActivity implements Navigat
         for (int i = 0 ; i < list.size(); i++ ){
             newList.add(list.get(i));
         }
-
 
         final ArrayAdapter adapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item,newList);
 
