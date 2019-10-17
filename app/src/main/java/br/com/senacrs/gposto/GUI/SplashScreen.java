@@ -8,6 +8,7 @@ import android.os.PersistableBundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
 import br.com.senacrs.gposto.R;
 
 public class SplashScreen extends AppCompatActivity {
@@ -46,3 +47,4 @@ public class SplashScreen extends AppCompatActivity {
         return prefs.getBoolean("savelogin", false);
     }
 }
+
