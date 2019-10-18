@@ -151,15 +151,11 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (editSenha.getText().toString().trim().equals(editConfirmarSenha.getText().toString().trim())){
-                    String user = editUsuario.getText().toString();
-                    String senha = editSenha.getText().toString();
-                    String email = editEmail.getText().toString();
+                    Usuario usuario = new Usuario();
+                    usuario.setUser(editUsuario.getText().toString());
+                    usuario.setSenha(editSenha.getText().toString());
+                    usuario.setEmail(editEmail.getText().toString());
 
-                    txtUsuario.setText(user);
-                    txtSenha.setText(senha);
-                    txtEmail.setText(email);
-
-                   // Usuario body = new Usuario(user,senha,email);
                    // UsuarioController usuarioController = new UsuarioController();
                     try {
                         //usuarioController.updateUserWeb(body,PerfilUsuarioActivity.this);

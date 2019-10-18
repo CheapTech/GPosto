@@ -34,7 +34,7 @@ public interface RetrofitService {
     Call<Combustivel> updateValorCombustivel(@Query (value = "idValor")int id, @Query(value = "preco") float preco);
 
     @POST()
-    Call<Usuario> updateUser(@Body Usuario usuario);
+    Call<Usuario> updateUser(@Query (value = "idValor")int id,@Body Usuario usuario);
 
     @POST()
     Call<Bandeira> registerBandeira(@Body Bandeira bandeira);

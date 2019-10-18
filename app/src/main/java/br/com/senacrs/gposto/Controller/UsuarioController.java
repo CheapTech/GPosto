@@ -75,7 +75,7 @@ public class UsuarioController {
         });
     }
 
-    public void updateUserWeb(final Usuario usuario, final UsuarioCallback callback) throws Exception{
+    public void updateUserWeb(int id,final Usuario usuario, final UsuarioCallback callback) throws Exception{
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
@@ -87,7 +87,7 @@ public class UsuarioController {
 
         RetrofitService service = retrofit.create(RetrofitService.class);
 
-        final Call<Usuario> user = service.updateUser(usuario);
+        final Call<Usuario> user = service.updateUser(id,usuario);
         user.enqueue(new Callback<Usuario>() {
             @Override
             public void onResponse(Call<Usuario> call, Response<Usuario> response) {

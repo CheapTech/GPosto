@@ -37,14 +37,13 @@ public class CadastroActivity extends AppCompatActivity implements UsuarioCallba
 
     public void cadastrarUsuario(View view) {
         if (!testarCampos()) {
-            String email = editEmail.getText().toString();
-            String user = editUser.getText().toString();
-            String senha = editSenha.getText().toString();
-
-            Usuario body = new Usuario(user, senha, email);
+            Usuario usuario = new Usuario();
+            usuario.setUser(editUser.getText().toString());
+            usuario.setSenha(editSenha.getText().toString());
+            usuario.setEmail(editEmail.getText().toString());
             UsuarioController usuarioController = new UsuarioController();
             try {
-                usuarioController.postUserWeb(body, this);
+                usuarioController.postUserWeb(usuario, this);
             } catch (Exception e) {
                 Utils.longToast(this, e.getMessage());
             }
