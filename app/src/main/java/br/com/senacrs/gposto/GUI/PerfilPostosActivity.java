@@ -2,6 +2,7 @@ package br.com.senacrs.gposto.GUI;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -13,6 +14,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +28,7 @@ import br.com.senacrs.gposto.Controller.CombustivelController;
 import br.com.senacrs.gposto.Controller.PostosController;
 import br.com.senacrs.gposto.Controller.TopPostosController;
 import br.com.senacrs.gposto.GUI.Callback.CombustivelCallback;
+import br.com.senacrs.gposto.GUI.Callback.CombustivelUpdateCallback;
 import br.com.senacrs.gposto.GUI.Callback.TopPostosCallback;
 import br.com.senacrs.gposto.LibClass.Combustivel;
 import br.com.senacrs.gposto.LibClass.Postos;
@@ -32,8 +36,9 @@ import br.com.senacrs.gposto.LibClass.TopPostos;
 import br.com.senacrs.gposto.R;
 import br.com.senacrs.gposto.Utilities.AdapterLvPrecos;
 import br.com.senacrs.gposto.Utilities.Utils;
+import okhttp3.internal.Util;
 
-public class PerfilPostosActivity extends AppCompatActivity implements TopPostosCallback, CombustivelCallback, NavigationView.OnNavigationItemSelectedListener {
+public class PerfilPostosActivity extends AppCompatActivity implements TopPostosCallback, CombustivelCallback, CombustivelUpdateCallback, NavigationView.OnNavigationItemSelectedListener {
 
     public static final String LOGIN_SAVE = "loginref";
     SharedPreferences loginPreferences;
@@ -109,6 +114,7 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
 
 
     public void atualizarValor(View view) {
+
     }
 
     //NavigationDrawer (Menu)
@@ -174,26 +180,76 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
 
     @Override
     public void onCombustivelSuccess(List<Combustivel> list) {
-
         if (list.size() > 0) {
-            AdapterLvPrecos adapter = new AdapterLvPrecos(PerfilPostosActivity.this, R.layout.layout_item_precos, list);
+            final AdapterLvPrecos adapter = new AdapterLvPrecos(PerfilPostosActivity.this, R.layout.layout_item_precos, list);//MONTA A LISTA DE PREÇOS
             lvPrecos.setAdapter(adapter);
             lvPrecos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Combustivel combustivel = (Combustivel) parent.getItemAtPosition(position);
-                    Toast.makeText(PerfilPostosActivity.this, combustivel.getDescricao() + " " + combustivel.getId(), Toast.LENGTH_LONG).show();
+                public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {//PERMITE O CLIQUE NO LAYOUTITEM DA LISTA
+                    final Combustivel combustivel = (Combustivel) parent.getItemAtPosition(position);
 
-                    //TODO editar preço dos combustiveis
+                    final AlertDialog alertDialog;
+
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(PerfilPostosActivity.this);
+                    final View mView = getLayoutInflater().inflate(R.layout.alertdialog_edit_combustivel, null);//CRIA O ALERT PARA FAZER O UPDATE
+
+
+
+                    final EditText editValor = mView.findViewById(R.id.edit_valor_combustivel);
+                    final TextView editCombustivel = mView.findViewById(R.id.textCombustivel);
+                    final Button btnSalvar = mView.findViewById(R.id.btn_salvar_preco);
+
+
+                    editCombustivel.setText(combustivel.getDescricao());
+                    editValor.setText(String.valueOf(combustivel.getPreco()));
+                    editValor.requestFocus();
+
+                    btnSalvar.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Float preco = Float.valueOf(editValor.getText().toString());
+                            if(preco <= 2 || preco >=6){
+                                editValor.setError("Valor incompatível");
+                                editValor.requestFocus();
+                            }else{
+                                CombustivelController controller = new CombustivelController();
+                                try {
+                                    controller.updateCombustivelWeb(combustivel.getIdValor(),preco,PerfilPostosActivity.this);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                        }
+                    });
+
+                    builder.setView(mView);
+                    alertDialog = builder.create();
+                    alertDialog.show();
+
                 }
+
+
             });
         } else {
-
         }
     }
 
     @Override
     public void onCombustivelFailure(String message) {
-        Toast.makeText(PerfilPostosActivity.this, message, Toast.LENGTH_LONG).show();
+        Utils.longToast(this,message);
+    }
+
+    @Override
+    public void onCombustivelUpdateSuccess(Boolean update) {
+        Utils.longToast(PerfilPostosActivity.this, "Preço atualizado.");
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+    }
+
+    @Override
+    public void onCombustivelUpdateFailure(String message) {
+        Utils.longToast(PerfilPostosActivity.this,"Erro: "+message);
     }
 }

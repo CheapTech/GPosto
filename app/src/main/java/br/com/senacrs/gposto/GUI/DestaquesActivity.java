@@ -74,7 +74,7 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
         try {
             controller.getCombustivelWeb(DestaquesActivity.this);
         } catch (Exception e) {
-            Toast.makeText(DestaquesActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+            Utils.longToast(this,e.getMessage());
         }
     }
 
@@ -94,7 +94,7 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
                 try {
                     controller.getTopPostosWeb(combustivel.getId(), DestaquesActivity.this);
                 } catch (Exception e) {
-                    Toast.makeText(DestaquesActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    Utils.longToast(DestaquesActivity.this,e.getMessage());
                 }
             }
 
@@ -106,7 +106,7 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
 
     @Override
     public void onCombustivelFailure(String message) {
-        Toast.makeText(DestaquesActivity.this, message, Toast.LENGTH_LONG).show();
+        Utils.longToast(this,message);
     }
 
     @Override
