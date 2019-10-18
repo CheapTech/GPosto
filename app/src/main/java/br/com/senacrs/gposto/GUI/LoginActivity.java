@@ -184,12 +184,14 @@ public class LoginActivity extends AppCompatActivity implements UsuarioCallback 
         Utils.longToast(this, "LOGIN FALHOU!");
     }
 
-    private void isLogged(SharedPreferences preferences, Usuario usuario) {
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("email", usuario.getEmail());
-        editor.putString("senha", usuario.getSenha());
-        editor.putInt("id", usuario.getId());
-        editor.commit();
+    private boolean getSession() {
+        SharedPreferences prefs = getSharedPreferences(SHARED_PREFERENCES,MODE_PRIVATE);
+        String email = prefs.getString("user",null);
+        if (email != null){
+            return true;
+        }else {
+            return false;
+        }
     }
 
 }

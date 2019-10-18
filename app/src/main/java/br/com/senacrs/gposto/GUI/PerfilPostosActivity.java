@@ -112,11 +112,6 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
 
     }
 
-
-    public void atualizarValor(View view) {
-
-    }
-
     //NavigationDrawer (Menu)
     private void navigationDrawer() {
         navigationView = findViewById(R.id.navigation_view);
@@ -176,6 +171,8 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
             super.onBackPressed();
         }
     }
+
+
 
 
     @Override

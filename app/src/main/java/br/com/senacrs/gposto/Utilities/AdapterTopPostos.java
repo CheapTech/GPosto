@@ -57,8 +57,6 @@ public class AdapterTopPostos extends RecyclerView.Adapter<HolderTopPostos> impl
         holder.atualizado.setText(list.get(position).getAtualizado());
     }
 
-
-
     @Override
     public int getItemCount() {
         return list.size();
@@ -66,9 +64,9 @@ public class AdapterTopPostos extends RecyclerView.Adapter<HolderTopPostos> impl
 
     @Override
     public void onItemClicked(int itemPosition) {
+
         Bundle bundle = new Bundle();
         bundle.putSerializable("posto", list.get(itemPosition));
-
         Intent intent = new Intent(context, PerfilPostosActivity.class);
         intent.putExtras(bundle);
 
