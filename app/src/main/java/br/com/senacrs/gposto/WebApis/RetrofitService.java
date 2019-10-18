@@ -36,14 +36,11 @@ public interface RetrofitService {
     @POST()
     Call<Usuario> updateUser(@Query (value = "idValor")int id,@Body Usuario usuario);
 
-    @POST()
-    Call<Bandeira> registerBandeira(@Body Bandeira bandeira);
-
     @GET("ListarBandeiras.php")
 
     Call<List<Bandeira>> getBandeira();
 
-    @POST()
+    @POST("InserirPosto.php")
     Call<Postos> cadastrarPostos(@Body Postos postos);
 
 }

@@ -9,13 +9,6 @@ public class Usuario implements Serializable {
     private String senha;
     private String email;
 
-    /*
-    public Usuario(String user, String senha, String email) {
-        this.user = user;
-        this.senha = senha;
-        this.email = email;
-    }*/
-
     public Integer getId() {
         return id;
     }
