@@ -107,10 +107,7 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
     }
 
     @Override
-    public void onTopPostosFailure(String message) {
-        Toast.makeText(PerfilPostosActivity.this, "ERRO AO TRAZER POSTO", Toast.LENGTH_LONG).show();
-
-    }
+    public void onTopPostosFailure(String message) { Utils.longToast(PerfilPostosActivity.this,"ERRO AO TRAZER POSTO"); }
 
     //NavigationDrawer (Menu)
     private void navigationDrawer() {
