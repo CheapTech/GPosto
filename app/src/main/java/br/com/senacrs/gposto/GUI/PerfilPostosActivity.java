@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -42,6 +43,9 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
 
     public static final String LOGIN_SAVE = "loginref";
     SharedPreferences loginPreferences;
+
+    public static final String STABILISHED_SESSION ="stabilishedsession";
+    SharedPreferences stabilishedSession;
 
     private TopPostos posto;
     public TextView perfilNome, endereco, telefone, bairro;
@@ -137,14 +141,21 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
             }
 
             case R.id.menu_cadastrar_posto: {
-                Intent intent = new Intent(this, CadastroPostosActivity.class);
-                startActivity(intent);
-                break;
+                if(getStabilishedSession()){
+                    Intent intent = new Intent(this, CadastroPostosActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    Utils.longToast(this, "FAÇA LOGIN PARA ACESSAR ESSA FUNCIONALIDADE");
+                }
             }
             case R.id.menu_editar_perfil: {
-                Intent intent = new Intent(this, PerfilUsuarioActivity.class);
-                startActivity(intent);
-                break;
+                if(getStabilishedSession()){
+                    Intent intent = new Intent(this, PerfilUsuarioActivity.class);
+                    startActivity(intent);
+                }else{
+                    Utils.longToast(this, "FAÇA LOGIN PARA ACESSAR ESSA FUNCIONALIDADE");
+                }
             }
             case R.id.menu_sair: {
                 loginPreferences = getSharedPreferences(LOGIN_SAVE, MODE_PRIVATE);
@@ -177,55 +188,58 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
         if (list.size() > 0) {
             final AdapterLvPrecos adapter = new AdapterLvPrecos(PerfilPostosActivity.this, R.layout.layout_item_precos, list);//MONTA A LISTA DE PREÇOS
             lvPrecos.setAdapter(adapter);
+
+
             lvPrecos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {//PERMITE O CLIQUE NO LAYOUTITEM DA LISTA
-                    final Combustivel combustivel = (Combustivel) parent.getItemAtPosition(position);
 
-                    final AlertDialog alertDialog;
+                    if(getStabilishedSession()){
+                        final Combustivel combustivel = (Combustivel) parent.getItemAtPosition(position);
 
-                    final AlertDialog.Builder builder = new AlertDialog.Builder(PerfilPostosActivity.this);
-                    final View mView = getLayoutInflater().inflate(R.layout.alertdialog_edit_combustivel, null);//CRIA O ALERT PARA FAZER O UPDATE
+                        final AlertDialog alertDialog;
+
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(PerfilPostosActivity.this);
+
+                        final View mView = getLayoutInflater().inflate(R.layout.alertdialog_edit_combustivel, null);//CRIA O ALERT PARA FAZER O UPDATE
+
+                        final EditText editValor = mView.findViewById(R.id.edit_valor_combustivel);
+                        final TextView editCombustivel = mView.findViewById(R.id.textCombustivel);
+                        final Button btnSalvar = mView.findViewById(R.id.btn_salvar_preco);
 
 
+                        editCombustivel.setText(combustivel.getDescricao());
+                        editValor.setText(String.valueOf(combustivel.getPreco()));
+                        editValor.requestFocus();
 
-                    final EditText editValor = mView.findViewById(R.id.edit_valor_combustivel);
-                    final TextView editCombustivel = mView.findViewById(R.id.textCombustivel);
-                    final Button btnSalvar = mView.findViewById(R.id.btn_salvar_preco);
-
-
-                    editCombustivel.setText(combustivel.getDescricao());
-                    editValor.setText(String.valueOf(combustivel.getPreco()));
-                    editValor.requestFocus();
-
-                    btnSalvar.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Float preco = Float.valueOf(editValor.getText().toString());
-                            if(preco <= 2 || preco >=6){
-                                editValor.setError("Valor incompatível");
-                                editValor.requestFocus();
-                            }else{
-                                CombustivelController controller = new CombustivelController();
-                                try {
-                                    controller.updateCombustivelWeb(combustivel.getIdValor(),preco,PerfilPostosActivity.this);
-                                } catch (Exception e) {
-                                    e.printStackTrace();
+                        btnSalvar.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Float preco = Float.valueOf(editValor.getText().toString());
+                                if(preco <= 2 || preco >=6){
+                                    editValor.setError("Valor incompatível");
+                                    editValor.requestFocus();
+                                }else{
+                                    CombustivelController controller = new CombustivelController();
+                                    try {
+                                        controller.updateCombustivelWeb(combustivel.getIdValor(),preco,PerfilPostosActivity.this);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
                                 }
+
                             }
+                        });
 
-                        }
-                    });
-
-                    builder.setView(mView);
-                    alertDialog = builder.create();
-                    alertDialog.show();
-
+                        builder.setView(mView);
+                        alertDialog = builder.create();
+                        alertDialog.show();
+                    }else{
+                        Utils.longToast(PerfilPostosActivity.this, "FAÇA LOGIN PARA EDITAR PREÇOS");
+                    }
                 }
-
-
             });
-        } else {
+
         }
     }
 
@@ -245,5 +259,11 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
     @Override
     public void onCombustivelUpdateFailure(String message) {
         Utils.longToast(PerfilPostosActivity.this,"Erro: "+message);
+    }
+
+    public boolean getStabilishedSession(){
+        stabilishedSession = getSharedPreferences(STABILISHED_SESSION, MODE_PRIVATE);
+
+        return stabilishedSession.getBoolean("isLogged", false);
     }
 }

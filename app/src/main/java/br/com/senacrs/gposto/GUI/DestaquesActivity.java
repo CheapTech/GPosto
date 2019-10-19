@@ -42,6 +42,9 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
     public static final String LOGIN_SAVE = "loginref";
     SharedPreferences loginPreferences;
 
+    public static final String STABILISHED_SESSION ="stabilishedsession";
+    SharedPreferences stabilishedSession;
+
     private FloatingActionButton btnVerTodos;
     private RadioButton rbtn_SearchPosto,rbtn_SearchBairro;
     private LinearLayout layout_searchPosto;
@@ -170,13 +173,22 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
             }
 
             case R.id.menu_cadastrar_posto: {
-                Intent intent = new Intent(this, CadastroPostosActivity.class);
-                startActivity(intent);
+                if(getStabilishedSession()){
+                    Intent intent = new Intent(this, CadastroPostosActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    Utils.longToast(this, "FAÇA LOGIN PARA ACESSAR ESSA FUNCIONALIDADE");
+                }
                 break;
             }
             case R.id.menu_editar_perfil: {
-                Intent intent = new Intent(this, PerfilUsuarioActivity.class);
-                startActivity(intent);
+                if(getStabilishedSession()){
+                    Intent intent = new Intent(this, PerfilUsuarioActivity.class);
+                    startActivity(intent);
+                }else{
+                    Utils.longToast(this, "FAÇA LOGIN PARA ACESSAR ESSA FUNCIONALIDADE");
+                }
                 break;
             }
             case R.id.menu_sair: {
@@ -209,5 +221,10 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
             layout_searchPosto.setVisibility(View.VISIBLE);
             searchPosto.requestFocus();
         }
+    }
+    public boolean getStabilishedSession(){
+        stabilishedSession = getSharedPreferences(STABILISHED_SESSION, MODE_PRIVATE);
+
+        return stabilishedSession.getBoolean("isLogged", false);
     }
 }

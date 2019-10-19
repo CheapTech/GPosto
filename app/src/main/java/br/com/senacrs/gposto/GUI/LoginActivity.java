@@ -37,12 +37,16 @@ import br.com.senacrs.gposto.Utilities.Utils;
 public class LoginActivity extends AppCompatActivity implements UsuarioCallback {
 
     public static final String SHARED_PREFERENCES = "loginref";
+    public static final String STABILISHED_SESSION = "stabilishedsession";
+
     TextInputEditText editEmail,editSenha;
     Button btnLogin;
     CheckBox chkBoxLogin;
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    SharedPreferences stabilishedSession;
+    SharedPreferences.Editor editorSession;
 
     //facebook login
     private LoginButton loginButton;
@@ -55,6 +59,9 @@ public class LoginActivity extends AppCompatActivity implements UsuarioCallback 
 
         sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
         editor=sharedPreferences.edit();
+
+        stabilishedSession = getSharedPreferences(STABILISHED_SESSION, MODE_PRIVATE);
+        editorSession =stabilishedSession.edit();
 
         editEmail = findViewById(R.id.editEmail);
         editSenha = findViewById(R.id.editSenha);
@@ -171,6 +178,8 @@ public class LoginActivity extends AppCompatActivity implements UsuarioCallback 
                 editor.putInt("id", usuario.getId());
                 editor.commit();
             }
+            editorSession.putBoolean("isLogged", true);
+            editorSession.commit();
             Utils.longToast(this, "LOGIN BEM SUCEDIDO!");
             startActivity(new Intent(this, DestaquesActivity.class));
         }else{
