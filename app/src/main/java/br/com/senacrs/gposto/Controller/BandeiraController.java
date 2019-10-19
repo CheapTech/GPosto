@@ -48,35 +48,4 @@ public class BandeiraController {
             }
         });
     }
-
-    /*
-    public void postBandeiraWeb(final Bandeira bandeira, final BandeiraCallback callback) throws Exception{
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-
-        RetrofitService service = retrofit.create(RetrofitService.class);
-
-        final Call<Bandeira> bandeiraCall = service.registerBandeira(bandeira);
-        bandeiraCall.enqueue(new Callback<Bandeira>() {
-            @Override
-            public void onResponse(Call<Bandeira> call, Response<Bandeira> response) {
-                if (response.isSuccessful()){
-                    callback.onBandeiraSuccess(response.body());
-                }else {
-                    callback.onBandeiraFailure("ERROR: " + response.code() + " - " + response.message());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Bandeira> call, Throwable t) {
-                callback.onBandeiraFailure(t.getMessage());
-            }
-        });
-    }*/
 }

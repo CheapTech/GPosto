@@ -48,10 +48,9 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
     public static final String LOGIN_SAVE = "loginref";
     SharedPreferences loginPreferences;
 
-    TextView txtEmail, txtUsuario,txtSenha;
+    TextView txtEmail, txtUsuario;
     ImageView imageEditPerfil,imageViewPerfil;
 
-    String marca,logo;
     Uri mCropImageUri;
 
     NavigationView navigationView;
@@ -68,8 +67,6 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
         imageEditPerfil = findViewById(R.id.imageEditPerfil);
         txtEmail = findViewById(R.id.txtEmail);
         txtUsuario = findViewById(R.id.txtUsuario);
-
-
     }
 
     //Get Image Perfil(Usuario)
@@ -251,13 +248,4 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
             super.onBackPressed();
         }
     }
-
-    /*
-    public void enviarBandeira(View view) {
-
-        Bandeira bandeira = new Bandeira();
-        bandeira.setLogo(Utils.convertBitmapToBase64(((BitmapDrawable) imageViewPerfil.getDrawable()).getBitmap()));
-        bandeira.setMarca(editPosto.getText().toString());
-
-    }*/
 }
