@@ -30,10 +30,13 @@ public interface RetrofitService {
     @POST("InserirUsuario.php")
     Call<Usuario> registerUser(@Body Usuario usuario);
 
+    @POST()
+    Call<Postos> sendRatingPosto(@Query(value = "") float aval);
+
     @PUT("AtualizarPreco.php")
     Call<Combustivel> updateValorCombustivel(@Query (value = "idValor")int id, @Query(value = "preco") float preco);
 
-    @POST()
+    @PUT()
     Call<Usuario> updateUser(@Query (value = "idValor")int id,@Body Usuario usuario);
 
     @GET("ListarBandeiras.php")

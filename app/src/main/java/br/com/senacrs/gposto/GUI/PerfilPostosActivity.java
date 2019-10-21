@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,7 @@ import br.com.senacrs.gposto.Controller.PostosController;
 import br.com.senacrs.gposto.Controller.TopPostosController;
 import br.com.senacrs.gposto.GUI.Callback.CombustivelCallback;
 import br.com.senacrs.gposto.GUI.Callback.CombustivelUpdateCallback;
+import br.com.senacrs.gposto.GUI.Callback.PostosCallback;
 import br.com.senacrs.gposto.GUI.Callback.TopPostosCallback;
 import br.com.senacrs.gposto.LibClass.Combustivel;
 import br.com.senacrs.gposto.LibClass.Postos;
@@ -39,7 +41,7 @@ import br.com.senacrs.gposto.Utilities.AdapterLvPrecos;
 import br.com.senacrs.gposto.Utilities.Utils;
 import okhttp3.internal.Util;
 
-public class PerfilPostosActivity extends AppCompatActivity implements TopPostosCallback, CombustivelCallback, CombustivelUpdateCallback, NavigationView.OnNavigationItemSelectedListener {
+public class PerfilPostosActivity extends AppCompatActivity implements TopPostosCallback, PostosCallback, CombustivelCallback, CombustivelUpdateCallback, NavigationView.OnNavigationItemSelectedListener {
 
     public static final String LOGIN_SAVE = "loginref";
     SharedPreferences loginPreferences;
@@ -47,9 +49,10 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
     public static final String STABILISHED_SESSION ="stabilishedsession";
     SharedPreferences stabilishedSession;
 
+    private RatingBar ratingBar;
     private TopPostos posto;
-    public TextView perfilNome, endereco, telefone, bairro;
-    public TextView preco;
+    public TextView perfilNome, endereco, telefone, bairro,avaliacao,preco;
+    public Button btnAvaliacao;
     public ListView lvPrecos;
 
 
@@ -97,12 +100,13 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
         strBuilder.append(", ");
         strBuilder.append(posto.getNumero());
 
-
+        btnAvaliacao = findViewById(R.id.btnRatingPosto);
+        ratingBar = findViewById(R.id.ratingPosto);
         perfilNome = findViewById(R.id.perfil_nome);
         endereco = findViewById(R.id.perfil_endereco);
         telefone = findViewById(R.id.perfil_telefone);
         bairro = findViewById(R.id.perfil_bairro);
-
+        avaliacao = findViewById(R.id.txtAvaliacao);
 
         perfilNome.setText(posto.getNomeFantasia());
         endereco.setText(strBuilder.toString());
@@ -265,5 +269,22 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
         stabilishedSession = getSharedPreferences(STABILISHED_SESSION, MODE_PRIVATE);
 
         return stabilishedSession.getBoolean("isLogged", false);
+    }
+
+    public void sendAvaliacao(View view) {
+        float aval = ratingBar.getRating();
+
+        PostosController controller = new PostosController();
+        controller.sendRatingPosto(aval,this);
+    }
+
+    @Override
+    public void onPostosSuccess(Postos postos) {
+        Utils.longToast(PerfilPostosActivity.this,"Agradecemos sua Participasão");
+    }
+
+    @Override
+    public void onPostosFailure(String message) {
+        Utils.longToast(PerfilPostosActivity.this,"Erro: "+message);
     }
 }

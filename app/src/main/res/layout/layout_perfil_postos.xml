@@ -40,7 +40,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimaryLight"
                 android:orientation="vertical">
 
                 <TextView
@@ -52,15 +51,24 @@
                     android:textSize="25dp" />
 
                 <androidx.appcompat.widget.AppCompatRatingBar
+                    android:id="@+id/ratingPosto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center" />
+
+                <Button
+                    android:id="@+id/btnRatingPosto"
+                    android:onClick="sendAvaliacao"
+                    android:text="Avaliar"
+                    android:layout_marginLeft="7dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="7dp">
+                android:layout_margin="4dp">
 
                 <TextView
                     android:id="@+id/textView13"
@@ -72,7 +80,7 @@
                     android:textSize="25sp" />
 
                 <TextView
-                    android:id="@+id/textView27"
+                    android:id="@+id/txtAvaliacao"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -92,7 +100,7 @@
 
             <TextView
                 android:id="@+id/perfil_nome"
-                android:layout_margin="7dp"
+                android:layout_margin="6dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nome do Posto"
@@ -101,7 +109,7 @@
 
             <TextView
                 android:id="@+id/perfil_endereco"
-                android:layout_margin="7dp"
+                android:layout_margin="6dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Endereço"
@@ -110,7 +118,7 @@
 
             <TextView
                 android:id="@+id/perfil_bairro"
-                android:layout_margin="7dp"
+                android:layout_margin="6dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Bairro"
@@ -119,7 +127,7 @@
 
             <TextView
                 android:id="@+id/perfil_telefone"
-                android:layout_margin="7dp"
+                android:layout_margin="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Telefone"

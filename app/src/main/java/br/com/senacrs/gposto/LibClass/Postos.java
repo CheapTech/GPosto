@@ -10,6 +10,7 @@ public class Postos implements Serializable {
    private  String bairro;
    private String tel;
    private String numero;
+   private String avaliacao;
 
     public int getId() {
         return id;
@@ -65,5 +66,13 @@ public class Postos implements Serializable {
 
     public void setNumero(String numero) {
         this.numero = numero;
+    }
+
+    public String getAvaliacao() {
+        return avaliacao;
+    }
+
+    public void setAvaliacao(String avaliacao) {
+        this.avaliacao = avaliacao;
     }
 }
