@@ -37,12 +37,13 @@ import br.com.senacrs.gposto.GUI.Callback.TopPostosCallback;
 import br.com.senacrs.gposto.LibClass.Combustivel;
 import br.com.senacrs.gposto.LibClass.Postos;
 import br.com.senacrs.gposto.LibClass.TopPostos;
+import br.com.senacrs.gposto.LibClass.Usuario;
 import br.com.senacrs.gposto.R;
 import br.com.senacrs.gposto.Utilities.AdapterLvPrecos;
 import br.com.senacrs.gposto.Utilities.Utils;
 import okhttp3.internal.Util;
 
-public class PerfilPostosActivity extends AppCompatActivity implements TopPostosCallback, AvaliacaoCallback , CombustivelCallback, CombustivelUpdateCallback, NavigationView.OnNavigationItemSelectedListener {
+public class PerfilPostosActivity extends AppCompatActivity implements TopPostosCallback, CombustivelCallback, CombustivelUpdateCallback, NavigationView.OnNavigationItemSelectedListener {
 
     public static final String LOGIN_SAVE = "loginref";
     SharedPreferences loginPreferences;
@@ -272,12 +273,13 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
         return stabilishedSession.getBoolean("isLogged", false);
     }
 
+    /*
     public void sendAvaliacao(View view) {
         float aval = ratingBar.getRating();
 
         PostosController controller = new PostosController();
         try {
-            controller.sendRatingPosto(aval,PerfilPostosActivity.this);
+            controller.sendRatingPosto(id_posto,id_user,aval,PerfilPostosActivity.this);
         } catch (Exception e) {
             Utils.longToast(this,e.getMessage());
         }
@@ -287,5 +289,5 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
     public void onAvaliacaoSucces(String avaliacao) { Utils.longToast(PerfilPostosActivity.this,"Agradecemos sua FeedBack"); }
 
     @Override
-    public void onAvaliacaoFailure(String message) { Utils.longToast(PerfilPostosActivity.this,"Erro: " + message); }
+    public void onAvaliacaoFailure(String message) { Utils.longToast(PerfilPostosActivity.this,"Erro: " + message); }*/
 }

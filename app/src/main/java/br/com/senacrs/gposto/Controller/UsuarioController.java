@@ -30,7 +30,7 @@ public class UsuarioController {
 
         RetrofitService services = retrofit.create(RetrofitService.class);
 
-       /* final Call<Usuario> user = services.getUser(id);
+        final Call<Usuario> user = services.getUser(id);
         user.enqueue(new Callback<Usuario>() {
             @Override
             public void onResponse(Call<Usuario> call, Response<Usuario> response) {
@@ -44,7 +44,7 @@ public class UsuarioController {
             public void onFailure(Call<Usuario> call, Throwable t) {
                 callback.onUsuarioFailure(t.getMessage());
             }
-        });*/
+        });
     }
 
     public void postUserWeb(final Usuario usuario, final UsuarioCallback callback) throws Exception{

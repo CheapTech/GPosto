@@ -202,5 +202,4 @@ public class LoginActivity extends AppCompatActivity implements UsuarioCallback 
             return false;
         }
     }
-
 }

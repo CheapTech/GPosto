@@ -31,7 +31,7 @@ public interface RetrofitService {
     Call<Usuario> registerUser(@Body Usuario usuario);
 
     @POST()
-    Call<Postos> sendRatingPosto(@Query(value = "") float aval);
+    Call<Postos> sendRatingPosto(@Query(value = "posto_id") int id_posto,@Query(value = "usuario_id") int id_usuario, @Query(value = "pontucao") float aval);
 
     @PUT("AtualizarPreco.php")
     Call<Combustivel> updateValorCombustivel(@Query (value = "idValor")int id, @Query(value = "preco") float preco);
@@ -40,10 +40,11 @@ public interface RetrofitService {
     Call<Usuario> updateUser(@Query (value = "idValor")int id,@Body Usuario usuario);
 
     @GET("ListarBandeiras.php")
-
     Call<List<Bandeira>> getBandeira();
 
     @POST("InserirPosto.php")
     Call<Postos> cadastrarPostos(@Body Postos postos);
 
+    @GET("")
+    Call<Usuario> getUser(@Query(value = "usuario_id") int id);
 }

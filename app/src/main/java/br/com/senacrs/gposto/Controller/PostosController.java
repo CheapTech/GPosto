@@ -75,7 +75,7 @@ public class PostosController {
         });
     }
 
-    public void sendRatingPosto(float avaliacao, final AvaliacaoCallback avaliacaoCallback) throws Exception{
+    public void sendRatingPosto(int id_posto,int id_usuario ,float avaliacao, final AvaliacaoCallback avaliacaoCallback) throws Exception{
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
@@ -87,7 +87,7 @@ public class PostosController {
 
         RetrofitService service = retrofit.create(RetrofitService.class);
 
-        final Call<Postos> posto = service.sendRatingPosto(avaliacao);
+        final Call<Postos> posto = service.sendRatingPosto(id_posto, id_usuario, avaliacao);
         posto.enqueue(new Callback<Postos>() {
             @Override
             public void onResponse(Call<Postos> call, Response<Postos> response) {
