@@ -189,9 +189,7 @@ public class LoginActivity extends AppCompatActivity implements UsuarioCallback 
     }
 
     @Override
-    public void onUsuarioFailure(String message) {
-        Utils.longToast(this, "LOGIN FALHOU! ERROR: "+ message);
-    }
+    public void onUsuarioFailure(String message) { Utils.longToast(this, "LOGIN FALHOU! ERROR: "+ message); }
 
     private boolean getSession() {
         SharedPreferences prefs = getSharedPreferences(SHARED_PREFERENCES,MODE_PRIVATE);
