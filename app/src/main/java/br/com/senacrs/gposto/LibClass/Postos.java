@@ -6,8 +6,8 @@ public class Postos implements Serializable {
    private  int id;
    private int id_bandeira;
    private String nomeFantasia;
-   private  String logradouro;
-   private  String bairro;
+   private String logradouro;
+   private String bairro;
    private String tel;
    private String numero;
    private String avaliacao;
