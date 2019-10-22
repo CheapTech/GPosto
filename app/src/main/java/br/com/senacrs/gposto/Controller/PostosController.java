@@ -3,6 +3,7 @@ package br.com.senacrs.gposto.Controller;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import br.com.senacrs.gposto.GUI.Callback.AvaliacaoCallback;
 import br.com.senacrs.gposto.GUI.Callback.PostosCallback;
 import br.com.senacrs.gposto.LibClass.Postos;
 import br.com.senacrs.gposto.WebApis.RetrofitService;
@@ -74,7 +75,7 @@ public class PostosController {
         });
     }
 
-    public void sendRatingPosto(float avaliacao,final PostosCallback postosCallback){
+    public void sendRatingPosto(float avaliacao, final AvaliacaoCallback avaliacaoCallback) throws Exception{
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
@@ -91,15 +92,15 @@ public class PostosController {
             @Override
             public void onResponse(Call<Postos> call, Response<Postos> response) {
                 if (response.isSuccessful()){
-                    postosCallback.onPostosSuccess(response.body());
+                    avaliacaoCallback.onAvaliacaoSucces(response.message());
                 }else {
-                    postosCallback.onPostosFailure("ERROR: "+response.code()+" - "+ response.message());
+                    avaliacaoCallback.onAvaliacaoFailure("ERROR: "+response.code()+" - "+ response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<Postos> call, Throwable t) {
-                postosCallback.onPostosFailure(t.getMessage());
+                avaliacaoCallback.onAvaliacaoFailure(t.getMessage());
             }
         });
     }

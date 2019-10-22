@@ -29,6 +29,7 @@ import java.util.List;
 import br.com.senacrs.gposto.Controller.CombustivelController;
 import br.com.senacrs.gposto.Controller.PostosController;
 import br.com.senacrs.gposto.Controller.TopPostosController;
+import br.com.senacrs.gposto.GUI.Callback.AvaliacaoCallback;
 import br.com.senacrs.gposto.GUI.Callback.CombustivelCallback;
 import br.com.senacrs.gposto.GUI.Callback.CombustivelUpdateCallback;
 import br.com.senacrs.gposto.GUI.Callback.PostosCallback;
@@ -41,7 +42,7 @@ import br.com.senacrs.gposto.Utilities.AdapterLvPrecos;
 import br.com.senacrs.gposto.Utilities.Utils;
 import okhttp3.internal.Util;
 
-public class PerfilPostosActivity extends AppCompatActivity implements TopPostosCallback, PostosCallback, CombustivelCallback, CombustivelUpdateCallback, NavigationView.OnNavigationItemSelectedListener {
+public class PerfilPostosActivity extends AppCompatActivity implements TopPostosCallback, AvaliacaoCallback , CombustivelCallback, CombustivelUpdateCallback, NavigationView.OnNavigationItemSelectedListener {
 
     public static final String LOGIN_SAVE = "loginref";
     SharedPreferences loginPreferences;
@@ -275,16 +276,16 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
         float aval = ratingBar.getRating();
 
         PostosController controller = new PostosController();
-        controller.sendRatingPosto(aval,this);
+        try {
+            controller.sendRatingPosto(aval,PerfilPostosActivity.this);
+        } catch (Exception e) {
+            Utils.longToast(this,e.getMessage());
+        }
     }
 
     @Override
-    public void onPostosSuccess(Postos postos) {
-        Utils.longToast(PerfilPostosActivity.this,"Agradecemos sua Participasão");
-    }
+    public void onAvaliacaoSucces(String avaliacao) { Utils.longToast(PerfilPostosActivity.this,"Agradecemos sua FeedBack"); }
 
     @Override
-    public void onPostosFailure(String message) {
-        Utils.longToast(PerfilPostosActivity.this,"Erro: "+message);
-    }
+    public void onAvaliacaoFailure(String message) { Utils.longToast(PerfilPostosActivity.this,"Erro: " + message); }
 }
