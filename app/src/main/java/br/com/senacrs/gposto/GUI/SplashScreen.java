@@ -29,7 +29,7 @@ public class SplashScreen extends AppCompatActivity {
 
         if(getSavedLogin() == true){
             stabilishSession();
-            Intent intent = new Intent(SplashScreen.this,MainActivity.class);
+            Intent intent = new Intent(SplashScreen.this,DestaquesActivity.class);
             startActivity(intent);
 
         }else{
