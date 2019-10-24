@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.Toast;
 
 import com.bumptech.glide.request.RequestOptions;
 import com.facebook.AccessToken;
@@ -36,17 +35,12 @@ import br.com.senacrs.gposto.Utilities.Utils;
 
 public class LoginActivity extends AppCompatActivity implements UsuarioCallback {
 
-    public static final String SHARED_PREFERENCES = "loginref";
-    public static final String STABILISHED_SESSION = "stabilishedsession";
+    public static final String USER_REF = "user_ref";
+    public static final String REMEMBER_LOGIN_REF = "remember_ref";
 
     TextInputEditText editEmail,editSenha;
     Button btnLogin;
     CheckBox chkBoxLogin;
-
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
-    SharedPreferences stabilishedSession;
-    SharedPreferences.Editor editorSession;
 
     //facebook login
     private LoginButton loginButton;
@@ -57,11 +51,7 @@ public class LoginActivity extends AppCompatActivity implements UsuarioCallback 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
-        editor=sharedPreferences.edit();
 
-        stabilishedSession = getSharedPreferences(STABILISHED_SESSION, MODE_PRIVATE);
-        editorSession =stabilishedSession.edit();
 
         editEmail = findViewById(R.id.editEmail);
         editSenha = findViewById(R.id.editSenha);
@@ -90,7 +80,6 @@ public class LoginActivity extends AppCompatActivity implements UsuarioCallback 
 
             }
         });
-
     }
 
     @Override
@@ -123,7 +112,6 @@ public class LoginActivity extends AppCompatActivity implements UsuarioCallback 
                     RequestOptions requestOptions = new RequestOptions();
                     requestOptions.dontAnimate();
 
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -134,7 +122,6 @@ public class LoginActivity extends AppCompatActivity implements UsuarioCallback 
         parameters.putString("fields","first_name,last_name,email,id");
         graphRequest.setParameters(parameters);
         graphRequest.executeAsync();
-
     }
 
     public void login(View view) {
@@ -168,38 +155,64 @@ public class LoginActivity extends AppCompatActivity implements UsuarioCallback 
         return isEmpty;
     }
 
+    private void saveUserReference(Usuario usuario) {
+
+        SharedPreferences.Editor editorSaveUser = getSharedPreferences(USER_REF, MODE_PRIVATE).edit();
+
+        editorSaveUser.putInt("id", usuario.getId());
+        editorSaveUser.putString("user", usuario.getUser());
+        editorSaveUser.putString("senha",usuario.getSenha());
+        editorSaveUser.putString("email",usuario.getEmail());
+
+        editorSaveUser.commit();
+    }
+
+    private Usuario getSavedUserReference(){
+        Usuario usuario;
+
+        SharedPreferences editorGetSavedUser = getSharedPreferences(USER_REF, MODE_PRIVATE);
+
+        String user = editorGetSavedUser.getString("user", null);
+        if(!user.equals(null)){
+            usuario = new Usuario();
+            usuario.setId(editorGetSavedUser.getInt("id", 0));
+            usuario.setUser(editorGetSavedUser.getString("user", ""));
+            usuario.setSenha(editorGetSavedUser.getString("senha", ""));
+            usuario.setEmail(editorGetSavedUser.getString("email", ""));
+
+            return usuario;
+        }else{
+            return null;
+        }
+    }
+
+    private void setRememberLoginReference() {
+        SharedPreferences.Editor editorRememberLogin = getSharedPreferences(REMEMBER_LOGIN_REF, MODE_PRIVATE).edit();
+        editorRememberLogin.putBoolean("logged", true);
+        editorRememberLogin.commit();
+    }
+
+    private boolean getRememberLoginReference() {
+        SharedPreferences editorGetRememberLogin = getSharedPreferences(REMEMBER_LOGIN_REF, MODE_PRIVATE);
+        return editorGetRememberLogin.getBoolean("logged", false);
+    }
+
     @Override
     public void onUsuarioSuccess(Usuario usuario) {
-        if(editEmail.getText().toString().equals(usuario.getEmail())){
+        if(usuario != null){
+            saveUserReference(usuario);
             if(chkBoxLogin.isChecked()){
-                editor.putBoolean("savelogin",true);
-                editor.putString("user",usuario.getEmail());
-                editor.putString("senha",usuario.getSenha());
-                editor.putInt("id", usuario.getId());
-                editor.commit();
+                setRememberLoginReference();
             }
-            editorSession.putBoolean("isLogged", true);
-            editorSession.commit();
             Utils.longToast(this, "LOGIN BEM SUCEDIDO!");
             startActivity(new Intent(this, DestaquesActivity.class));
         }else{
             Utils.longToast(this, "USUÁRIO E/OU SENHA INVÁLIDOS");
         }
-
     }
 
     @Override
     public void onUsuarioFailure(String message) {
         Utils.longToast(this, "LOGIN FALHOU!  Error: " + message);
-    }
-
-    private boolean getSession() {
-        SharedPreferences prefs = getSharedPreferences(SHARED_PREFERENCES,MODE_PRIVATE);
-        String email = prefs.getString("user",null);
-        if (email != null){
-            return true;
-        }else {
-            return false;
-        }
     }
 }

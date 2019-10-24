@@ -9,30 +9,25 @@ import android.os.PersistableBundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import br.com.senacrs.gposto.LibClass.Usuario;
 import br.com.senacrs.gposto.R;
 
 public class SplashScreen extends AppCompatActivity {
 
-    public static final String LOGIN_SAVE = "loginref";
-    public static final String STABILISHED_SESSION ="stabilishedsession";
+    public static final String USER_REF = "user_ref";
+    public static final String REMEMBER_LOGIN_REF = "remember_ref";
 
-    SharedPreferences stabilishedSession;
-    SharedPreferences.Editor editorSession;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
 
-        stabilishedSession = getSharedPreferences(STABILISHED_SESSION, MODE_PRIVATE);
-
-        clearStabilishedSession();
-
-        if(getSavedLogin() == true){
-            stabilishSession();
+        if(getRememberLoginReference()){
             Intent intent = new Intent(SplashScreen.this,DestaquesActivity.class);
             startActivity(intent);
 
         }else{
+            clearUserReference();
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
@@ -45,23 +40,16 @@ public class SplashScreen extends AppCompatActivity {
         }
     }
 
-    private boolean getSavedLogin() {
-        SharedPreferences prefs = getSharedPreferences(LOGIN_SAVE, MODE_PRIVATE);
-        return prefs.getBoolean("savelogin", false);
+    private void clearUserReference(){
+        SharedPreferences.Editor editorSaveUser = getSharedPreferences(USER_REF, MODE_PRIVATE).edit();
+        editorSaveUser.clear();
+        editorSaveUser.commit();
     }
 
-    private void clearStabilishedSession(){
-        editorSession = stabilishedSession.edit();
-        editorSession.clear();
-        editorSession.commit();
+    private boolean getRememberLoginReference() {
+        SharedPreferences editorGetRememberLogin = getSharedPreferences(REMEMBER_LOGIN_REF, MODE_PRIVATE);
+        return editorGetRememberLogin.getBoolean("logged", false);
     }
 
-    private boolean stabilishSession(){
-        editorSession=stabilishedSession.edit();
-        editorSession.putBoolean("isLogged", true);
-        editorSession.commit();
-
-        return stabilishedSession.getBoolean("isLogged", false);
-    }
 }
 

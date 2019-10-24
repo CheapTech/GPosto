@@ -168,10 +168,9 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
         switch (menuItem.getItemId()) {
 
             case R.id.menu_destaques: {
-                Utils.shortToast(this, "?????___??????");
+                    drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             }
-
             case R.id.menu_cadastrar_posto: {
                 if(getStabilishedSession()){
                     Intent intent = new Intent(this, CadastroPostosActivity.class);
