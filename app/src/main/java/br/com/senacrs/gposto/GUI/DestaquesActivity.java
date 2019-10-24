@@ -7,9 +7,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -33,11 +35,14 @@ import br.com.senacrs.gposto.GUI.Callback.CombustivelCallback;
 import br.com.senacrs.gposto.GUI.Callback.TopPostosCallback;
 import br.com.senacrs.gposto.LibClass.Combustivel;
 import br.com.senacrs.gposto.LibClass.TopPostos;
+import br.com.senacrs.gposto.LibClass.Usuario;
 import br.com.senacrs.gposto.R;
 import br.com.senacrs.gposto.Utilities.AdapterTopPostos;
 import br.com.senacrs.gposto.Utilities.Utils;
 
 public class DestaquesActivity extends AppCompatActivity implements CombustivelCallback, TopPostosCallback, NavigationView.OnNavigationItemSelectedListener {
+
+    public static final String USER_REF = "user_ref";
 
     public static final String LOGIN_SAVE = "loginref";
     SharedPreferences loginPreferences;
@@ -47,6 +52,8 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
 
     private FloatingActionButton btnVerTodos;
     private RadioButton rbtn_SearchPosto,rbtn_SearchBairro;
+    private ImageView nav_photo_user;
+    private TextView nav_user,nav_email;
     private LinearLayout layout_searchPosto;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
@@ -70,6 +77,25 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
         rbtn_SearchPosto = findViewById(R.id.search_by_Posto);
         rbtn_SearchBairro = findViewById(R.id.search_by_Bairro);
         rvTopPostos = findViewById(R.id.rvPrecosCombustivel);
+    }
+
+    private Usuario getSavedUserReference(){
+        Usuario usuario;
+
+        SharedPreferences editorGetSavedUser = getSharedPreferences(USER_REF, MODE_PRIVATE);
+
+        String user = editorGetSavedUser.getString("user", null);
+        if(!user.equals(null)){
+            usuario = new Usuario();
+            usuario.setId(editorGetSavedUser.getInt("id", 0));
+            usuario.setUser(editorGetSavedUser.getString("user", ""));
+            usuario.setSenha(editorGetSavedUser.getString("senha", ""));
+            usuario.setEmail(editorGetSavedUser.getString("email", ""));
+
+            return usuario;
+        }else{
+            return null;
+        }
     }
 
     private void fieldSpinner(){
@@ -152,6 +178,19 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
         drawerLayout = findViewById(R.id.drawerLayout);
         toolbar = findViewById(R.id.toolbar);
 
+        nav_photo_user = findViewById(R.id.nav_header_photo);
+        nav_user = findViewById(R.id.nav_header_user);
+        nav_email = findViewById(R.id.nav_header_email);
+
+        Usuario usuario = getSavedUserReference();
+        if (usuario != null){
+            nav_user.setText(usuario.getUser());
+            nav_email.setText(usuario.getEmail());
+        }else {
+            nav_user.setText("Visitante");
+            nav_email.setVisibility(View.GONE);
+            nav_photo_user.setVisibility(View.GONE);
+        }
         navigationView.setNavigationItemSelectedListener(this);
 
         toolbar.setTitle("Destaques");

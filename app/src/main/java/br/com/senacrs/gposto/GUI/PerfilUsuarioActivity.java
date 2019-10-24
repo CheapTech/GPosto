@@ -223,7 +223,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
                 break;
             }
             case R.id.menu_editar_perfil: {
-                Utils.shortToast(this, "?????___??????");
+                drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             }
             case R.id.menu_sair: {

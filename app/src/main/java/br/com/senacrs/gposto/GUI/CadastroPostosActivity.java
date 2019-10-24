@@ -141,7 +141,7 @@ public class CadastroPostosActivity extends AppCompatActivity implements Navigat
             }
 
             case R.id.menu_cadastrar_posto: {
-                Utils.shortToast(this, "?????___??????");
+                drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             }
             case R.id.menu_editar_perfil: {
