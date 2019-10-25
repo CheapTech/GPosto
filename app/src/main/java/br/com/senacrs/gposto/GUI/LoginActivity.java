@@ -173,7 +173,7 @@ public class LoginActivity extends AppCompatActivity implements UsuarioCallback 
         SharedPreferences editorGetSavedUser = getSharedPreferences(USER_REF, MODE_PRIVATE);
 
         String user = editorGetSavedUser.getString("user", null);
-        if(!user.equals(null)){
+        if(user != null){
             usuario = new Usuario();
             usuario.setId(editorGetSavedUser.getInt("id", 0));
             usuario.setUser(editorGetSavedUser.getString("user", ""));
