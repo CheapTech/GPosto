@@ -207,8 +207,7 @@ public class CadastroPostosActivity extends AppCompatActivity implements Navigat
                 break;
             }
             case R.id.menu_sair: {
-                loginPreferences = getSharedPreferences(LOGIN_SAVE, MODE_PRIVATE);
-                loginPreferences.edit().clear().commit();
+                clearUserReference();
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 break;
@@ -269,5 +268,11 @@ public class CadastroPostosActivity extends AppCompatActivity implements Navigat
     @Override
     public void onBandeiraFailure(String message) {
         Utils.longToast(this,message);
+    }
+
+    private void clearUserReference(){
+        SharedPreferences.Editor editorSaveUser = getSharedPreferences(USER_REF, MODE_PRIVATE).edit();
+        editorSaveUser.clear();
+        editorSaveUser.commit();
     }
 }

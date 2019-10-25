@@ -286,8 +286,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
                 break;
             }
             case R.id.menu_sair: {
-                loginPreferences = getSharedPreferences(LOGIN_SAVE, MODE_PRIVATE);
-                loginPreferences.edit().clear().commit();
+                clearUserReference();
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 break;
@@ -306,5 +305,11 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
         } else {
             super.onBackPressed();
         }
+    }
+
+    private void clearUserReference(){
+        SharedPreferences.Editor editorSaveUser = getSharedPreferences(USER_REF, MODE_PRIVATE).edit();
+        editorSaveUser.clear();
+        editorSaveUser.commit();
     }
 }

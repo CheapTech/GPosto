@@ -200,8 +200,7 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
                 }
             }
             case R.id.menu_sair: {
-                loginPreferences = getSharedPreferences(LOGIN_SAVE, MODE_PRIVATE);
-                loginPreferences.edit().clear().commit();
+                clearUserReference();
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 break;
@@ -299,6 +298,12 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
     @Override
     public void onCombustivelUpdateFailure(String message) {
         Utils.longToast(PerfilPostosActivity.this,"Erro: "+message);
+    }
+
+    private void clearUserReference(){
+        SharedPreferences.Editor editorSaveUser = getSharedPreferences(USER_REF, MODE_PRIVATE).edit();
+        editorSaveUser.clear();
+        editorSaveUser.commit();
     }
     /*
     public void sendAvaliacao(View view) {

@@ -230,8 +230,7 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
                 break;
             }
             case R.id.menu_sair: {
-                loginPreferences = getSharedPreferences(LOGIN_SAVE, MODE_PRIVATE);
-                loginPreferences.edit().clear().commit();
+                clearUserReference();
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 break;
@@ -259,5 +258,11 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
             layout_searchPosto.setVisibility(View.VISIBLE);
             searchPosto.requestFocus();
         }
+    }
+
+    private void clearUserReference(){
+        SharedPreferences.Editor editorSaveUser = getSharedPreferences(USER_REF, MODE_PRIVATE).edit();
+        editorSaveUser.clear();
+        editorSaveUser.commit();
     }
 }
