@@ -48,9 +48,6 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
 
     public static final String USER_REF = "user_ref";
 
-    public static final String LOGIN_SAVE = "loginref";
-    SharedPreferences loginPreferences;
-
     private RatingBar ratingBar;
     private ImageView nav_photo_user;
     private TopPostos posto;

@@ -44,9 +44,6 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
 
     public static final String USER_REF = "user_ref";
 
-    public static final String LOGIN_SAVE = "loginref";
-    SharedPreferences loginPreferences;
-
     private FloatingActionButton btnVerTodos;
     private RadioButton rbtn_SearchPosto,rbtn_SearchBairro;
     private ImageView nav_photo_user;

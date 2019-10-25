@@ -39,9 +39,6 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
 
     public static final String USER_REF = "user_ref";
 
-    public static final String LOGIN_SAVE = "loginref";
-    SharedPreferences loginPreferences;
-
     TextView txtEmail, txtUsuario,nav_user,nav_email;
     ImageView imageEditPerfil,imageViewPerfil,nav_photo_user;
 

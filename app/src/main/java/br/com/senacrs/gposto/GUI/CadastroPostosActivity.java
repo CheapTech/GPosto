@@ -39,9 +39,6 @@ public class CadastroPostosActivity extends AppCompatActivity implements Navigat
 
     public static final String USER_REF = "user_ref";
 
-    public static final String LOGIN_SAVE = "loginref";
-    SharedPreferences loginPreferences;
-
     TextInputEditText editNFantasia,editLogradouro,editNumero,editBairro,editTel;
     Toolbar toolbar;
     Spinner spBandeira;
