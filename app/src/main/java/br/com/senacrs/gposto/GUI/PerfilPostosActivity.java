@@ -159,9 +159,10 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
             nav_user.setText(usuario.getUser());
             nav_email.setText(usuario.getEmail());
         }else {
-            nav_user.setText("Visitante");
+            String userNull = "Modo Visitante";
+            nav_user.setText(userNull);
             nav_email.setVisibility(View.GONE);
-            nav_photo_user.setVisibility(View.GONE);
+            nav_photo_user.setVisibility(View.INVISIBLE);
         }
         navigationView.setNavigationItemSelectedListener(this);
 

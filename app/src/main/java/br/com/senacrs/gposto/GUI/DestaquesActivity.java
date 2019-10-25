@@ -189,7 +189,7 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
             String userNull = "Modo Visitante";
             nav_user.setText(userNull);
             nav_email.setVisibility(View.GONE);
-            nav_photo_user.setVisibility(View.GONE);
+            nav_photo_user.setVisibility(View.INVISIBLE);
         }
         navigationView.setNavigationItemSelectedListener(this);
 

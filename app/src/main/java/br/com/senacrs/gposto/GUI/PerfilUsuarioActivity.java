@@ -65,6 +65,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_usuario);
         navigationDrawer();
+
         imageViewPerfil = findViewById(R.id.imagePerfil);
         imageEditPerfil = findViewById(R.id.imageEditPerfil);
         txtEmail = findViewById(R.id.txtEmail);
@@ -212,12 +213,15 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
 
         Usuario usuario = getSavedUserReference();
         if (usuario != null){
+            txtUsuario.setText(usuario.getUser());
+            txtEmail.setText(usuario.getEmail());
             nav_user.setText(usuario.getUser());
             nav_email.setText(usuario.getEmail());
         }else {
-            nav_user.setText("Visitante");
+            String userNull = "Modo Visitante";
+            nav_user.setText(userNull);
             nav_email.setVisibility(View.GONE);
-            nav_photo_user.setVisibility(View.GONE);
+            nav_photo_user.setVisibility(View.INVISIBLE);
         }
         navigationView.setNavigationItemSelectedListener(this);
 
