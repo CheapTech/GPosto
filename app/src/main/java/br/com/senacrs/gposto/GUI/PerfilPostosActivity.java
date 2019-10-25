@@ -51,9 +51,6 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
     public static final String LOGIN_SAVE = "loginref";
     SharedPreferences loginPreferences;
 
-    public static final String STABILISHED_SESSION ="stabilishedsession";
-    SharedPreferences stabilishedSession;
-
     private RatingBar ratingBar;
     private ImageView nav_photo_user;
     private TopPostos posto;
@@ -234,7 +231,6 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
             final AdapterLvPrecos adapter = new AdapterLvPrecos(PerfilPostosActivity.this, R.layout.layout_item_precos, list);//MONTA A LISTA DE PREÇOS
             lvPrecos.setAdapter(adapter);
 
-
             lvPrecos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {//PERMITE O CLIQUE NO LAYOUTITEM DA LISTA
@@ -284,7 +280,6 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
                     }
                 }
             });
-
         }
     }
 

@@ -13,13 +13,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.Layout;
-import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -34,11 +30,7 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.IOException;
 
-import br.com.senacrs.gposto.Controller.UsuarioController;
-import br.com.senacrs.gposto.Controller.UsuarioLoginController;
 import br.com.senacrs.gposto.GUI.Callback.UsuarioCallback;
-import br.com.senacrs.gposto.LibClass.Bandeira;
-import br.com.senacrs.gposto.LibClass.Imagem;
 import br.com.senacrs.gposto.LibClass.Usuario;
 import br.com.senacrs.gposto.R;
 import br.com.senacrs.gposto.Utilities.Utils;
@@ -64,12 +56,19 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_usuario);
-        navigationDrawer();
+        Usuario usuario = getSavedUserReference();
+
+        navigationDrawer(usuario);
 
         imageViewPerfil = findViewById(R.id.imagePerfil);
         imageEditPerfil = findViewById(R.id.imageEditPerfil);
         txtEmail = findViewById(R.id.txtEmail);
         txtUsuario = findViewById(R.id.txtUsuario);
+
+        if (usuario != null){
+            txtUsuario.setText(usuario.getUser());
+            txtEmail.setText(usuario.getEmail());
+        }
     }
 
     private Usuario getSavedUserReference(){
@@ -153,39 +152,73 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
         AlertDialog.Builder builder = new AlertDialog.Builder(PerfilUsuarioActivity.this);
         View mView = getLayoutInflater().inflate(R.layout.alertdialog_edit_perfil,null);
 
+        Usuario getUser = getSavedUserReference();
+
         final EditText editEmail = mView.findViewById(R.id.editEmail);
         final EditText editUsuario = mView.findViewById(R.id.editUsuario);
         final EditText editSenha = mView.findViewById(R.id.editSenha);
         final EditText editConfirmarSenha = mView.findViewById(R.id.editConfirmarSenha);
+        final Button btnUpdateUser = mView.findViewById(R.id.btnUpdateUser);
+        final Button btnCloseAlertDialog = mView.findViewById(R.id.btnCloseAlertDialog);
+
+        if (getUser != null){
+            editEmail.setText(getUser.getEmail());
+            editUsuario.setText(getUser.getUser());
+        }
 
         builder.setMessage("Deseja Modificar seu Perfil?");
-        builder.setPositiveButton("Cancelar", new DialogInterface.OnClickListener() {
+
+        btnUpdateUser.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                alertDialog.cancel();
+            public void onClick(View v) {
+
+                if (editEmail.getText().toString().trim().isEmpty()){
+                    editEmail.setError("Campo Obrigatorio");
+                    editEmail.requestFocus();
+                } else {
+                    if (editUsuario.getText().toString().trim().isEmpty()){
+                        editUsuario.setError("Campo Obrigatorio");
+                        editUsuario.requestFocus();
+                    } else {
+                        if (editSenha.getText().toString().trim().isEmpty()){
+                            editSenha.requestFocus();
+                            Utils.shortToast( PerfilUsuarioActivity.this, "Error: Campo: SENHA Obrigatorio");
+                            //editSenha.setError("Campo Obrigatorio");
+                        } else {
+                            if (editConfirmarSenha.getText().toString().trim().isEmpty()){
+                                editConfirmarSenha.requestFocus();
+                                Utils.shortToast( PerfilUsuarioActivity.this, "Error: Campo: CONFIRMAR SENHA Obrigatorio");
+                                //editConfirmarSenha.setError("Campo Obrigatorio");
+                            } else {
+                                if (editSenha.getText().toString().trim().equals(editConfirmarSenha.getText().toString().trim())){
+                                    Usuario usuario = new Usuario();
+                                    usuario.setUser(editUsuario.getText().toString());
+                                    usuario.setSenha(editSenha.getText().toString());
+                                    usuario.setEmail(editEmail.getText().toString());
+
+                                    // UsuarioController usuarioController = new UsuarioController();
+                                    try {
+                                        //usuarioController.updateUserWeb(body,PerfilUsuarioActivity.this);
+                                    } catch (Exception e) {
+                                        //Utils.longToast(PerfilUsuarioActivity.this, e.getMessage());
+                                    }
+                                } else {
+                                    editSenha.getText().clear();
+                                    editConfirmarSenha.getText().clear();
+                                    editSenha.requestFocus();
+                                    Utils.shortToast( PerfilUsuarioActivity.this, "Senhas Diferentes");
+                                }
+                            }
+                        }
+                    }
+                }
             }
         });
 
-        builder.setNegativeButton("Salvar", new DialogInterface.OnClickListener() {
+        btnCloseAlertDialog.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (editSenha.getText().toString().trim().equals(editConfirmarSenha.getText().toString().trim())){
-                    Usuario usuario = new Usuario();
-                    usuario.setUser(editUsuario.getText().toString());
-                    usuario.setSenha(editSenha.getText().toString());
-                    usuario.setEmail(editEmail.getText().toString());
-
-                   // UsuarioController usuarioController = new UsuarioController();
-                    try {
-                        //usuarioController.updateUserWeb(body,PerfilUsuarioActivity.this);
-                    } catch (Exception e) {
-                        //Utils.longToast(PerfilUsuarioActivity.this, e.getMessage());
-                    }
-                }else {
-                    Utils.shortToast(PerfilUsuarioActivity.this,"Error => Senhas Diferentes");
-                    editarPerfil(v);
-                    editEmail.requestFocus();
-                }
+            public void onClick(View v) {
+                alertDialog.cancel();
             }
         });
         builder.setView(mView);
@@ -200,7 +233,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
     public void onUsuarioFailure(String message) { Utils.longToast(PerfilUsuarioActivity.this,message); }
 
     //NavigationDrawer (Menu)
-    private void navigationDrawer() {
+    private void navigationDrawer(Usuario usuario) {
         navigationView = findViewById(R.id.navigation_view);
         drawerLayout = findViewById(R.id.drawerLayout);
         toolbar = findViewById(R.id.toolbar);
@@ -211,10 +244,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
         nav_user= navView.findViewById(R.id.nav_header_user);
         nav_email = navView.findViewById(R.id.nav_header_email);
 
-        Usuario usuario = getSavedUserReference();
         if (usuario != null){
-            txtUsuario.setText(usuario.getUser());
-            txtEmail.setText(usuario.getEmail());
             nav_user.setText(usuario.getUser());
             nav_email.setText(usuario.getEmail());
         }else {
