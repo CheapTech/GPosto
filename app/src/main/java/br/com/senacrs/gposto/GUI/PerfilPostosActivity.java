@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -45,6 +46,8 @@ import okhttp3.internal.Util;
 
 public class PerfilPostosActivity extends AppCompatActivity implements TopPostosCallback, CombustivelCallback, CombustivelUpdateCallback, NavigationView.OnNavigationItemSelectedListener {
 
+    public static final String USER_REF = "user_ref";
+
     public static final String LOGIN_SAVE = "loginref";
     SharedPreferences loginPreferences;
 
@@ -52,8 +55,9 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
     SharedPreferences stabilishedSession;
 
     private RatingBar ratingBar;
+    private ImageView nav_photo_user;
     private TopPostos posto;
-    public TextView perfilNome, endereco, telefone, bairro,avaliacao,preco;
+    public TextView nav_user,nav_email,perfilNome, endereco, telefone, bairro,avaliacao,preco;
     public Button btnAvaliacao;
     public ListView lvPrecos;
 
@@ -95,6 +99,25 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
 
     }
 
+    private Usuario getSavedUserReference(){
+        Usuario usuario;
+
+        SharedPreferences editorGetSavedUser = getSharedPreferences(USER_REF, MODE_PRIVATE);
+
+        String user = editorGetSavedUser.getString("user", null);
+        if(user != null){
+            usuario = new Usuario();
+            usuario.setId(editorGetSavedUser.getInt("id", 0));
+            usuario.setUser(editorGetSavedUser.getString("user", ""));
+            usuario.setSenha(editorGetSavedUser.getString("senha", ""));
+            usuario.setEmail(editorGetSavedUser.getString("email", ""));
+
+            return usuario;
+        }else{
+            return null;
+        }
+    }
+
     @Override
     public void onTopPostosSuccess(List<TopPostos> list) {
         StringBuilder strBuilder = new StringBuilder();
@@ -125,6 +148,21 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
         drawerLayout = findViewById(R.id.drawerLayout);
         toolbar = findViewById(R.id.toolbar);
 
+        View navView = navigationView.getHeaderView(0);
+
+        nav_photo_user = navView.findViewById(R.id.nav_header_photo);
+        nav_user= navView.findViewById(R.id.nav_header_user);
+        nav_email = navView.findViewById(R.id.nav_header_email);
+
+        Usuario usuario = getSavedUserReference();
+        if (usuario != null){
+            nav_user.setText(usuario.getUser());
+            nav_email.setText(usuario.getEmail());
+        }else {
+            nav_user.setText("Visitante");
+            nav_email.setVisibility(View.GONE);
+            nav_photo_user.setVisibility(View.GONE);
+        }
         navigationView.setNavigationItemSelectedListener(this);
 
         toolbar.setTitle("Perfil Usuario");
@@ -147,7 +185,7 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
             }
 
             case R.id.menu_cadastrar_posto: {
-                if(getStabilishedSession()){
+                if(getSavedUserReference() != null){
                     Intent intent = new Intent(this, CadastroPostosActivity.class);
                     startActivity(intent);
                 }
@@ -156,7 +194,7 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
                 }
             }
             case R.id.menu_editar_perfil: {
-                if(getStabilishedSession()){
+                if(getSavedUserReference() != null){
                     Intent intent = new Intent(this, PerfilUsuarioActivity.class);
                     startActivity(intent);
                 }else{
@@ -200,7 +238,7 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
                 @Override
                 public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {//PERMITE O CLIQUE NO LAYOUTITEM DA LISTA
 
-                    if(getStabilishedSession()){
+                    if(getSavedUserReference() != null){
                         final Combustivel combustivel = (Combustivel) parent.getItemAtPosition(position);
 
                         final AlertDialog alertDialog;
@@ -266,13 +304,6 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
     public void onCombustivelUpdateFailure(String message) {
         Utils.longToast(PerfilPostosActivity.this,"Erro: "+message);
     }
-
-    public boolean getStabilishedSession(){
-        stabilishedSession = getSharedPreferences(STABILISHED_SESSION, MODE_PRIVATE);
-
-        return stabilishedSession.getBoolean("isLogged", false);
-    }
-
     /*
     public void sendAvaliacao(View view) {
         float aval = ratingBar.getRating();

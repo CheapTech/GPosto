@@ -45,11 +45,13 @@ import br.com.senacrs.gposto.Utilities.Utils;
 
 public class PerfilUsuarioActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, UsuarioCallback{
 
+    public static final String USER_REF = "user_ref";
+
     public static final String LOGIN_SAVE = "loginref";
     SharedPreferences loginPreferences;
 
-    TextView txtEmail, txtUsuario;
-    ImageView imageEditPerfil,imageViewPerfil;
+    TextView txtEmail, txtUsuario,nav_user,nav_email;
+    ImageView imageEditPerfil,imageViewPerfil,nav_photo_user;
 
     Uri mCropImageUri;
 
@@ -67,6 +69,25 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
         imageEditPerfil = findViewById(R.id.imageEditPerfil);
         txtEmail = findViewById(R.id.txtEmail);
         txtUsuario = findViewById(R.id.txtUsuario);
+    }
+
+    private Usuario getSavedUserReference(){
+        Usuario usuario;
+
+        SharedPreferences editorGetSavedUser = getSharedPreferences(USER_REF, MODE_PRIVATE);
+
+        String user = editorGetSavedUser.getString("user", null);
+        if(user != null){
+            usuario = new Usuario();
+            usuario.setId(editorGetSavedUser.getInt("id", 0));
+            usuario.setUser(editorGetSavedUser.getString("user", ""));
+            usuario.setSenha(editorGetSavedUser.getString("senha", ""));
+            usuario.setEmail(editorGetSavedUser.getString("email", ""));
+
+            return usuario;
+        }else{
+            return null;
+        }
     }
 
     //Get Image Perfil(Usuario)
@@ -185,16 +206,20 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
 
         View navView = navigationView.getHeaderView(0);
 
+        nav_photo_user = navView.findViewById(R.id.nav_header_photo);
+        nav_user= navView.findViewById(R.id.nav_header_user);
+        nav_email = navView.findViewById(R.id.nav_header_email);
+
+        Usuario usuario = getSavedUserReference();
+        if (usuario != null){
+            nav_user.setText(usuario.getUser());
+            nav_email.setText(usuario.getEmail());
+        }else {
+            nav_user.setText("Visitante");
+            nav_email.setVisibility(View.GONE);
+            nav_photo_user.setVisibility(View.GONE);
+        }
         navigationView.setNavigationItemSelectedListener(this);
-        TextView nav_user = navView.findViewById(R.id.nav_header_user);
-        TextView nav_email = navView.findViewById(R.id.nav_header_email);
-        ImageView nav_photo = navView.findViewById(R.id.nav_header_photo);
-
-        String user = "teste";
-        String email = "Teste@gmail.com";
-
-        nav_email.setText(email);
-        nav_user.setText(user);
 
         toolbar.setTitle("Perfil Usuario");
         setSupportActionBar(toolbar);
@@ -223,7 +248,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
                 break;
             }
             case R.id.menu_editar_perfil: {
-                drawerLayout.closeDrawer(GravityCompat.START);
+                Utils.shortToast(this, "?????___??????");
                 break;
             }
             case R.id.menu_sair: {

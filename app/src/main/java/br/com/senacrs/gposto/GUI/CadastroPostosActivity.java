@@ -7,7 +7,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -29,10 +31,13 @@ import br.com.senacrs.gposto.GUI.Callback.BandeiraCallback;
 import br.com.senacrs.gposto.GUI.Callback.PostosCallback;
 import br.com.senacrs.gposto.LibClass.Bandeira;
 import br.com.senacrs.gposto.LibClass.Postos;
+import br.com.senacrs.gposto.LibClass.Usuario;
 import br.com.senacrs.gposto.R;
 import br.com.senacrs.gposto.Utilities.Utils;
 
 public class CadastroPostosActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, PostosCallback, BandeiraCallback {
+
+    public static final String USER_REF = "user_ref";
 
     public static final String LOGIN_SAVE = "loginref";
     SharedPreferences loginPreferences;
@@ -40,6 +45,8 @@ public class CadastroPostosActivity extends AppCompatActivity implements Navigat
     TextInputEditText editNFantasia,editLogradouro,editNumero,editBairro,editTel;
     Toolbar toolbar;
     Spinner spBandeira;
+    private ImageView nav_photo_user;
+    private TextView nav_user,nav_email;
     NavigationView navigationView;
     DrawerLayout drawerLayout;
     FloatingActionButton btnCadstrarPosto;
@@ -59,6 +66,26 @@ public class CadastroPostosActivity extends AppCompatActivity implements Navigat
         spBandeira = findViewById(R.id.spBandeira);
         btnCadstrarPosto = findViewById(R.id.btnCadastrarPosto);
     }
+
+    private Usuario getSavedUserReference(){
+        Usuario usuario;
+
+        SharedPreferences editorGetSavedUser = getSharedPreferences(USER_REF, MODE_PRIVATE);
+
+        String user = editorGetSavedUser.getString("user", null);
+        if(user != null){
+            usuario = new Usuario();
+            usuario.setId(editorGetSavedUser.getInt("id", 0));
+            usuario.setUser(editorGetSavedUser.getString("user", ""));
+            usuario.setSenha(editorGetSavedUser.getString("senha", ""));
+            usuario.setEmail(editorGetSavedUser.getString("email", ""));
+
+            return usuario;
+        }else{
+            return null;
+        }
+    }
+
 
     private void fieldSpinner(){
         BandeiraController controller = new BandeiraController();
@@ -118,6 +145,23 @@ public class CadastroPostosActivity extends AppCompatActivity implements Navigat
         navigationView = findViewById(R.id.navigation_view);
         toolbar = findViewById(R.id.toolbar);
 
+        View navView = navigationView.getHeaderView(0);
+
+        nav_photo_user = navView.findViewById(R.id.nav_header_photo);
+        nav_user= navView.findViewById(R.id.nav_header_user);
+        nav_email = navView.findViewById(R.id.nav_header_email);
+
+        Usuario usuario = getSavedUserReference();
+        if (usuario != null){
+            nav_user.setText(usuario.getUser());
+            nav_email.setText(usuario.getEmail());
+        }else {
+            nav_user.setText("Visitante");
+            nav_email.setVisibility(View.GONE);
+            nav_photo_user.setVisibility(View.GONE);
+        }
+        navigationView.setNavigationItemSelectedListener(this);
+
         toolbar.setTitle("Cadastro Posto");
         setSupportActionBar(toolbar);
 
@@ -134,20 +178,31 @@ public class CadastroPostosActivity extends AppCompatActivity implements Navigat
         switch (menuItem.getItemId()) {
 
             case R.id.menu_destaques:{
-                Intent intent = new Intent(this,DestaquesActivity.class);
-                startActivity(intent);
-                finish();
+                if(getSavedUserReference() != null){
+                    Intent intent = new Intent(this, DestaquesActivity.class);
+                    startActivity(intent);
+                }else{
+                    Utils.longToast(this, "FAÇA LOGIN PARA ACESSAR ESSA FUNCIONALIDADE");
+                }
                 break;
             }
 
             case R.id.menu_cadastrar_posto: {
-                drawerLayout.closeDrawer(GravityCompat.START);
+                if(getSavedUserReference() != null){
+                    Intent intent = new Intent(this, CadastroPostosActivity.class);
+                    startActivity(intent);
+                }else{
+                    Utils.longToast(this, "FAÇA LOGIN PARA ACESSAR ESSA FUNCIONALIDADE");
+                }
                 break;
             }
             case R.id.menu_editar_perfil: {
-                Intent intent = new Intent(this,PerfilUsuarioActivity.class);
-                startActivity(intent);
-                finish();
+                if(getSavedUserReference() != null){
+                    Intent intent = new Intent(this, PerfilUsuarioActivity.class);
+                    startActivity(intent);
+                }else{
+                    Utils.longToast(this, "FAÇA LOGIN PARA ACESSAR ESSA FUNCIONALIDADE");
+                }
                 break;
             }
             case R.id.menu_sair: {

@@ -47,9 +47,6 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
     public static final String LOGIN_SAVE = "loginref";
     SharedPreferences loginPreferences;
 
-    public static final String STABILISHED_SESSION ="stabilishedsession";
-    SharedPreferences stabilishedSession;
-
     private FloatingActionButton btnVerTodos;
     private RadioButton rbtn_SearchPosto,rbtn_SearchBairro;
     private ImageView nav_photo_user;
@@ -77,25 +74,6 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
         rbtn_SearchPosto = findViewById(R.id.search_by_Posto);
         rbtn_SearchBairro = findViewById(R.id.search_by_Bairro);
         rvTopPostos = findViewById(R.id.rvPrecosCombustivel);
-    }
-
-    private Usuario getSavedUserReference(){
-        Usuario usuario;
-
-        SharedPreferences editorGetSavedUser = getSharedPreferences(USER_REF, MODE_PRIVATE);
-
-        String user = editorGetSavedUser.getString("user", null);
-        if(!user.equals(null)){
-            usuario = new Usuario();
-            usuario.setId(editorGetSavedUser.getInt("id", 0));
-            usuario.setUser(editorGetSavedUser.getString("user", ""));
-            usuario.setSenha(editorGetSavedUser.getString("senha", ""));
-            usuario.setEmail(editorGetSavedUser.getString("email", ""));
-
-            return usuario;
-        }else{
-            return null;
-        }
     }
 
     private void fieldSpinner(){
@@ -173,21 +151,43 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
         Utils.longToast(this, message);
     }
 
+    private Usuario getSavedUserReference(){
+        Usuario usuario;
+
+        SharedPreferences editorGetSavedUser = getSharedPreferences(USER_REF, MODE_PRIVATE);
+
+        String user = editorGetSavedUser.getString("user", null);
+        if(user != null){
+            usuario = new Usuario();
+            usuario.setId(editorGetSavedUser.getInt("id", 0));
+            usuario.setUser(editorGetSavedUser.getString("user", ""));
+            usuario.setSenha(editorGetSavedUser.getString("senha", ""));
+            usuario.setEmail(editorGetSavedUser.getString("email", ""));
+
+            return usuario;
+        }else{
+            return null;
+        }
+    }
+
     private void navigationDrawer() {
         navigationView = findViewById(R.id.navigation_view);
         drawerLayout = findViewById(R.id.drawerLayout);
         toolbar = findViewById(R.id.toolbar);
 
-        nav_photo_user = findViewById(R.id.nav_header_photo);
-        nav_user = findViewById(R.id.nav_header_user);
-        nav_email = findViewById(R.id.nav_header_email);
+        View navView = navigationView.getHeaderView(0);
+
+        nav_photo_user = navView.findViewById(R.id.nav_header_photo);
+        nav_user = navView.findViewById(R.id.nav_header_user);
+        nav_email = navView.findViewById(R.id.nav_header_email);
 
         Usuario usuario = getSavedUserReference();
         if (usuario != null){
             nav_user.setText(usuario.getUser());
             nav_email.setText(usuario.getEmail());
         }else {
-            nav_user.setText("Visitante");
+            String userNull = "Modo Visitante";
+            nav_user.setText(userNull);
             nav_email.setVisibility(View.GONE);
             nav_photo_user.setVisibility(View.GONE);
         }
@@ -211,7 +211,7 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
                 break;
             }
             case R.id.menu_cadastrar_posto: {
-                if(getStabilishedSession()){
+                if(getSavedUserReference() != null){
                     Intent intent = new Intent(this, CadastroPostosActivity.class);
                     startActivity(intent);
                 }
@@ -221,7 +221,7 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
                 break;
             }
             case R.id.menu_editar_perfil: {
-                if(getStabilishedSession()){
+                if(getSavedUserReference() != null){
                     Intent intent = new Intent(this, PerfilUsuarioActivity.class);
                     startActivity(intent);
                 }else{
@@ -259,10 +259,5 @@ public class DestaquesActivity extends AppCompatActivity implements CombustivelC
             layout_searchPosto.setVisibility(View.VISIBLE);
             searchPosto.requestFocus();
         }
-    }
-    public boolean getStabilishedSession(){
-        stabilishedSession = getSharedPreferences(STABILISHED_SESSION, MODE_PRIVATE);
-
-        return stabilishedSession.getBoolean("isLogged", false);
     }
 }
