@@ -44,7 +44,7 @@ import br.com.senacrs.gposto.Utilities.AdapterLvPrecos;
 import br.com.senacrs.gposto.Utilities.Utils;
 import okhttp3.internal.Util;
 
-public class PerfilPostosActivity extends AppCompatActivity implements TopPostosCallback, CombustivelCallback, CombustivelUpdateCallback, NavigationView.OnNavigationItemSelectedListener {
+public class PerfilPostosActivity extends AppCompatActivity implements TopPostosCallback,AvaliacaoCallback, CombustivelCallback, CombustivelUpdateCallback, NavigationView.OnNavigationItemSelectedListener {
 
     public static final String USER_REF = "user_ref";
 
@@ -52,7 +52,6 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
     private ImageView nav_photo_user;
     private TopPostos posto;
     public TextView nav_user,nav_email,perfilNome, endereco, telefone, bairro,avaliacao,preco;
-    public Button btnAvaliacao;
     public ListView lvPrecos;
 
 
@@ -119,8 +118,24 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
         strBuilder.append(", ");
         strBuilder.append(posto.getNumero());
 
-        btnAvaliacao = findViewById(R.id.btnRatingPosto);
         ratingBar = findViewById(R.id.ratingPosto);
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                Usuario usuario = getSavedUserReference();
+                if (usuario != null){
+                    PostosController controller = new PostosController();
+                    try {
+                        controller.sendRatingPosto(posto.getIdPosto(),usuario.getId(),rating,PerfilPostosActivity.this);
+                    } catch (Exception e) {
+                        Utils.longToast(PerfilPostosActivity.this,e.getMessage());
+                    }
+                }else {
+                    Utils.shortToast(PerfilPostosActivity.this,"FAÇA LOGIN PARA ACESSAR ESSA FUNCIONALIDADE");
+                }
+            }
+        });
+
         perfilNome = findViewById(R.id.perfil_nome);
         endereco = findViewById(R.id.perfil_endereco);
         telefone = findViewById(R.id.perfil_telefone);
@@ -302,21 +317,10 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
         editorSaveUser.clear();
         editorSaveUser.commit();
     }
-    /*
-    public void sendAvaliacao(View view) {
-        float aval = ratingBar.getRating();
-
-        PostosController controller = new PostosController();
-        try {
-            controller.sendRatingPosto(id_posto,id_user,aval,PerfilPostosActivity.this);
-        } catch (Exception e) {
-            Utils.longToast(this,e.getMessage());
-        }
-    }
 
     @Override
-    public void onAvaliacaoSucces(String avaliacao) { Utils.longToast(PerfilPostosActivity.this,"Agradecemos sua FeedBack"); }
+    public void onAvaliacaoSucces(String avaliacao) { Utils.shortToast(PerfilPostosActivity.this,"Agradecemos sua Avaliação"); }
 
     @Override
-    public void onAvaliacaoFailure(String message) { Utils.longToast(PerfilPostosActivity.this,"Erro: " + message); }*/
+    public void onAvaliacaoFailure(String message) { Utils.longToast(PerfilPostosActivity.this,"ERROR: " + message); }
 }
