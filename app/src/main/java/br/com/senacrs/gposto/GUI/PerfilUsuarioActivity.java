@@ -124,6 +124,8 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
                 Glide.with(this).load(thePic).into(imageViewPerfil);
 
 
+
+
             }else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
                 Exception error = result.getError();
             }
