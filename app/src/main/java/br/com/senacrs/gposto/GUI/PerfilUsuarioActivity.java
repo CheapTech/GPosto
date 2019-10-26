@@ -183,12 +183,10 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
                         if (editSenha.getText().toString().trim().isEmpty()){
                             editSenha.requestFocus();
                             Utils.shortToast( PerfilUsuarioActivity.this, "Error: Campo: SENHA Obrigatorio");
-                            //editSenha.setError("Campo Obrigatorio");
                         } else {
                             if (editConfirmarSenha.getText().toString().trim().isEmpty()){
                                 editConfirmarSenha.requestFocus();
                                 Utils.shortToast( PerfilUsuarioActivity.this, "Error: Campo: CONFIRMAR SENHA Obrigatorio");
-                                //editConfirmarSenha.setError("Campo Obrigatorio");
                             } else {
                                 if (editSenha.getText().toString().trim().equals(editConfirmarSenha.getText().toString().trim())){
                                     Usuario usuario = new Usuario();
