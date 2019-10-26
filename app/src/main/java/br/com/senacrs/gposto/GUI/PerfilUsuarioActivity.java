@@ -30,6 +30,7 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.IOException;
 
+import br.com.senacrs.gposto.Controller.UsuarioController;
 import br.com.senacrs.gposto.GUI.Callback.UsuarioCallback;
 import br.com.senacrs.gposto.LibClass.Usuario;
 import br.com.senacrs.gposto.R;
@@ -195,11 +196,11 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
                                     usuario.setSenha(editSenha.getText().toString());
                                     usuario.setEmail(editEmail.getText().toString());
 
-                                    // UsuarioController usuarioController = new UsuarioController();
+                                     UsuarioController usuarioController = new UsuarioController();
                                     try {
-                                        //usuarioController.updateUserWeb(body,PerfilUsuarioActivity.this);
+                                         usuarioController.updateUserWeb(usuario.getId(),usuario,PerfilUsuarioActivity.this);
                                     } catch (Exception e) {
-                                        //Utils.longToast(PerfilUsuarioActivity.this, e.getMessage());
+                                        Utils.longToast(PerfilUsuarioActivity.this, e.getMessage());
                                     }
                                 } else {
                                     editSenha.getText().clear();
