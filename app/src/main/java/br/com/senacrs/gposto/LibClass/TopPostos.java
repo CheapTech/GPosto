@@ -3,16 +3,17 @@ package br.com.senacrs.gposto.LibClass;
 import java.io.Serializable;
 
 public class TopPostos implements Serializable {
-    int id;
-    int idPosto;
-    String nomeFantasia;
-    String preco;
-    String descricao;
-    String logradouro;
-    String bairro;
-    String numero;
-    String atualizado;
-    String telefone;
+    private int id;
+    private int idPosto;
+    private int id_bandeira;
+    private String nomeFantasia;
+    private String preco;
+    private String descricao;
+    private String logradouro;
+    private String bairro;
+    private String numero;
+    private String atualizado;
+    private String telefone;
 
     public int getId() {
         return id;
@@ -92,5 +93,13 @@ public class TopPostos implements Serializable {
 
     public void setAtualizado(String atualizado) {
         this.atualizado = atualizado;
+    }
+
+    public int getId_bandeira() {
+        return id_bandeira;
+    }
+
+    public void setId_bandeira(int id_bandeira) {
+        this.id_bandeira = id_bandeira;
     }
 }

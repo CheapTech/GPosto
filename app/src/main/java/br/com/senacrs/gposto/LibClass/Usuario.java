@@ -3,7 +3,6 @@ package br.com.senacrs.gposto.LibClass;
 import java.io.Serializable;
 
 public class Usuario implements Serializable {
-
     private Integer id;
     private String user;
     private String senha;
