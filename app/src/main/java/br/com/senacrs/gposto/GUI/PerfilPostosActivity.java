@@ -44,7 +44,7 @@ import br.com.senacrs.gposto.Utilities.AdapterLvPrecos;
 import br.com.senacrs.gposto.Utilities.Utils;
 import okhttp3.internal.Util;
 
-public class PerfilPostosActivity extends AppCompatActivity implements TopPostosCallback,AvaliacaoCallback, CombustivelCallback, CombustivelUpdateCallback, NavigationView.OnNavigationItemSelectedListener {
+public class PerfilPostosActivity extends AppCompatActivity implements TopPostosCallback,AvaliacaoCallback,PostosCallback, CombustivelCallback, CombustivelUpdateCallback, NavigationView.OnNavigationItemSelectedListener {
 
     public static final String USER_REF = "user_ref";
 
@@ -118,13 +118,14 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
         strBuilder.append(", ");
         strBuilder.append(posto.getNumero());
 
+        final PostosController controller = new PostosController();
+
         ratingBar = findViewById(R.id.ratingPosto);
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 Usuario usuario = getSavedUserReference();
                 if (usuario != null){
-                    PostosController controller = new PostosController();
                     try {
                         controller.sendRatingPosto(posto.getIdPosto(),usuario.getId(),rating,PerfilPostosActivity.this);
                     } catch (Exception e) {
@@ -135,6 +136,12 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
                 }
             }
         });
+
+        try {
+            controller.getBandeirasWeb(posto.getIdPosto(),PerfilPostosActivity.this);
+        } catch (Exception e) {
+            Utils.shortToast(PerfilPostosActivity.this,e.getMessage());
+        }
 
         perfilNome = findViewById(R.id.perfil_nome);
         endereco = findViewById(R.id.perfil_endereco);
@@ -323,4 +330,10 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
 
     @Override
     public void onAvaliacaoFailure(String message) { Utils.longToast(PerfilPostosActivity.this,"ERROR: " + message); }
+
+    @Override
+    public void onPostosSuccess(Postos postos) { Utils.shortToast(PerfilPostosActivity.this,"Deu Certo"); }
+
+    @Override
+    public void onPostosFailure(String message) { Utils.longToast(PerfilPostosActivity.this,"ERROR: " + message); }
 }
