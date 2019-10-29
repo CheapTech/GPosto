@@ -4,8 +4,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import br.com.senacrs.gposto.GUI.Callback.AvaliacaoCallback;
+import br.com.senacrs.gposto.GUI.Callback.BandeiraCallback;
 import br.com.senacrs.gposto.GUI.Callback.PostosCallback;
+import br.com.senacrs.gposto.LibClass.Bandeira;
 import br.com.senacrs.gposto.LibClass.Postos;
+import br.com.senacrs.gposto.Utilities.Deserializer.BandeiraDeserializer;
+import br.com.senacrs.gposto.Utilities.Deserializer.PostosDeserializer;
 import br.com.senacrs.gposto.WebApis.RetrofitService;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -16,34 +20,35 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class PostosController {
     private final String BASE_URL = "http://www.gestoo.com.br/gposto/api/";
 
-    /*
-    public void getPostosWeb(final PostosCallback callback) throws Exception{
+    public void getBandeirasWeb(int id_posto,final PostosCallback callback) throws Exception{
         Gson gson = new GsonBuilder()
-                .setLenient()
+                .registerTypeAdapter(Postos.class, new PostosDeserializer())
                 .create();
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
-        RetrofitService services = retrofit.create(RetrofitService.class);
 
-        final Call<Postos> posto = services;
-        posto.enqueue(new Callback<Postos>() {
+        RetrofitService service = retrofit.create(RetrofitService.class);
+
+        final Call<Postos> bandeiraCall = service.getBandeiraPosto(id_posto);
+        bandeiraCall.enqueue(new Callback<Postos>() {
             @Override
             public void onResponse(Call<Postos> call, Response<Postos> response) {
                 if (response.isSuccessful()){
                     callback.onPostosSuccess(response.body());
                 }else {
-                    callback.onPostosFailure("ERRO: " + response.code() + " - " + response.message());
+                    callback.onPostosFailure("ERROR: " + response.code() + " - " + response.message());
                 }
             }
+
             @Override
             public void onFailure(Call<Postos> call, Throwable t) {
                 callback.onPostosFailure(t.getMessage());
             }
         });
-    }*/
+    }
 
     public void postPostosWeb(final Postos postos, final PostosCallback postosCallback) throws Exception{
         Gson gson = new GsonBuilder()

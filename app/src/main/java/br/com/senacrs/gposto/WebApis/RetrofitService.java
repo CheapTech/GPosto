@@ -1,5 +1,7 @@
 package br.com.senacrs.gposto.WebApis;
 
+import android.renderscript.Sampler;
+
 import java.util.List;
 
 import br.com.senacrs.gposto.LibClass.Bandeira;
@@ -46,5 +48,5 @@ public interface RetrofitService {
     Call<Postos> cadastrarPostos(@Body Postos postos);
 
     @GET("")
-    Call<Usuario> getUser(@Query(value = "usuario_id") int id);
+    Call<Postos> getBandeiraPosto(@Query(value = "posto_id") int posto_id);
 }
