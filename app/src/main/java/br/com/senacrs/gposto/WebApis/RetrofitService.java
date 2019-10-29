@@ -49,7 +49,7 @@ public interface RetrofitService {
     Call<Usuario> updateUser(@Query (value = "idValor")int id,@Body Usuario usuario);
 
     @POST()
-    Call<Usuario> sendUserPhoto(@Query(value = "usuario_id") int id, @Query(value = "photo")Base64 photo);
+    Call<Usuario> sendUserPhoto(@Query(value = "usuario_id") int id, @Query(value = "photo")String photo);
 
     @GET()
     Call<Postos> getBandeiraPosto(@Query(value = "posto_id") int posto_id);

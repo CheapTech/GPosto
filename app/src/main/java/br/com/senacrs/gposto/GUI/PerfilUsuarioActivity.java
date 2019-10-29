@@ -16,6 +16,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -107,6 +108,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Usuario usuario = getSavedUserReference();
 
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
@@ -115,20 +117,28 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
                 Uri resultUri = result.getUri();
 
                 Bitmap thePic = null;
+                UsuarioController controller = new UsuarioController();
 
                 try {
+
                     thePic = MediaStore.Images.Media.getBitmap(this.getContentResolver(),resultUri);
+                    String userPhoto = Utils.convertBitmapToBase64(thePic);
+
+                    try {
+                        if (usuario != null){
+                            controller.sendUserPhoto(usuario.getId(),userPhoto,PerfilUsuarioActivity.this);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Utils.shortToast(PerfilUsuarioActivity.this,e.getMessage());
                 }
 
                 Glide.with(this).load(thePic).into(imageViewPerfil);
 
-
-
-
             }else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
-                Exception error = result.getError();
+                Utils.shortToast(PerfilUsuarioActivity.this, result.getError().getMessage());
             }
         }
     }

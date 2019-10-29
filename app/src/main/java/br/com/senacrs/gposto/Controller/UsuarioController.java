@@ -109,7 +109,7 @@ public class UsuarioController {
         });
     }
 
-    public void sendUserPhoto(int id,Base64 photo, final UsuarioCallback callback) throws Exception{
+    public void sendUserPhoto(int id,String photo, final UsuarioCallback callback) throws Exception{
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
