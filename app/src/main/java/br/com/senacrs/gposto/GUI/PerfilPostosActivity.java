@@ -48,8 +48,8 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
 
     public static final String USER_REF = "user_ref";
 
-    private RatingBar ratingBar;
-    private ImageView nav_photo_user;
+    public RatingBar ratingBar;
+    public ImageView nav_photo_user;
     private TopPostos posto;
     public TextView nav_user,nav_email,perfilNome, endereco, telefone, bairro,avaliacao,preco;
     public ListView lvPrecos;
@@ -64,10 +64,12 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_perfil_postos);
         navigationDrawer();
+        getTopPostosandCombustivel();
 
         lvPrecos = findViewById(R.id.lv_precos);
+    }
 
-
+    private void getTopPostosandCombustivel(){
         Intent intent = getIntent();
         if (intent.getSerializableExtra("posto") != null) {
             this.posto = (TopPostos) intent.getSerializableExtra("posto");
@@ -81,7 +83,6 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
             }
         }
 
-
         CombustivelController combustivelController = new CombustivelController();
 
         try {
@@ -89,7 +90,6 @@ public class PerfilPostosActivity extends AppCompatActivity implements TopPostos
         } catch (Exception e) {
             Toast.makeText(PerfilPostosActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
-
     }
 
     private Usuario getSavedUserReference(){
