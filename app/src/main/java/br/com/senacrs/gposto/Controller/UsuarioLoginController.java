@@ -16,6 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class UsuarioLoginController {
     private final String BASE_URL = "http://www.gestoo.com.br/gposto/api/";
 
+    /*
     public void getUsuarioWeb (String email, String senha, final UsuarioCallback callback) throws Exception{
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Usuario.class, new UsuarioDeserializer())
@@ -45,5 +46,5 @@ public class UsuarioLoginController {
                 callback.onUsuarioFailure(t.getMessage());
             }
         });
-    }
+    }*/
 }

@@ -27,6 +27,7 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 
+import br.com.senacrs.gposto.Controller.UsuarioController;
 import br.com.senacrs.gposto.Controller.UsuarioLoginController;
 import br.com.senacrs.gposto.GUI.Callback.UsuarioCallback;
 import br.com.senacrs.gposto.LibClass.Usuario;
@@ -131,7 +132,7 @@ public class LoginActivity extends AppCompatActivity implements UsuarioCallback 
     }
 
     private void userLogin() {
-        UsuarioLoginController controller = new UsuarioLoginController();
+        UsuarioController controller = new UsuarioController();
         try {
             controller.getUsuarioWeb(editEmail.getText().toString(), editSenha.getText().toString(), this);
         } catch (Exception e) {

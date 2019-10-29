@@ -1,6 +1,7 @@
 package br.com.senacrs.gposto.WebApis;
 
 import android.renderscript.Sampler;
+import android.util.Base64;
 
 import java.util.List;
 
@@ -41,12 +42,16 @@ public interface RetrofitService {
     @PUT()
     Call<Usuario> updateUser(@Query (value = "idValor")int id,@Body Usuario usuario);
 
+    @POST()
+    Call<Usuario> sendUserPhoto(@Query(value = "usuario_id") int id, @Query(value = "photo")Base64 photo);
+
+
     @GET("ListarBandeiras.php")
     Call<List<Bandeira>> getBandeira();
 
     @POST("InserirPosto.php")
     Call<Postos> cadastrarPostos(@Body Postos postos);
 
-    @GET("")
+    @GET()
     Call<Postos> getBandeiraPosto(@Query(value = "posto_id") int posto_id);
 }
