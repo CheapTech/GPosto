@@ -129,7 +129,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity implements Navigati
                             controller.sendUserPhoto(usuario.getId(),userPhoto,PerfilUsuarioActivity.this);
                         }
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        Utils.shortToast(PerfilUsuarioActivity.this,e.getMessage());
                     }
                 } catch (IOException e) {
                     Utils.shortToast(PerfilUsuarioActivity.this,e.getMessage());
