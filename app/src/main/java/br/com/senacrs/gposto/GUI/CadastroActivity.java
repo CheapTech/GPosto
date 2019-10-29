@@ -25,8 +25,6 @@ public class CadastroActivity extends AppCompatActivity implements UsuarioCallba
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
 
-        txtUsuarioSugerido = findViewById(R.id.txtUsuarioSugerido);
-
         editEmail = findViewById(R.id.editEmail);
         editUser = findViewById(R.id.editUsuario);
         editSenha = findViewById(R.id.editSenha);
@@ -48,6 +46,14 @@ public class CadastroActivity extends AppCompatActivity implements UsuarioCallba
                 Utils.longToast(this, e.getMessage());
             }
         }
+    }
+
+    private void clearEditText(){
+        editUser.setText("");
+        editEmail.setText("");
+        editSenha.setText("");
+        editConfirmarSenha.setText("");
+        editEmail.requestFocus();
     }
 
     public boolean testarCampos(){
@@ -77,10 +83,16 @@ public class CadastroActivity extends AppCompatActivity implements UsuarioCallba
     }
 
     @Override
-    public void onUsuarioSuccess(Usuario usuario) { Utils.longToast(CadastroActivity.this,"Cadastro Efetuado com Sucesso"); }
+    public void onUsuarioSuccess(Usuario usuario) {
+        Utils.shortToast(CadastroActivity.this,"Cadastro Efetuado com Sucesso");
+        clearEditText();
+    }
 
     @Override
-    public void onUsuarioFailure(String message) { Utils.longToast(CadastroActivity.this,message); }
+    public void onUsuarioFailure(String message) {
+        Utils.longToast(CadastroActivity.this,message);
+        clearEditText();
+    }
 
     @Override
     public void onBackPressed() { finish(); }

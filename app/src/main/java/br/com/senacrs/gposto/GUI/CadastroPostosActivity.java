@@ -112,6 +112,15 @@ public class CadastroPostosActivity extends AppCompatActivity implements Navigat
         }
     }
 
+    private void clearEditText(){
+        editNFantasia.setText("");
+        editLogradouro.setText("");
+        editBairro.setText("");
+        editNumero.setText("");
+        editTel.setText("");
+        editNFantasia.requestFocus();
+    }
+
     public boolean testarCampos(){
         boolean testarCampos = true;
 
@@ -127,7 +136,7 @@ public class CadastroPostosActivity extends AppCompatActivity implements Navigat
                     editBairro.setError("Campo Obrigatorio");
                 }else {
                     if (id_bandeira == 0){
-                        Utils.longToast(this, "Selecione uma Marca");
+                        Utils.shortToast(this, "Selecione uma Marca");
                     }else {
                         testarCampos = false;
                     }
@@ -180,7 +189,7 @@ public class CadastroPostosActivity extends AppCompatActivity implements Navigat
                     Intent intent = new Intent(this, DestaquesActivity.class);
                     startActivity(intent);
                 }else{
-                    Utils.longToast(this, "FAÇA LOGIN PARA ACESSAR ESSA FUNCIONALIDADE");
+                    Utils.shortToast(this, "FAÇA LOGIN PARA ACESSAR ESSA FUNCIONALIDADE");
                 }
                 break;
             }
@@ -190,7 +199,7 @@ public class CadastroPostosActivity extends AppCompatActivity implements Navigat
                     Intent intent = new Intent(this, CadastroPostosActivity.class);
                     startActivity(intent);
                 }else{
-                    Utils.longToast(this, "FAÇA LOGIN PARA ACESSAR ESSA FUNCIONALIDADE");
+                    Utils.shortToast(this, "FAÇA LOGIN PARA ACESSAR ESSA FUNCIONALIDADE");
                 }
                 break;
             }
@@ -199,7 +208,7 @@ public class CadastroPostosActivity extends AppCompatActivity implements Navigat
                     Intent intent = new Intent(this, PerfilUsuarioActivity.class);
                     startActivity(intent);
                 }else{
-                    Utils.longToast(this, "FAÇA LOGIN PARA ACESSAR ESSA FUNCIONALIDADE");
+                    Utils.shortToast(this, "FAÇA LOGIN PARA ACESSAR ESSA FUNCIONALIDADE");
                 }
                 break;
             }
@@ -226,7 +235,10 @@ public class CadastroPostosActivity extends AppCompatActivity implements Navigat
     }
 
     @Override
-    public void onPostosSuccess(Postos postos) { Utils.longToast(CadastroPostosActivity.this,"Cadastro Efetuado com Sucesso"); }
+    public void onPostosSuccess(Postos postos) {
+        Utils.shortToast(CadastroPostosActivity.this,"Cadastro Efetuado com Sucesso");
+        clearEditText();
+    }
 
     @Override
     public void onPostosFailure(String message) { Utils.longToast(CadastroPostosActivity.this,message); }
