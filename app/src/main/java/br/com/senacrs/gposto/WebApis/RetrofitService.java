@@ -33,24 +33,23 @@ public interface RetrofitService {
     @POST("InserirUsuario.php")
     Call<Usuario> registerUser(@Body Usuario usuario);
 
-    @POST()
-    Call<Postos> sendRatingPosto(@Query(value = "posto_id") int id_posto,@Query(value = "usuario_id") int id_usuario, @Query(value = "pontucao") float aval);
-
     @PUT("AtualizarPreco.php")
     Call<Combustivel> updateValorCombustivel(@Query (value = "idValor")int id, @Query(value = "preco") float preco);
-
-    @PUT()
-    Call<Usuario> updateUser(@Query (value = "idValor")int id,@Body Usuario usuario);
-
-    @POST()
-    Call<Usuario> sendUserPhoto(@Query(value = "usuario_id") int id, @Query(value = "photo")Base64 photo);
-
 
     @GET("ListarBandeiras.php")
     Call<List<Bandeira>> getBandeira();
 
     @POST("InserirPosto.php")
     Call<Postos> cadastrarPostos(@Body Postos postos);
+
+    @POST()
+    Call<Postos> sendRatingPosto(@Query(value = "posto_id") int id_posto,@Query(value = "usuario_id") int id_usuario, @Query(value = "pontucao") float aval);
+
+    @PUT()
+    Call<Usuario> updateUser(@Query (value = "idValor")int id,@Body Usuario usuario);
+
+    @POST()
+    Call<Usuario> sendUserPhoto(@Query(value = "usuario_id") int id, @Query(value = "photo")Base64 photo);
 
     @GET()
     Call<Postos> getBandeiraPosto(@Query(value = "posto_id") int posto_id);
